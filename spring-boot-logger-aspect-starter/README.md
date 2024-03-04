@@ -30,4 +30,3 @@
     *  пометьте метод аннотацией ```@ServiceAspectLogger```
 * В слое repository
     *  пометьте метод аннотацией ```@RepositoryAspectLogger```
-
