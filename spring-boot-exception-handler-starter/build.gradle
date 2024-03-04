@@ -29,12 +29,10 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-aop:${starterVersion}"
     implementation "org.springframework.boot:spring-boot-starter-web-services:${starterVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${starterVersion}"
-//    implementation "org.springframework.boot:spring-boot-starter-security:${starterVersion}"
-
-    testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
 
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
 }
 
 test {

@@ -234,14 +234,4 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity<BaseResponse> handleException(BadCredentialsException exception) {
-//        ExceptionResponse response = getExceptionResponse(
-//                HttpStatus.UNAUTHORIZED,
-//                BAD_CREDENTIALS_EXCEPTION_MESSAGE,
-//                exception
-//        );
-//        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-//    }
 }
