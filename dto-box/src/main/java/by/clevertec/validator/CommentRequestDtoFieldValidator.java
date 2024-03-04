@@ -4,7 +4,6 @@ import by.clevertec.request.CommentRequestDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-//@RequiredArgsConstructor
 public class CommentRequestDtoFieldValidator implements ConstraintValidator<CommentRequestDtoFieldValue, CommentRequestDto> {
 
     @Override

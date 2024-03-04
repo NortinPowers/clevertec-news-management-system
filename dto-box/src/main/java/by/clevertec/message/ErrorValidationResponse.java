@@ -1,11 +1,11 @@
 package by.clevertec.message;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
-import java.util.List;
 
 @Getter
 @Setter

@@ -3,9 +3,7 @@ package by.clevertec.validator;
 import by.clevertec.request.NewsRequestDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
 public class NewsRequestDtoFieldValidator implements ConstraintValidator<NewsRequestDtoFieldValue, NewsRequestDto> {
 
     @Override

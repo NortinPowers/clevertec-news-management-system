@@ -18,6 +18,7 @@ public class CommentRequestDtoFieldValidatorTest {
         requestDto.setText("some text");
         requestDto.setUsername("name");
         requestDto.setNewsId(1L);
+
         assertTrue(validator.isValid(requestDto, mock(ConstraintValidatorContext.class)));
     }
 

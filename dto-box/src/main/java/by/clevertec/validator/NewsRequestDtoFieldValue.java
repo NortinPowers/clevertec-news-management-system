@@ -10,9 +10,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = NewsRequestDtoFieldValidator.class)
 @Target(FIELD)
 @Retention(RUNTIME)
+@Constraint(validatedBy = NewsRequestDtoFieldValidator.class)
 public @interface NewsRequestDtoFieldValue {
 
     String message() default "News is not valid";

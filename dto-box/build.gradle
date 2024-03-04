@@ -39,8 +39,6 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${starterVersion}"
-
-
 }
 
 test {

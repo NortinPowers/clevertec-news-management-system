@@ -5,14 +5,14 @@ import static by.clevertec.utils.Constants.USERNAME_NOT_BLANK;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Schema(description = "Entity of User")
 @NoArgsConstructor
+@Schema(description = "Entity of User")
 public class JwtRequest {
 
     @NotBlank(message = USERNAME_NOT_BLANK)

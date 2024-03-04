@@ -1,21 +1,23 @@
 package by.clevertec.message;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-public abstract class BaseResponse implements Serializable{
-//public abstract class BaseResponse{
+@AllArgsConstructor
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
+public abstract class BaseResponse implements Serializable {
 
     @Schema(description = "Status", example = "200")
     private Integer status;
