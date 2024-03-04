@@ -10,53 +10,20 @@ volumes:
 
 services:
 
-#  m2-lib:
-#    image: alpine
-#    volumes:
-#      - ~/.m2:/root/.m2
-#  myservice:
-#    image: gradle:latest
-#    volumes:
-#      - "C:/Users/Нортин/.m2/repository/by/clevertec:/root/.m2"
-##      - "$HOME/.m2:/root/.m2"
-#      - .:/workspace
-#    working_dir: /workspace
-#    command: gradle build
-
-#  build:
-#    build:
-#      context: .
-#      dockerfile: ./dto-box/Dockerfile
-#    volumes:
-#      - .:/app
-#    working_dir: /app
-
   news:
     build: ./news
-#    build:
-#      context: .
-#      dockerfile: ./docker/news/Dockerfile
     container_name: news
     depends_on:
       - db_news
-#      - db
       - redis
-    env_file:
-      - .env.properties
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_news:5432/clevertec_news
-#      - SPRING_DATASOURCE_URL=jdbc:${HOST_NEWS}://db:5432/${POSTGRES_DATABASE_NEWS}
-#          - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/clevertec_news?currentSchema=news
-#      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USERNAME}
-#      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
     expose:
-#    ports:
       - '8001'
-#      - '8001:8001'
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://news:8001/health || exit 1"]
+      test: [ "CMD-SHELL", "curl -f http://news:8001/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -64,30 +31,17 @@ services:
 
   comment:
     build: ./comment
-#    build:
-#      context: .
-#      dockerfile: ./docker/comment/Dockerfile
     container_name: comment
     depends_on:
-#      - db
-#      - db_news
-#      - redis
       - news
-    env_file:
-      - .env.properties
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_news:5432/clevertec_news
-#      - SPRING_DATASOURCE_URL=jdbc:${HOST_NEWS}://db:5432/${POSTGRES_DATABASE_NEWS}
-#      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USERNAME}
-#      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
-#    ports:
     expose:
       - '8002'
-#      - '8002:8002'
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://comment:8002/health || exit 1"]
+      test: [ "CMD-SHELL", "curl -f http://comment:8002/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -95,38 +49,26 @@ services:
 
   auth:
     build: ./auth
-#    build:
-#      context: .
-#      dockerfile: ./docker/auth/Dockerfile
     container_name: auth
     depends_on:
       - db_auth
       - comment
-#      - db
     env_file:
       - .env.properties
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_auth:5432/clevertec_auth
-#      - SPRING_DATASOURCE_URL=jdbc:${HOST_AUTH}://db:5432/${POSTGRES_DATABASE_AUTH}
-#      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USERNAME}
-#      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root
     expose:
-#    ports:
       - '8003'
-#      - '8003:8003'
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://auth:8003/health || exit 1"]
+      test: [ "CMD-SHELL", "curl -f http://auth:8003/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
 
   gateway:
     build: ./gateway
-#    build:
-#      context: .
-#      dockerfile: ./docker/gateway/Dockerfile
     container_name: gateway
     depends_on:
       - auth
@@ -140,9 +82,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=clevertec_news
-#      - POSTGRES_USER=${POSTGRES_USERNAME}
-#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#      - POSTGRES_DB=${POSTGRES_DATABASE_NEWS}
     volumes:
       - ./db-init:/docker-entrypoint-initdbNews.d
       - db-data-news:/var/lib/postgresql/data
@@ -154,9 +93,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=clevertec_auth
-#      - POSTGRES_USER=${POSTGRES_USERNAME}
-#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#      - POSTGRES_DB=${POSTGRES_DATABASE_AUTH}
     volumes:
       - ./db-init:/docker-entrypoint-initdbAuth.d
       - db-data-auth:/var/lib/postgresql/data
@@ -167,8 +103,6 @@ services:
     container_name: redis
     ports:
       - '6379'
-#      - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass cGFzc3dvcnRvcmVkaXM=
-#    command: redis-server --save 20 1 --loglevel warning --requirepass &{REDIS_PASSWORD}
     volumes:
       - cache:/data
