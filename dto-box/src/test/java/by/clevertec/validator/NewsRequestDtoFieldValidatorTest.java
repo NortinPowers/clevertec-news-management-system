@@ -18,6 +18,7 @@ public class NewsRequestDtoFieldValidatorTest {
         NewsRequestDto requestDto = new NewsRequestDto();
         requestDto.setTitle("title");
         requestDto.setText("some text");
+
         assertTrue(validator.isValid(requestDto, mock(ConstraintValidatorContext.class)));
     }
 

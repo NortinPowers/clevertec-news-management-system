@@ -11,11 +11,11 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@Schema(description = "Entity of User")
 @ToString
-public class UserDto extends BaseDto{
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Schema(description = "Entity of User")
+public class UserDto extends BaseDto {
 
     @Schema(description = "Username", example = "Samael")
     private String username;

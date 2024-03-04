@@ -10,9 +10,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = CommentRequestDtoFieldValidator.class)
 @Target(FIELD)
 @Retention(RUNTIME)
+@Constraint(validatedBy = CommentRequestDtoFieldValidator.class)
 public @interface CommentRequestDtoFieldValue {
 
     String message() default "Comment is not valid";

@@ -8,8 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class JwtResponse {
 
     @Schema(description = "Jwt-token", example = "XXX.YYYY.ZZZZ")
