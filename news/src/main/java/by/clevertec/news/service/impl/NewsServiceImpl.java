@@ -16,11 +16,8 @@ import by.clevertec.request.NewsAndNamePathRequestDto;
 import by.clevertec.request.NewsAndNameRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
-
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -97,6 +94,7 @@ public class NewsServiceImpl implements NewsService {
             throw CustomEntityNotFoundException.of(News.class, id);
         }
     }
+
     @Override
     @Transactional
 //    @NewsCacheable
@@ -132,8 +130,8 @@ public class NewsServiceImpl implements NewsService {
             if (hasAccess(username, news)) {
                 repository.deleteById(id);
             } else {
-                throw CustomAccessException.of(News.class); 
-            } 
+                throw CustomAccessException.of(News.class);
+            }
         } else {
             throw CustomEntityNotFoundException.of(News.class, id);
         }

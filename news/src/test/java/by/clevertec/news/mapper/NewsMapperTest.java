@@ -1,21 +1,16 @@
 package by.clevertec.news.mapper;
 
-import by.clevertec.news.config.TestContainerConfig;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import by.clevertec.news.domain.News;
-import by.clevertec.news.mapper.NewsMapper;
 import by.clevertec.news.util.NewsTestBuilder;
 import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")

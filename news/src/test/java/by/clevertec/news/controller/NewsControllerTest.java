@@ -14,7 +14,6 @@ import static by.clevertec.utils.ResponseUtils.getSuccessResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -152,7 +151,6 @@ class NewsControllerTest {
         private final String url = "/news";
 
         @Test
-
         void saveShouldReturnSuccessResponse_whenValidRequestSend() throws Exception {
             NewsAndNameRequestDto requestDto = NewsTestBuilder.builder()
                     .build()
@@ -447,8 +445,8 @@ class NewsControllerTest {
             );
 
             mockMvc.perform(delete(url, INCORRECT_ID)
-                    .contentType(APPLICATION_JSON)
-                    .content(AUTHOR_NAME))
+                            .contentType(APPLICATION_JSON)
+                            .content(AUTHOR_NAME))
                     .andExpect(status().isNotFound())
                     .andExpectAll(
                             jsonPath("$.timestamp").isNotEmpty(),

@@ -1,15 +1,14 @@
 package by.clevertec.news.repository;
 
 import by.clevertec.aspect.RepositoryAspectLogger;
-import by.clevertec.news.domain.Comment;
 import by.clevertec.news.domain.News;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import java.util.Optional;
 
 @Repository
 public interface NewsRepository extends JpaRepository<News, Long> {

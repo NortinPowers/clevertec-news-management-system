@@ -1,6 +1,5 @@
 package by.clevertec.news.mapper;
 
-import by.clevertec.news.domain.Author;
 import by.clevertec.news.domain.News;
 import by.clevertec.news.mapper.annotation.DateMapping;
 import by.clevertec.news.mapper.util.DateConverter;
@@ -10,7 +9,6 @@ import by.clevertec.response.NewsResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 
 @Mapper(config = CustomMapperConfig.class)
 public interface NewsMapper extends DateConverter {
@@ -52,7 +50,7 @@ public interface NewsMapper extends DateConverter {
     /**
      * Обновляет существующий объект типа {@link News} данными из объекта {@link News updated}.
      *
-     * @param news  Объект типа {@link News}, который требуется обновить.
+     * @param news    Объект типа {@link News}, который требуется обновить.
      * @param updated Объект типа {@link News}, содержащий обновленные данные.
      * @return Обновленный объект типа {@link News}.
      */

@@ -7,6 +7,7 @@ import by.clevertec.news.mapper.NewsMapper;
 import by.clevertec.news.repository.NewsRepository;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -14,7 +15,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import java.util.Optional;
 
 @Aspect
 @Component
@@ -25,7 +25,7 @@ public class NewsCacheableAspect {
     private final NewsRepository newsRepository;
     private final NewsMapper mapper;
 
-//    @Value("${cache.algorithm}")
+    //    @Value("${cache.algorithm}")
 //    private String algorithm;
 //
 //    @Value("${cache.max-collection-size}")
@@ -83,14 +83,14 @@ public class NewsCacheableAspect {
         optionalNews.ifPresent(news -> cache.put(id, mapper.toDto(news)));
     }
 
-//    @AfterReturning(pointcut = "@annotation(by.clevertec.news.proxy.NewsCacheable) && execution(* by.clevertec.news.service.NewsService.delete(..)) && args(id)", argNames = "id")
+    //    @AfterReturning(pointcut = "@annotation(by.clevertec.news.proxy.NewsCacheable) && execution(* by.clevertec.news.service.NewsService.delete(..)) && args(id)", argNames = "id")
     @AfterReturning(pointcut = "@annotation(org.springframework.cache.annotation.CacheEvict) && execution(* by.clevertec.news.service.NewsService.update(..)) && args(id)", argNames = "id")
 
     public void cacheableDelete(Long id) {
         cache.remove(id);
     }
 
-//    @AfterReturning(pointcut = "@annotation(by.clevertec.news.proxy.NewsCacheable) && execution(* by.clevertec.news.service.NewsService.update(..)) && args(id, newsDto)", argNames = "id, newsDto")
+    //    @AfterReturning(pointcut = "@annotation(by.clevertec.news.proxy.NewsCacheable) && execution(* by.clevertec.news.service.NewsService.update(..)) && args(id, newsDto)", argNames = "id, newsDto")
     @AfterReturning(pointcut = "@annotation(org.springframework.cache.annotation.CachePut) && execution(* by.clevertec.news.service.NewsService.update(..)) && args(id, newsDto)", argNames = "id, newsDto")
     public void cacheableUpdate(Long id, NewsRequestDto newsDto) {
         News news = newsRepository.findById(id).orElseThrow(() -> CustomEntityNotFoundException.of(News.class, id));

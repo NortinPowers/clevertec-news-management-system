@@ -15,8 +15,6 @@ import by.clevertec.news.domain.News;
 import by.clevertec.news.service.NewsService;
 import by.clevertec.request.NewsAndNamePathRequestDto;
 import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsPathRequestDto;
-import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +33,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,6 +48,12 @@ public class NewsController {
 
     private final NewsService newsService;
 
+    /**
+     * Получает определенную страницу со списком новостей определенного размера из всех новостей.
+     *
+     * @param pageable Объект определяющий номер страницы и размер списка новостей.
+     * @return {@link ResponseEntity} с Page объектов {@link NewsResponseDto}.
+     */
     @GetMapping
     @ControllerAspectLogger
     @Operation(
@@ -67,7 +70,6 @@ public class NewsController {
                                                         @ParameterObject Pageable pageable) {
         return ResponseEntity.ok(newsService.getAll(pageable));
     }
-
 
     /**
      * Получает информацию о новости по ее уникальному идентификатору.
@@ -109,16 +111,14 @@ public class NewsController {
             @ApiResponse(responseCode = "400", content = {@Content(array = @ArraySchema(schema = @Schema(implementation = ErrorValidationResponse.class)), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<BaseResponse> save(@RequestBody NewsAndNameRequestDto requestDto) {
-//    public ResponseEntity<BaseResponse> save(@RequestBody NewsRequestDto news) {
         newsService.save(requestDto);
-//        newsService.save(news);
         return ResponseEntity.ok(getSuccessResponse(CREATION_MESSAGE, News.class));
     }
 
     /**
      * Обновляет данные новости по её уникальному идентификатору.
      *
-     * @param id   Уникальный идентификатор новости, которую требуется обновить.
+     * @param id         Уникальный идентификатор новости, которую требуется обновить.
      * @param requestDto Объект {@link NewsAndNameRequestDto}, содержащий обновленные данные новости и имя пользователя.
      * @return {@link ResponseEntity} с объектом {@link BaseResponse} для успешного ответа.
      */
@@ -137,28 +137,24 @@ public class NewsController {
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<BaseResponse> update(@PathVariable Long id,
                                                @Valid @RequestBody NewsAndNameRequestDto requestDto) {
-//                                               @Valid @RequestBody NewsRequestDto news) {
         newsService.update(id, requestDto);
-//        newsService.update(id, news);
         return ResponseEntity.ok(getSuccessResponse(UPDATE_MESSAGE, News.class));
     }
 
     /**
      * Частично обновляет некоторые данные новости по её уникальному идентификатору.
      *
-     * @param id   Уникальный идентификатор новости, которую требуется частично обновить.
+     * @param id         Уникальный идентификатор новости, которую требуется частично обновить.
      * @param requestDto Объект {@link NewsAndNamePathRequestDto}, содержащий обновленные данные новости и имя пользователя.
      * @return {@link ResponseEntity} с объектом {@link BaseResponse} для успешного ответа.
      * @throws IllegalArgumentException Если переданный объект {@code null}.
      */
     @ControllerAspectLogger
     @PostMapping("/{id}")
-//    @PatchMapping("/{id}")
     @Operation(
             summary = "Update the news by id",
             description = "Update the news by specifying its id. The response is a message about the successful update a news",
             tags = "post"
-//            tags = "patch"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = BaseResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
@@ -167,8 +163,7 @@ public class NewsController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<BaseResponse> updatePath(@PathVariable Long id,
-                                                  @RequestBody NewsAndNamePathRequestDto requestDto) {
-//        checkIllegalArgument(news, "Incorrect news data");
+                                                   @RequestBody NewsAndNamePathRequestDto requestDto) {
         checkIllegalArgument(requestDto.getRequestDto(), "Incorrect news data");
         newsService.updatePath(id, requestDto);
         return ResponseEntity.ok(getSuccessResponse(UPDATE_MESSAGE, News.class));
@@ -177,7 +172,7 @@ public class NewsController {
     /**
      * Удаляет новость по его уникальному идентификатору.
      *
-     * @param id Уникальный идентификатор новости, который требуется удалить.
+     * @param id       Уникальный идентификатор новости, который требуется удалить.
      * @param username Имя пользователя запрашивающего метод.
      * @return {@link ResponseEntity} с объектом {@link BaseResponse} для успешного ответа.
      */
@@ -199,6 +194,13 @@ public class NewsController {
         return ResponseEntity.ok(getSuccessResponse(DELETION_MESSAGE, News.class));
     }
 
+    /**
+     * Получает определенную страницу со списком новостей определенного размера из всех новостей в зависимости от условия поиска.
+     *
+     * @param pageable Объект определяющий номер страницы и размер списка новостей.
+     * @param condition Объект определяющий условие поиска.
+     * @return {@link ResponseEntity} с Page объектов {@link NewsResponseDto}.
+     */
     @ControllerAspectLogger
     @GetMapping("/search/{condition}")
     @Operation(
@@ -211,9 +213,9 @@ public class NewsController {
             @ApiResponse(responseCode = "410", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<Page<NewsResponseDto>> getPersonSearchResult(@PathVariable String condition,
-                                                                         @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
-                                                                         @PageableDefault(size = 15)
-                                                                         @ParameterObject Pageable pageable) {
+                                                                       @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
+                                                                       @PageableDefault(size = 15)
+                                                                       @ParameterObject Pageable pageable) {
         return ResponseEntity.ok(newsService.findNewsSearchResult(condition, pageable));
     }
 }

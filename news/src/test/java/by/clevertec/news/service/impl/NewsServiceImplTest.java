@@ -14,7 +14,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import by.clevertec.exception.ConditionalException;
 import by.clevertec.exception.CustomAccessException;
 import by.clevertec.exception.CustomEntityNotFoundException;
 import by.clevertec.exception.CustomNoContentException;
@@ -29,7 +28,6 @@ import by.clevertec.request.NewsAndNameRequestDto;
 import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Nested;
@@ -220,7 +218,7 @@ class NewsServiceImplTest {
             verify(newsMapper, never()).toDomain(any(NewsRequestDto.class));
             verify(newsMapper, never()).merge(any(News.class), any(News.class));
         }
-        
+
         @Test
         void updateShouldThrowCustomAccessException_whenHasNotRightToModify() {
             News news = NewsTestBuilder.builder()
@@ -230,7 +228,7 @@ class NewsServiceImplTest {
             NewsAndNameRequestDto newsAndNameRequestDto = NewsTestBuilder.builder()
                     .build()
                     .buildNewsAndNameRequestDto();
-            
+
             when(newsRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(news));
 
@@ -410,7 +408,8 @@ class NewsServiceImplTest {
         void deleteShouldDeleteNews_whenCorrectIdAndUsername() {
             News news = NewsTestBuilder.builder()
                     .build()
-                    .buildNews();;
+                    .buildNews();
+            ;
 
             when(newsRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(news));

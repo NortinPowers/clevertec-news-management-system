@@ -3,7 +3,6 @@ package by.clevertec.news.service;
 import by.clevertec.news.domain.News;
 import by.clevertec.request.NewsAndNamePathRequestDto;
 import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
 import org.springframework.data.domain.Page;
@@ -39,7 +38,7 @@ public interface NewsService {
     /**
      * Обновляет данные объекта {@link News} по уникальному идентификатору (UUID).
      *
-     * @param id   Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
+     * @param id              Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
      * @param newsDtoWithName Объект {@link NewsAndNameRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void update(Long id, NewsAndNameRequestDto newsDtoWithName);
@@ -49,7 +48,7 @@ public interface NewsService {
      * Обновляет данные объекта {@link News} по уникальному идентификатору (UUID) с использованием
      * данных из объекта {@link NewsAndNamePathRequestDto}.
      *
-     * @param id      Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
+     * @param id              Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
      * @param newsDtoWithName Объект {@link NewsAndNamePathRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void updatePath(Long id, NewsAndNamePathRequestDto newsDtoWithName);
@@ -57,7 +56,7 @@ public interface NewsService {
     /**
      * Удаляет объект {@link News} по уникальному идентификатору (UUID).
      *
-     * @param id Уникальный идентификатор (Long) объекта {@link News}, который требуется удалить.
+     * @param id       Уникальный идентификатор (Long) объекта {@link News}, который требуется удалить.
      * @param username Имя пользователя, который запрашивает метод.
      */
     void delete(Long id, String username);

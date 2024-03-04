@@ -2,7 +2,6 @@ package by.clevertec.news.domain;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-import jakarta.persistence.Access;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,9 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.*;
-import lombok.experimental.FieldNameConstants;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 @Entity
 @Getter

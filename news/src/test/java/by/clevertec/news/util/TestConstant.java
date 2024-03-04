@@ -1,9 +1,7 @@
 package by.clevertec.news.util;
 
-import lombok.experimental.UtilityClass;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TestConstant {

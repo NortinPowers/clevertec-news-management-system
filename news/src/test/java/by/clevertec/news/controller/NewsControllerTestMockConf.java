@@ -17,14 +17,12 @@ import by.clevertec.news.service.NewsService;
 import by.clevertec.news.util.NewsTestBuilder;
 import by.clevertec.response.NewsResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
@@ -34,7 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
-class NewsControllerTestMockConf{
+class NewsControllerTestMockConf {
 
     private final ObjectMapper mapper;
     private final MockMvc mockMvc;

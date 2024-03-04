@@ -43,7 +43,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -155,7 +154,7 @@ class NewsServiceImplIntegrationTest {
         }
     }
 
-//    не получает key = "#result.id"
+    //    не получает key = "#result.id"
     @Nested
     class SaveTest {
 
