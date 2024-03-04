@@ -1,5 +1,0 @@
-#logger:
-#    package:
-#        controller: by.clevertec.controller
-#        service: by.clevertec.service
-#        repository: by.clevertec.repository
