@@ -1,12 +1,11 @@
 package by.clevertec.util;
 
 import by.clevertec.model.ExceptionResponse;
+import java.util.List;
 import lombok.experimental.UtilityClass;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import java.util.List;
 
 @UtilityClass
 public class ResponseUtils {
@@ -17,8 +16,6 @@ public class ResponseUtils {
     public static final String UNIQUE_CONSTRAINT_VIOLATION_EXCEPTION_MESSAGE = "Unique constraint violation";
     public static final String METHOD_ARGUMENT_NOT_VALID_EXCEPTION_MESSAGE = "The transmitted data did not pass verification";
     public static final String HTTP_NOT_READABLE_EXCEPTION_MESSAGE = "The entered data is incorrect and leads to an error";
-//
-//    public static final String BAD_CREDENTIALS_EXCEPTION_MESSAGE = "Incorrect username and password";
 
     /**
      * Возвращает объект {@link ExceptionResponse} для ответа с ошибкой, содержащий

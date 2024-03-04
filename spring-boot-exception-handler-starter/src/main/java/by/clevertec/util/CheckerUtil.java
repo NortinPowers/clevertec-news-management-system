@@ -1,8 +1,8 @@
 package by.clevertec.util;
 
 import by.clevertec.exception.CustomNoContentException;
-import lombok.experimental.UtilityClass;
 import java.util.Collection;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class CheckerUtil {
