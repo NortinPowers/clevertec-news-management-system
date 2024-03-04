@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/clevertec-news-management-system.iml" filepath="$PROJECT_DIR$/.idea/clevertec-news-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/comment.main.iml" filepath="$PROJECT_DIR$/.idea/modules/comment.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dto-box.main.iml" filepath="$PROJECT_DIR$/.idea/modules/dto-box.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/news.main.iml" filepath="$PROJECT_DIR$/.idea/modules/news.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/news.test.iml" filepath="$PROJECT_DIR$/.idea/modules/news.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot-exception-handler-starter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot-exception-handler-starter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-boot-exception-handler-starter.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-boot-exception-handler-starter.test.iml" />
+    </modules>
+  </component>
+</project>

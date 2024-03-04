@@ -1,0 +1,3 @@
+rootProject.name = 'news'
+//include 'spring-boot-exception-handler-starter'
+//include 'dto-box'

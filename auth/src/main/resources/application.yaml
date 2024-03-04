@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    tomcat:
+      driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/clevertec_auth
+#    url: jdbc:postgresql://localhost:5434/clevertec_auth
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+  liquibase:
+    change-log: classpath:db/changelog/master-changelog.yaml
+server:
+  port: 8003
+jwt:
+  secret: qwerty232425ndjdysjrndhhsjjeesppsuurvxnhhfdkksdurnnsjj22234isknfnnfl8845jjdjdcscacassascbb353fdcd
+  lifetime: 10m
+auth:
+  openapi:
+    dev-url: http://localhost:8003
+springdoc:
+  swagger-ui:
+    path: /documentation
+    try-it-out-enabled: true
+  api-docs:
+    path: /api-doc
+  packages-to-scan: by.clevertec.auth.controller

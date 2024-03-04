@@ -1,0 +1,32 @@
+server:
+  port: 8000
+
+#gateway:
+#  openapi:
+#    dev-url: http://localhost:8000
+#
+#springdoc:
+#  swagger-ui:
+#    path: /documentation
+#    try-it-out-enabled: true
+#  api-docs:
+#    path: /api-doc
+#  packages-to-scan: by.clevertec.gateway.controller
+#
+#jwt:
+#  secret: qwerty232425ndjdysjrndhhsjjeesppsuurvxnhhfdkksdurnnsjj22234isknfnnfl8845jjdjdcscacassascbb353fdcd
+#  lifetime: 10m
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          news-service:
+            url: http://localhost:8001/news
+          comment-service:
+            url: http://localhost:8002/comments
+          auth-service:
+            url: http://localhost:8003/auth
+          admin-service:
+            url: http://localhost:8003/admin

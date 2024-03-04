@@ -1,0 +1,23 @@
+package by.clevertec.news.util;
+
+import lombok.experimental.UtilityClass;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@UtilityClass
+public class TestConstant {
+
+    public static final Long NEWS_ID = 1L;
+    public static final LocalDateTime NEWS_TIME = LocalDateTime.of(2024, 2, 20, 11, 17, 15);
+    public static final String NEWS_TITLE = "news title";
+    public static final String NEWS_TEXT = "news text";
+    public static final Long AUTHOR_ID = 1L;
+    public static final String AUTHOR_NAME = "Ben Brown";
+
+    public static final Long CORRECT_ID = 1L;
+    public static final Long INCORRECT_ID = 30L;
+    public static final int PAGE_NUMBER = 0;
+    public static final int PAGE_SIZE = 15;
+
+}

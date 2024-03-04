@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    tomcat:
+      driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/clevertec_news
+#    url: jdbc:postgresql://localhost:5434/clevertec_news
+    username: postgres
+    password: root
+

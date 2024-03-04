@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
+        </processorPath>
+        <module name="news.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
+        </processorPath>
+        <module name="news.test" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auth.spring-boot-exception-handler-starter.main" target="17" />
+      <module name="auth.spring-boot-exception-handler-starter.test" target="17" />
+      <module name="auth.spring-boot-jwt-news-starter" target="17" />
+      <module name="auth.spring-boot-jwt-news-starter.main" target="17" />
+      <module name="auth.spring-boot-jwt-news-starter.test" target="17" />
+      <module name="comment.spring-boot-exception-handler-starter" target="17" />
+      <module name="comment.spring-boot-exception-handler-starter.main" target="17" />
+      <module name="comment.spring-boot-exception-handler-starter.test" target="17" />
+      <module name="dtoBox" target="17" />
+      <module name="dtoBox.main" target="17" />
+      <module name="dtoBox.test" target="17" />
+      <module name="gateway.dto-box" target="17" />
+      <module name="gateway.dto-box.main" target="17" />
+      <module name="gateway.dto-box.test" target="17" />
+      <module name="gateway.spring-boot-exception-handler-starter" target="17" />
+      <module name="gateway.spring-boot-exception-handler-starter.main" target="17" />
+      <module name="gateway.spring-boot-exception-handler-starter.test" target="17" />
+      <module name="news.dto-box" target="17" />
+      <module name="news.dto-box.main" target="17" />
+      <module name="news.dto-box.test" target="17" />
+      <module name="news.spring-boot-exception-handler-starter" target="17" />
+      <module name="news.spring-boot-exception-handler-starter.main" target="17" />
+      <module name="news.spring-boot-exception-handler-starter.test" target="17" />
+      <module name="spring-boot-jwt-news-starter" target="17" />
+      <module name="spring-boot-jwt-news-starter.main" target="17" />
+      <module name="spring-boot-jwt-news-starter.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

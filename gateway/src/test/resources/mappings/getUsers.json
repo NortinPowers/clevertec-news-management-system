@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+//    "method": "GET",
+    "url": "/admin/users"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": "[]"
+  }
+}

@@ -1,0 +1,336 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="lazy-1" author="nortin" context="dml">
+        <sql>
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:00:00', 'Java 17 выпущена: новые функции и улучшения', 'Свежие новости о Java 17 и его новых возможностях.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:10:00', 'Как Java помогает в разработке мобильных приложений', 'Узнайте, как Java используется для создания мобильных приложений.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:20:00', 'Исследование показывает, что Java остается одним из самых популярных языков программирования', 'Подробности исследования о популярности Java в разработке ПО.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:30:00', 'Как Java используется в больших корпоративных проектах', 'Успешные примеры применения Java в крупных корпоративных проектах.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:40:00', 'Новые тренды в разработке на Java: микросервисы и контейнеры', 'Погружение в современные тренды использования Java в разработке ПО.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 13:50:00', 'Java vs Kotlin: какой язык лучше выбрать для разработки Android-приложений', 'Сравнение Java и Kotlin в контексте разработки приложений для Android.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:00:00', 'Java в области машинного обучения: какие библиотеки и инструменты выбрать', 'Особенности применения Java в сфере машинного обучения и рекомендации по выбору инструментов.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:10:00', 'Советы по оптимизации производительности Java-приложений', 'Практические советы по улучшению производительности Java-приложений.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:20:00', 'Java в облаке: как использовать язык для создания облачных приложений', 'Руководство по использованию Java для разработки облачных приложений.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Как Java помогает в разработке игр: популярные игровые движки и фреймворки', 'О применении Java в разработке игр и обзор популярных игровых движков.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Новая версия Java 15', 'Была выпущена новая версия Java 15 с множеством новых функций и улучшений.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Java разработчики собрались на конференции', 'Сотни разработчиков Java со всего мира собрались на большой конференции, чтобы обсудить последние тенденции и инновации в мире Java.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Уязвимость в Java Virtual Machine', 'Обнаружена уязвимость в Java Virtual Machine, которая может быть использована злоумышленниками для выполнения вредоносного кода.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'JavaFX - популярный инструмент для создания графических интерфейсов', 'JavaFX продолжает оставаться одним из самых популярных инструментов для создания красивых и интуитивно понятных графических интерфейсов.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Java в облачных вычислениях', 'Java становится все более популярным языком программирования для облачных вычислений благодаря своей надежности и масштабируемости.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Java и машинное обучение', 'Java получает все большую популярность в области машинного обучения благодаря своей простоте в использовании и богатому набору библиотек.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Новый фреймворк для тестирования Java приложений', 'Был представлен новый фреймворк для тестирования Java приложений, который обещает значительно упростить и автоматизировать процесс тестирования.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Программисты Java в большом спросе', 'Программисты Java находятся в большом спросе на рынке труда благодаря широкому применению языка и его надежности.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Применение Java в системах безопасности', 'Java активно применяется в системах безопасности для обеспечения надежности и защиты от вредоносного ПО.', 1);
+            INSERT INTO news (time, title, text, author_id) VALUES ('2024-02-28 14:30:00', 'Java и разработка мобильных приложений', 'Java остается одним из основных языков программирования для разработки мобильных приложений благодаря своей кросс-платформенности и широкому сообществу разработчиков.', 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-2" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:05:00', 'Отличная статья, спасибо за информацию!', 'Samael', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:15:00', 'Полезная информация, спасибо за обзор.', 'subscriber', 1, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:25:00', 'Интересные идеи, жду продолжения.', 'journalist', 1, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:35:00', 'Статья вдохновила меня попробовать Java для разработки в облаке.', 'Дмитрий', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:45:00', 'Хорошо написано и информативно, спасибо!', 'Ева', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:55:00', 'Я давно искал ресурсы по разработке игр на Java, это здорово.', 'Федор', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:05:00', 'Впечатлен контентом, продолжайте в том же духе!', 'Галина', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:15:00', 'У меня есть вопрос по одному из примеров, можете пояснить?', 'Игорь', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:25:00', 'Жду с нетерпением попробовать эти техники.', 'Юлия', 1, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:35:00', 'Спасибо за обмен знаниями с нами.', 'Кирилл', 1, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-3" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:00:00', 'Очень интересная тема, буду изучать дополнительную информацию.', 'Samael', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:10:00', 'Спасибо за подробное описание, теперь все стало ясно.', 'subscriber', 2, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:20:00', 'Хороший пример, я попробую реализовать это в своем проекте.', 'journalist', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:30:00', 'Спасибо за практические советы, это очень ценно.', 'Денис', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:40:00', 'У вас всегда такие интересные материалы, спасибо за труд!', 'Екатерина', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 15:50:00', 'Я в восторге от вашего подхода к обучению, продолжайте в том же духе.', 'Федор', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 16:00:00', 'Очень понятно объяснено, спасибо за уделенное внимание деталям.', 'Галина', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 16:10:00', 'Интересная статья, буду ждать новых публикаций.', 'Игорь', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 16:20:00', 'Спасибо за подсказки, они пригодятся в моей работе.', 'Юлия', 2, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 16:30:00', 'Отличный материал для самостоятельного изучения, спасибо за обзор.', 'Кирилл', 2, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-4"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень интересный материал, буду изучать дополнительные источники.', 'Samael', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:10:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 3, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:20:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'journalist', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:30:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Григорий', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:40:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Диана', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:50:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Ефим', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:00:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'Жанна', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:10:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'Игорь', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:20:00', 'Полезные советы, спасибо за подсказки.', 'Юлия', 3, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:30:00', 'Отличный обзор, спасибо за информацию.', 'Кирилл', 3, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-5"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень интересный материал, буду изучать дополнительные источники.', 'Samael', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:10:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 4, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:20:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'journalist', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:30:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Григорий', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:40:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Диана', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:50:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Ефим', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:00:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'Жанна', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:10:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'Игорь', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:20:00', 'Полезные советы, спасибо за подсказки.', 'Юлия', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:30:00', 'Отличный обзор, спасибо за информацию.', 'Кирилл', 4, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-6"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень интересный материал, буду изучать дополнительные источники.', 'Samael', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:10:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 5, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:20:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'journalist', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:30:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Григорий', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:40:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Диана', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:50:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Ефим', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:00:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'Жанна', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:10:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'Игорь', 4, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:20:00', 'Полезные советы, спасибо за подсказки.', 'Юлия', 5, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:30:00', 'Отличный обзор, спасибо за информацию.', 'Кирилл', 5, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-7" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:05:00', 'Отличная статья, спасибо за информацию!', 'Samael', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:15:00', 'Полезная информация, спасибо за обзор.', 'subscriber', 6, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:25:00', 'Интересные идеи, жду продолжения.', 'journalist', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:35:00', 'Статья вдохновила меня попробовать Java для разработки в облаке.', 'Дмитрий', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:45:00', 'Хорошо написано и информативно, спасибо!', 'Ева', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 13:55:00', 'Я давно искал ресурсы по разработке игр на Java, это здорово.', 'Федор', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:05:00', 'Впечатлен контентом, продолжайте в том же духе!', 'Галина', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:15:00', 'У меня есть вопрос по одному из примеров, можете пояснить?', 'Игорь', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:25:00', 'Жду с нетерпением попробовать эти техники.', 'Юлия', 6, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 14:35:00', 'Спасибо за обмен знаниями с нами.', 'Кирилл', 6, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-8" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:40:00', 'Очень интересный материал, спасибо за информацию.', 'Samael', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:50:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 7, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:00:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'Валентина', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:10:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'journalist', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:20:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Диана', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:30:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Ефим', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:40:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'Жанна', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 19:50:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'Игорь', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:00:00', 'Полезные советы, спасибо за подсказки.', 'Юлия', 7, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:10:00', 'Отличный обзор, спасибо за информацию.', 'Кирилл', 7, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-9" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:20:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'Samael', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:30:00', 'Отличный обзор, спасибо за информацию.', 'Никита', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:40:00', 'Полезные советы, спасибо за подсказки.', 'Ольга', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 20:50:00', 'Очень интересный материал, спасибо за информацию.', 'Павел', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:00:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 8, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:10:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'Сергей', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:20:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'journalist', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:30:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Ульяна', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:40:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Федор', 8, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 21:50:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'Христина', 8, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-10" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:00:00', 'Спасибо за такой подробный обзор, очень информативно.', 'Samael', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:10:00', 'Очень познавательная статья, спасибо за интересные факты.', 'journalist', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:20:00', 'Спасибо за полезные советы, обязательно приму их к сведению.', 'Глеб', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:30:00', 'Отличный материал, спасибо за информацию.', 'Дарья', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:40:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'Евгений', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:50:00', 'Спасибо за интересный обзор, буду ждать новых материалов.', 'Жанна', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:00:00', 'Полезные советы, спасибо за подсказки.', 'Иван', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:10:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Ксения', 9, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:20:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'subscriber', 9, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:30:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Маргарита', 9, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-11"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень интересный материал, буду изучать дополнительные источники.', 'Samael', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:10:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'subscriber', 10, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:20:00', 'Спасибо за подробное описание ситуации, теперь все стало ясно.', 'journalist', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:30:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Григорий', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:40:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Диана', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:50:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'Ефим', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:00:00', 'Я в восторге от вашего профессионализма, продолжайте в том же духе.', 'subscriber', 10, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:10:00', 'Спасибо за интересный материал, буду изучать дополнительную информацию.', 'subscriber', 10, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:20:00', 'Полезные советы, спасибо за подсказки.', 'Юлия', 10, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 18:30:00', 'Отличный обзор, спасибо за информацию.', 'Кирилл', 10, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-12"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Скачал и установил новую версию. Пока всё работает отлично!', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Должно быть интересно послушать доклады на конференции.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - отличный инструмент для создания пользовательских интерфейсов.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Уязвимости - это всегда серьезная проблема. Надеюсь, ее скоро устранят.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - связка, которая работает!', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и машинное обучение звучит очень интересно.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Новый фреймворк для тестирования? Жду с нетерпением подробностей!', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Это замечательно, что Java развивается и улучшается.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Всегда интересно видеть новости из мира Java.', 'subscriber', 11, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Спасибо за информацию. Очень известный журналист!', 'journalist', 11, 3);
+            </sql>
+    </changeSet>
+
+    <changeSet id="lazy-13"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Отличная новость! Большие ожидания от этой версии.', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Советую всем обновиться как можно скорее!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Как всегда, Java не перестает удивлять!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Надеюсь, что исправили все известные ошибки.', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Жду с нетерпением новых функций Java 15!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Спасибо за информацию. Буду изучать новую версию!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'У меня уже возникло несколько идей, которые можно воплотить с помощью новых функций Java 15.', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Я в восторге от новой версии Java. Продолжайте в том же духе!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Скачал и установил новую версию. Пока всё работает отлично!', 'subscriber', 12, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Должно быть интересно послушать доклады на конференции.', 'subscriber', 12, 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-14"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - отличный инструмент для создания пользовательских интерфейсов.', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Уязвимости - это всегда серьезная проблема. Надеюсь, ее скоро устранят.', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - связка, которая работает!', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и машинное обучение звучит очень интересно.', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Новый фреймворк для тестирования? Жду с нетерпением подробностей!', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Это замечательно, что Java развивается и улучшается.', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Всегда интересно видеть новости из мира Java.', 'subscriber', 13, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Спасибо за информацию. Очень известный журналист!', 'journalist', 13, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Хорошая статья. Понятно и информативно.', 'journalist', 13, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - это то, что делает Java еще более привлекательной для разработчиков.', 'journalist', 13, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-15"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Надеюсь, что новый фреймворк принесет с собой много полезных инструментов.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java не перестает радовать своими новостями.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Узнавать последние новости из мира Java всегда интересно.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'С удовольствием присоединился бы к конференции.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - надежный инструмент для создания профессиональных интерфейсов.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Безопасность всегда на первом месте.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - идеальное сочетание.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'В мире машинного обучения Java занимает важное место.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Новый фреймворк для тестирования - обязательная тема для изучения.', 'journalist',14, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java продолжает оставаться в центре внимания разработчиков.', 'journalist',14, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-16"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Интересно ли новые функции работы с графическими интерфейсами?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Будут ли обновлены библиотеки для машинного обучения?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Каковы особенности нового фреймворка для тестирования?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Надеюсь, что в новой версии исправили все известные баги.', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Подскажите, где можно посмотреть список изменений?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Какое место занимает Java в сравнении с другими языками программирования?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Какова роль Java в разработке облачных приложений?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Какие преимущества Java на фоне других языков программирования?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Какие требования к аппаратному обеспечению для работы новой версии Java?', 'Samael', 15, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Могу ли я использовать Java для разработки мобильных приложений?', 'Samael', 15, 1);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="lazy-17"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень важно регулярно обновляться, чтобы уменьшить риск исправленных уязвимостей.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - неразрывная связь в современном мире.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Машинное обучение дает Java еще больше возможностей.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Надеюсь, что новый фреймворк принесет с собой много полезных инструментов.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java не перестает радовать своими новостями.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Узнавать последние новости из мира Java всегда интересно.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'С удовольствием присоединился бы к конференции.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - надежный инструмент для создания профессиональных интерфейсов.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Безопасность всегда на первом месте.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - идеальное сочетание.', 'journalist', 16, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'В мире машинного обучения Java занимает важное место.', 'journalist', 16, 3);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="lazy-18"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Хорошая статья. Понятно и информативно.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - это то, что делает Java еще более привлекательной для разработчиков.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень важно регулярно обновляться, чтобы уменьшить риск исправленных уязвимостей.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - неразрывная связь в современном мире.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Машинное обучение дает Java еще больше возможностей.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Надеюсь, что новый фреймворк принесет с собой много полезных инструментов.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java не перестает радовать своими новостями.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Узнавать последние новости из мира Java всегда интересно.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'С удовольствием присоединился бы к конференции.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - надежный инструмент для создания профессиональных интерфейсов.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Безопасность всегда на первом месте.', 'journalist', 17, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - идеальное сочетание.', 'journalist', 17, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-19"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - отличный инструмент для создания пользовательских интерфейсов.', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Уязвимости - это всегда серьезная проблема. Надеюсь, ее скоро устранят.', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - связка, которая работает!', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и машинное обучение звучит очень интересно.', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Новый фреймворк для тестирования? Жду с нетерпением подробностей!', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Это замечательно, что Java развивается и улучшается.', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Всегда интересно видеть новости из мира Java.', 'subscriber', 18, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Спасибо за информацию. Очень известный журналист!', 'journalist', 18, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Хорошая статья. Понятно и информативно.', 'journalist', 18, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - это то, что делает Java еще более привлекательной для разработчиков.', 'journalist', 18, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Очень важно регулярно обновляться, чтобы уменьшить риск исправленных уязвимостей.', 'journalist', 18, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-20"  author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Скачал и установил новую версию. Пока всё работает отлично!', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Должно быть интересно послушать доклады на конференции.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'JavaFX - отличный инструмент для создания пользовательских интерфейсов.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Уязвимости - это всегда серьезная проблема. Надеюсь, ее скоро устранят.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и облачные вычисления - связка, которая работает!', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Java и машинное обучение звучит очень интересно.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Новый фреймворк для тестирования? Жду с нетерпением подробностей!', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Это замечательно, что Java развивается и улучшается.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Всегда интересно видеть новости из мира Java.', 'subscriber', 19, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 17:00:00', 'Спасибо за информацию. Очень известный журналист!', 'journalist', 19, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="lazy-21" author="nortin" context="dml">
+        <sql>
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:00:00', 'Спасибо за такой подробный обзор, очень информативно.', 'Samael', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:10:00', 'Очень познавательная статья, спасибо за интересные факты.', 'journalist', 20, 3);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:20:00', 'Спасибо за полезные советы, обязательно приму их к сведению.', 'Глеб', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:30:00', 'Отличный материал, спасибо за информацию.', 'Дарья', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:40:00', 'Я в восторге от вашего анализа, продолжайте в том же духе.', 'Евгений', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 22:50:00', 'Спасибо за интересный обзор, буду ждать новых материалов.', 'Жанна', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:00:00', 'Полезные советы, спасибо за подсказки.', 'Иван', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:10:00', 'Отличная статья, буду использовать эту информацию в своей работе.', 'Ксения', 20, 1);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:20:00', 'Интересный подход к решению проблемы, спасибо за идеи.', 'subscriber', 20, 2);
+            INSERT INTO comments (time, text, username, news_id, author_id) VALUES ('2024-02-28 23:30:00', 'Спасибо за полезные советы, они пригодятся в моей работе.', 'Маргарита', 20, 1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

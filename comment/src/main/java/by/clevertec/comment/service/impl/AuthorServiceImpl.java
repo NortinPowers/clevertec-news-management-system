@@ -1,0 +1,28 @@
+package by.clevertec.comment.service.impl;
+
+import by.clevertec.aspect.ServiceAspectLogger;
+import by.clevertec.comment.domain.Author;
+import by.clevertec.comment.repository.AuthorRepository;
+import by.clevertec.comment.service.AuthorService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class AuthorServiceImpl implements AuthorService {
+
+    private final AuthorRepository authorRepository;
+
+    @Override
+    @ServiceAspectLogger
+    @Cacheable(value = "AuthorService::getByName", key = "#name")
+    public Author getByName(String name) {
+        Optional<Author> optionalAuthor = authorRepository.findByName(name);
+        return optionalAuthor.orElseGet(() -> authorRepository.save(new Author(name)));
+    }
+}
