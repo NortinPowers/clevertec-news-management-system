@@ -10,9 +10,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-//@FeignClient(name = "news-service", url = "http://localhost:8001/news")
 @FeignClient(name = "news-service")
 @CircuitBreaker(name = "news-service-breaker")
 @Retry(name = "news-service-retry")
@@ -27,16 +31,13 @@ public interface NewsServiceClient {
     @PostMapping
     ResponseEntity<BaseResponse> save(@RequestBody NewsAndNameRequestDto requestDto);
 
-
     @PutMapping("/{id}")
     ResponseEntity<BaseResponse> update(@PathVariable Long id,
                                         @RequestBody NewsAndNameRequestDto requestDto);
 
-//    @PatchMapping("/{id}")
     @PostMapping("/{id}")
     ResponseEntity<BaseResponse> updatePath(@PathVariable Long id,
                                             @RequestBody NewsAndNamePathRequestDto requestDto);
-
 
     @DeleteMapping("/{id}")
     ResponseEntity<BaseResponse> delete(@PathVariable Long id,

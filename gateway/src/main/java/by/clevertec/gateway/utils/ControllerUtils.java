@@ -8,14 +8,14 @@ import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.CommentResponseDto;
 import by.clevertec.response.NewsResponseDto;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 
 @UtilityClass
 public class ControllerUtils {
@@ -67,7 +67,6 @@ public class ControllerUtils {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String username = authentication.getName();
-//        String username = (String) authentication.getPrincipal();
         return new CustomUserDetails(username, authorities);
     }
 }

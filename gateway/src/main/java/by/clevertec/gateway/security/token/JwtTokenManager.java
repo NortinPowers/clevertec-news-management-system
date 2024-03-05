@@ -1,6 +1,5 @@
 package by.clevertec.gateway.security.token;
 
-
 import static by.clevertec.gateway.utils.Constants.AuthConstants.ROLES;
 import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,7 +41,6 @@ public class JwtTokenManager {
         return Jwts.builder()
                 .claims(claims)
                 .subject(userDetails.getUsername())
-//                .issuedAt(issuedDate)
                 .expiration(expiredDate)
                 .signWith(key)
                 .compact();

@@ -1,6 +1,6 @@
 package by.clevertec.gateway.controller;
 
-import static by.clevertec.utils.Constants.SECURITY_SWAGGER;
+import static by.clevertec.gateway.utils.Constants.SECURITY_SWAGGER;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import by.clevertec.aspect.ControllerAspectLogger;
@@ -11,7 +11,6 @@ import by.clevertec.model.ExceptionResponse;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
-import by.clevertec.response.NewsResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -75,13 +74,12 @@ public class CommentController {
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CommentResponseDto.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
-    public ResponseEntity<CommentResponseDto> getById(@PathVariable Long id){
+    public ResponseEntity<CommentResponseDto> getById(@PathVariable Long id) {
         return commentServiceClient.getById(id);
     }
 
     @PostMapping
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Create new comment",
@@ -98,10 +96,9 @@ public class CommentController {
         return commentServiceClient.save(comment);
 
     }
-    
+
     @PutMapping("/{id}")
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Update the comment by id",
@@ -123,7 +120,6 @@ public class CommentController {
 
     @ControllerAspectLogger
     @PatchMapping("/{id}")
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Update the comment by id",
@@ -142,10 +138,8 @@ public class CommentController {
         return commentServiceClient.updatePath(id, comment);
     }
 
-
     @ControllerAspectLogger
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Delete the comment by id",
@@ -176,9 +170,9 @@ public class CommentController {
             @ApiResponse(responseCode = "410", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<Page<CommentResponseDto>> getPersonSearchResult(@PathVariable String condition,
-                                                                       @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
-                                                                       @PageableDefault(size = 15)
-                                                                       @ParameterObject Pageable pageable) {
+                                                                          @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
+                                                                          @PageableDefault(size = 15)
+                                                                          @ParameterObject Pageable pageable) {
         return commentServiceClient.getCommentsSearchResult(condition, pageable);
     }
 }

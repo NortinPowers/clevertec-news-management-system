@@ -8,8 +8,8 @@ import by.clevertec.auth.JwtResponse;
 import by.clevertec.auth.UserRegistrationDto;
 import by.clevertec.gateway.client.AuthServiceClient;
 import by.clevertec.message.BaseResponse;
-import by.clevertec.message.ExceptionResponse;
 import by.clevertec.message.ErrorValidationResponse;
+import by.clevertec.message.ExceptionResponse;
 import by.clevertec.message.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -21,8 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +36,6 @@ public class AuthController {
 
     @ControllerAspectLogger
     @PostMapping("/token")
-//    @PreAuthorize("isAnonymous()")
     @Operation(
             summary = "Create user token",
             description = "Get a jwt-token by credentials. The response is jwt-token",
@@ -51,7 +48,7 @@ public class AuthController {
             @ApiResponse(responseCode = "403", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
-    public ResponseEntity<JwtResponse> createAuthToken(@RequestBody @Valid JwtRequest request){
+    public ResponseEntity<JwtResponse> createAuthToken(@RequestBody @Valid JwtRequest request) {
         return authServiceClient.createAuthToken(request);
     }
 
@@ -68,7 +65,7 @@ public class AuthController {
             @ApiResponse(responseCode = "403", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
-    public ResponseEntity<BaseResponse> createNewUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto){
+    public ResponseEntity<BaseResponse> createNewUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto) {
         return authServiceClient.createNewUser(userRegistrationDto);
     }
 }

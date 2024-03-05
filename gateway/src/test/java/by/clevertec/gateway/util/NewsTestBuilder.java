@@ -1,6 +1,5 @@
 package by.clevertec.gateway.util;
 
-
 import static by.clevertec.gateway.util.TestConstant.AUTHOR_ID;
 import static by.clevertec.gateway.util.TestConstant.AUTHOR_NAME;
 import static by.clevertec.gateway.util.TestConstant.NEWS_ID;
@@ -8,8 +7,6 @@ import static by.clevertec.gateway.util.TestConstant.NEWS_TEXT;
 import static by.clevertec.gateway.util.TestConstant.NEWS_TIME;
 import static by.clevertec.gateway.util.TestConstant.NEWS_TITLE;
 
-import by.clevertec.request.NewsAndNamePathRequestDto;
-import by.clevertec.request.NewsAndNameRequestDto;
 import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
@@ -34,7 +31,7 @@ public class NewsTestBuilder {
     private String text = NEWS_TEXT;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     public NewsPathRequestDto buildNewsPathRequestDto() {
         NewsPathRequestDto news = new NewsPathRequestDto();
@@ -57,25 +54,5 @@ public class NewsTestBuilder {
         news.setText(text);
         news.setAuthor(AUTHOR_NAME);
         return news;
-    }
-
-    public NewsAndNamePathRequestDto buildNewsAndNamePathRequestDto() {
-        NewsAndNamePathRequestDto requestDto = new NewsAndNamePathRequestDto();
-        requestDto.setName(AUTHOR_NAME);
-        NewsPathRequestDto news = new NewsPathRequestDto();
-        news.setTitle("new title");
-        news.setText(text);
-        requestDto.setRequestDto(news);
-        return requestDto;
-    }
-
-    public NewsAndNameRequestDto buildNewsAndNameRequestDto() {
-        NewsAndNameRequestDto requestDto = new NewsAndNameRequestDto();
-        requestDto.setName(AUTHOR_NAME);
-        NewsRequestDto news = new NewsRequestDto();
-        news.setTitle("new title");
-        news.setText("new text");
-        requestDto.setRequestDto(news);
-        return requestDto;
     }
 }

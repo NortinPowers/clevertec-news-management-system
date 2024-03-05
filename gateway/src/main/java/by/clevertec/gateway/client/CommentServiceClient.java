@@ -10,12 +10,16 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "comment-service")
 @CircuitBreaker(name = "comment-service-breaker")
 @Retry(name = "comment-service-retry")
-//@FeignClient(name = "comment-service", url = "http://localhost:8002/comments")
 public interface CommentServiceClient {
 
     @GetMapping
@@ -27,16 +31,13 @@ public interface CommentServiceClient {
     @PostMapping
     ResponseEntity<BaseResponse> save(@RequestBody CommentRequestDto comment);
 
-
     @PutMapping("/{id}")
     ResponseEntity<BaseResponse> update(@PathVariable Long id,
                                         @RequestBody CommentRequestDto comment);
 
-//    @PatchMapping("/{id}")
     @PostMapping("/{id}")
     ResponseEntity<BaseResponse> updatePath(@PathVariable Long id,
                                             @RequestBody CommentPathRequestDto comment);
-
 
     @DeleteMapping("/{id}")
     ResponseEntity<BaseResponse> delete(@PathVariable Long id);
@@ -46,5 +47,5 @@ public interface CommentServiceClient {
 
     @GetMapping("/search/{condition}")
     ResponseEntity<Page<CommentResponseDto>> getCommentsSearchResult(@PathVariable String condition,
-                                                                   Pageable pageable);
+                                                                     Pageable pageable);
 }

@@ -1,11 +1,13 @@
 package by.clevertec.gateway.util;
 
+import static by.clevertec.gateway.util.TestConstant.AUTHOR_ID;
+import static by.clevertec.gateway.util.TestConstant.AUTHOR_NAME;
+import static by.clevertec.gateway.util.TestConstant.COMMENT_ID;
+import static by.clevertec.gateway.util.TestConstant.COMMENT_TEXT;
+import static by.clevertec.gateway.util.TestConstant.COMMENT_TIME;
+import static by.clevertec.gateway.util.TestConstant.COMMENT_USERNAME;
+import static by.clevertec.gateway.util.TestConstant.NEWS_ID;
 
-import static by.clevertec.gateway.util.TestConstant.*
-        ;
-
-import by.clevertec.request.CommentAndNamePathRequestDto;
-import by.clevertec.request.CommentAndNameRequestDto;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
@@ -30,10 +32,10 @@ public class CommentTestBuilder {
     private String username = COMMENT_USERNAME;
 
     @Builder.Default
-    private Long news_id = NEWS_ID;
+    private Long newsId = NEWS_ID;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     public CommentPathRequestDto buildCommentPathRequestDto() {
         CommentPathRequestDto comment = new CommentPathRequestDto();
@@ -59,29 +61,5 @@ public class CommentTestBuilder {
         comment.setNewsId(NEWS_ID);
         comment.setAuthor(AUTHOR_NAME);
         return comment;
-    }
-
-
-
-    public CommentAndNamePathRequestDto buildCommentAndNamePathRequestDto() {
-        CommentAndNamePathRequestDto requestDto = new CommentAndNamePathRequestDto();
-        requestDto.setName(AUTHOR_NAME);
-        CommentPathRequestDto comment = new CommentPathRequestDto();
-        comment.setText(text);
-        comment.setUsername(AUTHOR_NAME);
-        comment.setNewsId(NEWS_ID);
-        requestDto.setRequestDto(comment);
-        return requestDto;
-    }
-
-    public CommentAndNameRequestDto buildCommentAndNameRequestDto() {
-        CommentAndNameRequestDto requestDto = new CommentAndNameRequestDto();
-        requestDto.setName(AUTHOR_NAME);
-        CommentRequestDto comment = new CommentRequestDto();
-        comment.setText(text);
-        comment.setUsername(AUTHOR_NAME);
-        comment.setNewsId(NEWS_ID);
-        requestDto.setRequestDto(comment);
-        return requestDto;
     }
 }

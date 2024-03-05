@@ -1,13 +1,10 @@
 package by.clevertec.gateway.util;
 
-
-
 import static by.clevertec.gateway.util.TestConstant.USER_ID;
 import static by.clevertec.gateway.util.TestConstant.USER_PASSWORD;
 import static by.clevertec.gateway.util.TestConstant.USER_USERNAME;
 
 import by.clevertec.auth.UserDto;
-import by.clevertec.auth.UserRegistrationDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,7 +17,7 @@ public class UserTestBuilder {
 
     @Builder.Default
     private String username = USER_USERNAME;
-    
+
     @Builder.Default
     private String password = USER_PASSWORD;
 
@@ -31,14 +28,6 @@ public class UserTestBuilder {
         UserDto user = new UserDto();
         user.setUsername(username);
         user.setRole(roleName);
-        return user;
-    }
-
-    public UserRegistrationDto buildUserRegistrationDto() {
-        UserRegistrationDto user = new UserRegistrationDto();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setVerifyPassword(password);
         return user;
     }
 }

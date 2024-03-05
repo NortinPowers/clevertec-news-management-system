@@ -1,13 +1,10 @@
 package by.clevertec.gateway.controller;
 
+import static by.clevertec.gateway.utils.Constants.SECURITY_SWAGGER;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNamePathRequestDtoToUpdate;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNameRequestDtoToCreate;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNameRequestDtoToUpdate;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsWithCommentsProjection;
-import static by.clevertec.gateway.utils.ControllerUtils.getUsername;
-import static by.clevertec.utils.Constants.SECURITY_SWAGGER;
-import static by.clevertec.utils.ResponseUtils.getExceptionResponse;
-import static by.clevertec.utils.ResponseUtils.getSuccessResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import by.clevertec.aspect.ControllerAspectLogger;
@@ -16,7 +13,6 @@ import by.clevertec.gateway.client.NewsServiceClient;
 import by.clevertec.gateway.projection.NewsWithCommentsProjection;
 import by.clevertec.gateway.projection.impl.NewsWithCommentsProjectionImpl;
 import by.clevertec.message.BaseResponse;
-import by.clevertec.message.MessageResponse;
 import by.clevertec.model.ErrorValidationResponse;
 import by.clevertec.model.ExceptionResponse;
 import by.clevertec.request.NewsAndNamePathRequestDto;
@@ -25,9 +21,6 @@ import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.CommentResponseDto;
 import by.clevertec.response.NewsResponseDto;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import feign.FeignException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -38,16 +31,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Objects;
+import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,11 +48,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestController
 @RequiredArgsConstructor
@@ -86,8 +71,8 @@ public class NewsController {
             @ApiResponse(responseCode = "410", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<Page<NewsResponseDto>> getAll(@Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
-                                                            @PageableDefault(size = 15)
-                                                            @ParameterObject Pageable pageable) {
+                                                        @PageableDefault(size = 15)
+                                                        @ParameterObject Pageable pageable) {
         return newsServiceClient.getAll(pageable);
     }
 
@@ -108,7 +93,6 @@ public class NewsController {
 
     @PostMapping
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Create new news",
@@ -129,7 +113,6 @@ public class NewsController {
 
     @PutMapping("/{id}")
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Update the news by id",
@@ -151,14 +134,11 @@ public class NewsController {
     }
 
     @PatchMapping("/{id}")
-//    @PostMapping("/{id}")
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Update the news by id",
             description = "Update the news by specifying its id. Access is restricted. The response is a message about the successful update a news",
-//            tags = "post"
             tags = "patch"
     )
     @ApiResponses({
@@ -174,10 +154,8 @@ public class NewsController {
         return newsServiceClient.updatePath(id, requestDto);
     }
 
-
     @DeleteMapping("/{id}")
     @ControllerAspectLogger
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'JOURNALIST')")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
     @Operation(
             summary = "Delete the news by id",
@@ -214,9 +192,7 @@ public class NewsController {
                                                                           @PageableDefault(size = 15)
                                                                           @ParameterObject Pageable pageable) {
         ResponseEntity<NewsResponseDto> responseWithNewsResponseDto = newsServiceClient.getById(id);
-//        NewsResponseDto newsResponseDto = responseWithNewsResponseDto.getBody();
         ResponseEntity<Page<CommentResponseDto>> responseWithPageOfCommentResponseDtos = commentServiceClient.getAllByNewsId(id, pageable);
-//        Page<CommentResponseDto> commentResponseDtos = responseWithPageOfCommentResponseDtos.getBody();
         NewsWithCommentsProjectionImpl newsWithCommentsProjection = getNewsWithCommentsProjection(
                 Objects.requireNonNull(responseWithNewsResponseDto.getBody()),
                 responseWithPageOfCommentResponseDtos.getBody()

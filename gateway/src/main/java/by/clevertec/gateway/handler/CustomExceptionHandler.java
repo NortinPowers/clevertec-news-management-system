@@ -1,10 +1,8 @@
 package by.clevertec.gateway.handler;
 
-
 import static by.clevertec.gateway.utils.Constants.HandlerConstants.MESSAGE;
 import static by.clevertec.gateway.utils.Constants.HandlerConstants.STATUS;
 import static by.clevertec.gateway.utils.Constants.HandlerConstants.TYPE;
-import static by.clevertec.gateway.utils.ResponseUtils.OTHER_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.getExceptionResponse;
 
 import by.clevertec.message.BaseResponse;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<BaseResponse> handleException(AccessDeniedException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -33,7 +30,6 @@ public class CustomExceptionHandler {
         );
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
-
 
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<BaseResponse> handleException(FeignException exception) {
@@ -50,7 +46,7 @@ public class CustomExceptionHandler {
     public ResponseEntity<BaseResponse> handleException(RuntimeException exception) {
         ExceptionResponse response = getExceptionResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                OTHER_EXCEPTION_MESSAGE,
+                "Unexpected error",
                 exception
         );
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,5 +61,6 @@ public class CustomExceptionHandler {
         return new RerouteExceptionResponse(status, message, type);
     }
 
-    record RerouteExceptionResponse(int status, String message, String type){};
+    record RerouteExceptionResponse(int status, String message, String type) {
+    }
 }
