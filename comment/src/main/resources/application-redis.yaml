@@ -1,7 +1,9 @@
 spring:
+
   cache:
     type: redis
     cache-names: redis-cache
+
   data:
     redis:
       host: localhost
