@@ -1,0 +1,16 @@
+server:
+  port: 8000
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          news-service:
+            url: http://localhost:8001/news
+          comment-service:
+            url: http://localhost:8002/comments
+          auth-service:
+            url: http://localhost:8003/auth
+          admin-service:
+            url: http://localhost:8003/admin

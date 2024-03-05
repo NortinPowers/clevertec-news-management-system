@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-comments-table
+      author: nortin
+      context: ddl
+      changes:
+        - createTable:
+            tableName: comments
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: news_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: comments
+            baseColumnNames: news_id
+            constraintName: comments_news_id_fk
+            referencedTableName: news
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
