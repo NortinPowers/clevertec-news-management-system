@@ -1,8 +1,6 @@
 plugins {
     id 'java'
-//    id 'org.springframework.boot' version '3.2.0'
     id 'org.springframework.boot' version '3.2.2'
-//    id 'org.springframework.boot' version '3.2.3'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'io.freefair.lombok' version '8.3'
 }
@@ -26,37 +24,26 @@ repositories {
 }
 
 ext {
-//    set('springCloudVersion', "2023.0.0")
     mapstructVersion = '1.5.5.Final'
     assertjVersion = '3.24.2'
     openapiVersion = '2.3.0'
 }
 
 dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.liquibase:liquibase-core'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-gateway-mvc'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
+
     implementation 'by.clevertec:spring-boot-exception-handler-starter:0.0.1-SNAPSHOT'
     implementation 'by.clevertec:spring-boot-logger-aspect-starter:0.0.1-SNAPSHOT'
     implementation 'by.clevertec:dto-box:0.0.1-SNAPSHOT'
-//    implementation 'org.springframework.data:spring-data-commons'
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-//    implementation 'redis.clients:jedis:5.1.0'
-
-//    implementation project(path: ':spring-boot-exception-handler-starter')
 
     compileOnly 'org.projectlombok:lombok'
     compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
     compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-
-//    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
     runtimeOnly 'org.postgresql:postgresql'
 
@@ -69,26 +56,10 @@ dependencies {
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
 }
 
-//jar {
-//    archiveFileName = "comment.jar"
-//    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-//    from(sourceSets.main.output)
-//    manifest {
-//        attributes 'Implementation-Title': 'Comment'
-//    }
-//}
-
 springBoot {
     mainClass = 'by.clevertec.comment.CommentApplication'
 }
-//
-//dependencyManagement {
-//    imports {
-//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-//    }
-//}
 
-//tasks.named('test') {
 test {
     useJUnitPlatform()
 }
