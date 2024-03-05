@@ -1,6 +1,5 @@
 package by.clevertec.news.util;
 
-
 import static by.clevertec.news.util.TestConstant.AUTHOR_ID;
 import static by.clevertec.news.util.TestConstant.AUTHOR_NAME;
 import static by.clevertec.news.util.TestConstant.NEWS_ID;
@@ -39,7 +38,7 @@ public class NewsTestBuilder {
     private String text = NEWS_TEXT;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     @Builder.Default
     private Author author = new Author(AUTHOR_NAME);

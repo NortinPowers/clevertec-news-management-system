@@ -304,7 +304,6 @@ class NewsServiceImplTest {
     @Nested
     class UpdatePathTest {
 
-
         @Test
         void updateShouldThrowCustomEntityNotFoundException_whenIncorrectId() {
             when(newsRepository.findById(INCORRECT_ID))
@@ -409,7 +408,6 @@ class NewsServiceImplTest {
             News news = NewsTestBuilder.builder()
                     .build()
                     .buildNews();
-            ;
 
             when(newsRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(news));

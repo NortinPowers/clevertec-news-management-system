@@ -17,8 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @Transactional
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

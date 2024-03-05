@@ -15,9 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-//@Transactional
-//@Import(TestContainerConfig.class)
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class NewsMapperTest {
 
     private final NewsMapper newsMapper;

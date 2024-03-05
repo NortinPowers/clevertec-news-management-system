@@ -18,7 +18,6 @@ import by.clevertec.news.util.NewsTestBuilder;
 import by.clevertec.response.NewsResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,8 +28,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-@ActiveProfiles("test")
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 class NewsControllerTestMockConf {
 
@@ -55,52 +54,25 @@ class NewsControllerTestMockConf {
                 .andExpect(content().json(mapper.writeValueAsString(news)));
     }
 
-    @Nested
-    class TestGetAll {
+    @Test
+    void getAllShouldReturnExceptionResponse_whenNewsListIsEmpty() throws Exception {
+        PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
+        CustomNoContentException exception = CustomNoContentException.of(News.class);
+        ExceptionResponse response = getExceptionResponse(
+                HttpStatus.GONE,
+                exception.getMessage(),
+                exception
+        );
 
-        private final String url = "/news";
+        when(newsService.getAll(pageRequest))
+                .thenThrow(exception);
 
-//        @Test
-//        void getAllShouldReturnPageWithNewsResponseDtosList() throws Exception {
-//            NewsResponseDto news = NewsTestBuilder.builder()
-//                    .build()
-//                    .buildNewsResponseDto();
-//            List<NewsResponseDto> newsList = List.of(news);
-//            PageImpl<NewsResponseDto> page = new PageImpl<>(newsList);
-//            PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
-//
-//            when(newsService.getAll(pageRequest))
-//                    .thenReturn(page);
-//
-//            mockMvc.perform(get(url))
-//                    .andExpect(status().isOk())
-//                    .andExpectAll(
-//                            jsonPath("$.content").isArray(),
-//                            jsonPath("$.content[0].time").value(news.getTime()),
-//                            jsonPath("$.content[0].title").value(news.getTitle()),
-//                            jsonPath("$.content[0].text").value(news.getText()),
-//                            jsonPath("$.content[0].author").value(news.getAuthor()));
-//        }
-
-        @Test
-        void getAllShouldReturnExceptionResponse_whenNewsListIsEmpty() throws Exception {
-            PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
-            CustomNoContentException exception = CustomNoContentException.of(News.class);
-            ExceptionResponse response = getExceptionResponse(
-                    HttpStatus.GONE,
-                    exception.getMessage(),
-                    exception
-            );
-
-            when(newsService.getAll(pageRequest))
-                    .thenThrow(exception);
-
-            mockMvc.perform(get(url))
-                    .andExpect(status().isGone())
-                    .andExpectAll(
-                            jsonPath("$.status").value(response.getStatus()),
-                            jsonPath("$.message").value(response.getMessage()),
-                            jsonPath("$.type").value(response.getType()));
-        }
+        mockMvc.perform(get("/news"))
+                .andExpect(status().isGone())
+                .andExpectAll(
+                        jsonPath("$.status").value(response.getStatus()),
+                        jsonPath("$.message").value(response.getMessage()),
+                        jsonPath("$.type").value(response.getType()));
     }
+
 }

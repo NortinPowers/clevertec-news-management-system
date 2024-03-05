@@ -49,15 +49,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-//@SpringBootTest
-@ActiveProfiles("test")
 @Transactional
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @SpringBootTest(classes = TestContainerConfig.class)
-//TODO @Transactional не работает!!
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class NewsControllerTest {
 
@@ -87,9 +84,6 @@ class NewsControllerTest {
         }
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void getAllShouldReturnExceptionResponse_whenNewsListIsEmpty() throws Exception {
             CustomNoContentException exception = CustomNoContentException.of(News.class);
@@ -418,9 +412,6 @@ class NewsControllerTest {
         private final String url = "/news/{id}";
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void deleteShouldReturnSuccessResponse_whenValidId() throws Exception {
             MessageResponse response = getSuccessResponse(DELETION_MESSAGE, News.class);

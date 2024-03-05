@@ -9,7 +9,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-//@Profile("test")
 @TestConfiguration(proxyBeanMethods = false)
 public class TestContainerConfig {
 

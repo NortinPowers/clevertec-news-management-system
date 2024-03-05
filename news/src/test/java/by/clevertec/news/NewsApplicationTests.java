@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @RequiredArgsConstructor
 class NewsApplicationTests {
-//class NewsApplicationTests extends AbstractTest{
 
     private final NewsController newsController;
 

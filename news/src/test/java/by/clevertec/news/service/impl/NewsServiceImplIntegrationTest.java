@@ -47,13 +47,9 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-//@Transactional
 class NewsServiceImplIntegrationTest {
 
     private final NewsService newsService;
-
-//    @MockBean
-//    private CacheManager cacheManager;
 
     @MockBean
     private NewsRepository newsRepository;
@@ -154,7 +150,6 @@ class NewsServiceImplIntegrationTest {
         }
     }
 
-    //    не получает key = "#result.id"
     @Nested
     class SaveTest {
 
@@ -314,7 +309,6 @@ class NewsServiceImplIntegrationTest {
     @Nested
     class UpdatePathTest {
 
-
         @Test
         void updateShouldThrowCustomEntityNotFoundException_whenIncorrectId() {
             when(newsRepository.findById(INCORRECT_ID))
@@ -419,7 +413,6 @@ class NewsServiceImplIntegrationTest {
             News news = NewsTestBuilder.builder()
                     .build()
                     .buildNews();
-            ;
 
             when(newsRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(news));
