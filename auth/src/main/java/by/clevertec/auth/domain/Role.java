@@ -3,13 +3,12 @@ package by.clevertec.auth.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
-
-import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter

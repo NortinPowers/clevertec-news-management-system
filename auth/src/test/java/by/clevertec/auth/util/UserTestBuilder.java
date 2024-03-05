@@ -1,18 +1,16 @@
 package by.clevertec.auth.util;
 
 
+import static by.clevertec.auth.util.TestConstant.USER_ID;
+import static by.clevertec.auth.util.TestConstant.USER_PASSWORD;
+import static by.clevertec.auth.util.TestConstant.USER_USERNAME;
+
 import by.clevertec.auth.UserDto;
 import by.clevertec.auth.domain.Role;
 import by.clevertec.auth.domain.User;
 import by.clevertec.auth.dto.UserRegistrationDto;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
-
-import static by.clevertec.auth.util.TestConstant.USER_ID;
-import static by.clevertec.auth.util.TestConstant.USER_PASSWORD;
-import static by.clevertec.auth.util.TestConstant.USER_USERNAME;
 
 @Data
 @Builder(setterPrefix = "with")
@@ -23,7 +21,7 @@ public class UserTestBuilder {
 
     @Builder.Default
     private String username = USER_USERNAME;
-    
+
     @Builder.Default
     private String password = USER_PASSWORD;
 

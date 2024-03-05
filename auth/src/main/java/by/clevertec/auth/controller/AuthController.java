@@ -1,5 +1,10 @@
 package by.clevertec.auth.controller;
 
+import static by.clevertec.auth.utils.Constants.USER;
+import static by.clevertec.auth.utils.ResponseUtils.CREATION_MESSAGE;
+import static by.clevertec.auth.utils.ResponseUtils.getSuccessResponse;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import by.clevertec.aspect.ControllerAspectLogger;
 import by.clevertec.auth.JwtRequest;
 import by.clevertec.auth.JwtResponse;
@@ -25,11 +30,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static by.clevertec.auth.utils.Constants.USER;
-import static by.clevertec.auth.utils.ResponseUtils.CREATION_MESSAGE;
-import static by.clevertec.auth.utils.ResponseUtils.getSuccessResponse;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Tag(name = "Auth", description = "User`s management API")
 @RestController

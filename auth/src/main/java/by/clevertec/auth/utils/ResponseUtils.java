@@ -3,16 +3,11 @@ package by.clevertec.auth.utils;
 
 import by.clevertec.message.ExceptionResponse;
 import by.clevertec.message.SuccessResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import lombok.experimental.UtilityClass;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 @UtilityClass
 public class ResponseUtils {

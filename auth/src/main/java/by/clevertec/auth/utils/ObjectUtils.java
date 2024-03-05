@@ -1,11 +1,11 @@
 package by.clevertec.auth.utils;
 
-import lombok.experimental.UtilityClass;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 import java.beans.FeatureDescriptor;
 import java.util.Arrays;
 import java.util.stream.Stream;
+import lombok.experimental.UtilityClass;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 
 @UtilityClass
 public class ObjectUtils {
