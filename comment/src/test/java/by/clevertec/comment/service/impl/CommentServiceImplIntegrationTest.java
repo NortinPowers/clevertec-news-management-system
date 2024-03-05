@@ -13,7 +13,6 @@ import static org.mockito.Mockito.when;
 import by.clevertec.comment.domain.Author;
 import by.clevertec.comment.domain.Comment;
 import by.clevertec.comment.mapper.CommentMapper;
-import by.clevertec.comment.proxy.CommentCacheableAspect;
 import by.clevertec.comment.repository.CommentRepository;
 import by.clevertec.comment.service.AuthorService;
 import by.clevertec.comment.service.CommentService;
@@ -26,12 +25,7 @@ import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
-import by.clevertec.request.NewsAndNamePathRequestDto;
-import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsPathRequestDto;
-import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.CommentResponseDto;
-import by.clevertec.response.NewsResponseDto;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -39,20 +33,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-//@Transactional
 class CommentServiceImplIntegrationTest {
 
     private final CommentService commentService;
@@ -314,7 +304,6 @@ class CommentServiceImplIntegrationTest {
     @Nested
     class UpdatePathTest {
 
-
         @Test
         void updateShouldThrowCustomEntityNotFoundException_whenIncorrectId() {
             when(commentRepository.findById(TestConstant.INCORRECT_ID))
@@ -418,7 +407,7 @@ class CommentServiceImplIntegrationTest {
         void deleteShouldDeleteComment_whenCorrectIdAndUsername() {
             Comment comment = CommentTestBuilder.builder()
                     .build()
-                    .buildComment();;
+                    .buildComment();
 
             when(commentRepository.findById(TestConstant.CORRECT_ID))
                     .thenReturn(Optional.of(comment));
@@ -563,5 +552,4 @@ class CommentServiceImplIntegrationTest {
             verify(commentMapper, never()).toDto(any(Comment.class));
         }
     }
-
 }

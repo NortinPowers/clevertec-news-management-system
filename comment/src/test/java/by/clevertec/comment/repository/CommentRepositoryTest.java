@@ -1,21 +1,5 @@
 package by.clevertec.comment.repository;
 
-import by.clevertec.comment.config.TestContainerConfig;
-import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.util.CommentTestBuilder;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
-
-import java.util.Optional;
-
 import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
 import static by.clevertec.comment.util.TestConstant.COMMENT_USERNAME;
 import static by.clevertec.comment.util.TestConstant.NEWS_ID;
@@ -27,17 +11,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import by.clevertec.comment.config.TestContainerConfig;
+import by.clevertec.comment.domain.Comment;
+import by.clevertec.comment.util.CommentTestBuilder;
+import jakarta.transaction.Transactional;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+
 @DataJpaTest
-@ActiveProfiles("test")
 @Transactional
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-
-//TODO @Transactional не работает?
-
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class CommentRepositoryTest {
 
@@ -80,8 +75,6 @@ class CommentRepositoryTest {
     }
 
     @Test
-    //TODO
-//    @Sql(value = {"classpath:sql/comment/create-comment-without-owner.sql", "classpath:sql/delete-owners.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void deleteByIdShouldDeleteComment_whenCommentExistInTable() {
         Optional<Comment> before = commentRepository.findById(COMMENT_ID);
         assertTrue(before.isPresent());

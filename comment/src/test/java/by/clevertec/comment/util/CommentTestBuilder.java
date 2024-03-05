@@ -1,5 +1,12 @@
 package by.clevertec.comment.util;
 
+import static by.clevertec.comment.util.TestConstant.AUTHOR_ID;
+import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
+import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
+import static by.clevertec.comment.util.TestConstant.COMMENT_TEXT;
+import static by.clevertec.comment.util.TestConstant.COMMENT_TIME;
+import static by.clevertec.comment.util.TestConstant.COMMENT_USERNAME;
+import static by.clevertec.comment.util.TestConstant.NEWS_ID;
 
 import by.clevertec.comment.domain.Author;
 import by.clevertec.comment.domain.Comment;
@@ -8,23 +15,10 @@ import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
-import by.clevertec.request.NewsAndNamePathRequestDto;
-import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsPathRequestDto;
-import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.CommentResponseDto;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.LocalDateTime;
-
-import static by.clevertec.comment.util.TestConstant.AUTHOR_ID;
-import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
-import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
-import static by.clevertec.comment.util.TestConstant.COMMENT_TEXT;
-import static by.clevertec.comment.util.TestConstant.COMMENT_TIME;
-import static by.clevertec.comment.util.TestConstant.COMMENT_USERNAME;
-import static by.clevertec.comment.util.TestConstant.NEWS_ID;
 
 @Data
 @Builder(setterPrefix = "with")
@@ -43,10 +37,10 @@ public class CommentTestBuilder {
     private String username = COMMENT_USERNAME;
 
     @Builder.Default
-    private Long news_id = NEWS_ID;
+    private Long newsId = NEWS_ID;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     @Builder.Default
     private Author author = new Author(AUTHOR_NAME);
@@ -92,8 +86,6 @@ public class CommentTestBuilder {
         comment.setAuthor(author.getName());
         return comment;
     }
-
-
 
     public CommentAndNamePathRequestDto buildCommentAndNamePathRequestDto() {
         CommentAndNamePathRequestDto requestDto = new CommentAndNamePathRequestDto();

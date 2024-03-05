@@ -1,13 +1,23 @@
 package by.clevertec.comment.controller;
 
-import by.clevertec.comment.config.TestContainerConfig;
-import by.clevertec.exception.CustomNoContentException;
-import by.clevertec.model.ExceptionResponse;
+import static by.clevertec.comment.util.TestConstant.CORRECT_ID;
+import static by.clevertec.comment.util.TestConstant.PAGE_NUMBER;
+import static by.clevertec.comment.util.TestConstant.PAGE_SIZE;
+import static by.clevertec.util.ResponseUtils.getExceptionResponse;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import by.clevertec.comment.domain.Comment;
 import by.clevertec.comment.service.CommentService;
 import by.clevertec.comment.util.CommentTestBuilder;
+import by.clevertec.exception.CustomNoContentException;
+import by.clevertec.model.ExceptionResponse;
 import by.clevertec.response.CommentResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,22 +30,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
-
-import static by.clevertec.comment.util.TestConstant.CORRECT_ID;
-import static by.clevertec.comment.util.TestConstant.PAGE_NUMBER;
-import static by.clevertec.comment.util.TestConstant.PAGE_SIZE;
-import static by.clevertec.util.ResponseUtils.getExceptionResponse;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @SpringBootTest
-@ActiveProfiles("test")
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 class CommentControllerTestMockConf {
 

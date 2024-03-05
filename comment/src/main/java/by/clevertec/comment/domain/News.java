@@ -12,13 +12,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -38,9 +38,6 @@ public class News {
     @Column(nullable = false)
     private String title;
     private String text;
-
-//    @ElementCollection
-//    private List<Long> commentIds;
 
     @OneToMany(
             mappedBy = "news",

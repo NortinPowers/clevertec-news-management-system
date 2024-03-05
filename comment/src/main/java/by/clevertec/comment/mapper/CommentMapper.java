@@ -3,15 +3,12 @@ package by.clevertec.comment.mapper;
 import by.clevertec.comment.domain.Comment;
 import by.clevertec.comment.mapper.annotation.DateMapping;
 import by.clevertec.comment.mapper.util.DateConverter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 
 @Mapper(config = CustomMapperConfig.class)
 public interface CommentMapper extends DateConverter {
@@ -49,7 +46,7 @@ public interface CommentMapper extends DateConverter {
     /**
      * Обновляет существующий объект типа {@link Comment} данными из объекта {@link Comment updated}.
      *
-     * @param comment  Объект типа {@link Comment}, который требуется обновить.
+     * @param comment Объект типа {@link Comment}, который требуется обновить.
      * @param updated Объект типа {@link Comment}, содержащий обновленные данные.
      * @return Обновленный объект типа {@link Comment}.
      */

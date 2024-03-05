@@ -1,13 +1,13 @@
 package by.clevertec.comment.service;
 
+import by.clevertec.comment.domain.Comment;
 import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
-import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
+import by.clevertec.response.NewsResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import by.clevertec.comment.domain.Comment;
 
 public interface CommentService {
 
@@ -33,13 +33,11 @@ public interface CommentService {
      * @param commentDtoWithName Объект {@link CommentAndNameRequestDto}, который требуется сохранить в виде нового пользователя.
      */
     Long save(CommentAndNameRequestDto commentDtoWithName);
-//    void save(CommentAndNameRequestDto commentDtoWithName);
-//    Comment save(CommentAndNameRequestDto commentDtoWithName);
 
     /**
      * Обновляет данные объекта {@link Comment} по уникальному идентификатору (UUID).
      *
-     * @param id   Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
+     * @param id                 Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
      * @param commentDtoWithName Объект {@link CommentAndNameRequestDto}, одержащий обновленные данные и имя пользователя.
      */
     void update(Long id, CommentAndNameRequestDto commentDtoWithName);
@@ -48,7 +46,7 @@ public interface CommentService {
      * Обновляет данные объекта {@link Comment} по уникальному идентификатору (UUID) с использованием
      * данных из объекта {@link CommentAndNamePathRequestDto}.
      *
-     * @param id      Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
+     * @param id                 Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
      * @param commentDtoWithName Объект {@link CommentAndNamePathRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void updatePath(Long id, CommentAndNamePathRequestDto commentDtoWithName);
@@ -56,14 +54,26 @@ public interface CommentService {
     /**
      * Удаляет объект {@link Comment} по уникальному идентификатору (UUID).
      *
-     * @param id Уникальный идентификатор (Long) объекта {@link Comment}, который требуется удалить.
+     * @param id       Уникальный идентификатор (Long) объекта {@link Comment}, который требуется удалить.
      * @param username Имя пользователя, который запрашивает метод.
      */
     void delete(Long id, String username);
 
-//    List<CommentResponseDto> getAllByNewsId(Long newsId);
-
+    /**
+     * Получает страницу объектов {@link CommentResponseDto}, связанных с новостью по указанному идентификатору.
+     *
+     * @param newsId   Идентификатор новости.
+     * @param pageable Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link CommentResponseDto}, связанными с указанной новостью.
+     */
     Page<CommentResponseDto> getAllByNewsId(Long newsId, Pageable pageable);
 
+    /**
+     * Ищет объекты {@link NewsResponseDto} по заданному условию с использованием пагинации.
+     *
+     * @param condition Условие поиска (например, ключевое слово).
+     * @param pageable  Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link NewsResponseDto}, удовлетворяющими условию поиска.
+     */
     Page<CommentResponseDto> findCommentsSearchResult(String condition, Pageable pageable);
 }
