@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
      * Обрабатывает исключение {@link CustomEntityNotFoundException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
      *
      * @param exception Исключение {@link CustomEntityNotFoundException}, которое требуется обработать.
-     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP NOT_FOUND.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP FORBIDDEN.
      */
     @ExceptionHandler(CustomAccessException.class)
     public ResponseEntity<BaseResponse> handleException(CustomAccessException exception) {
