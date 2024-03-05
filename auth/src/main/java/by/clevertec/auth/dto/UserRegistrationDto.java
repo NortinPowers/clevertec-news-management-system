@@ -15,26 +15,26 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
+@Valid
 @Getter
 @Setter
 @PasswordMatching
-@Valid
 @Schema(description = "Entity of User")
 public class UserRegistrationDto implements Serializable {
 
-    @NotBlank(message = USERNAME_NOT_BLANK)
-    @Pattern(regexp = USERNAME_PATTERN, message = "Incorrect username")
     @UserExist
+    @NotBlank(message = USERNAME_NOT_BLANK)
     @Schema(description = "Username", example = "Samael")
+    @Pattern(regexp = USERNAME_PATTERN, message = "Incorrect username")
     private String username;
 
     @NotBlank(message = PASSWORD_NOT_BLANK)
-    @Pattern(regexp = PASSWORD_PATTERN, message = "Incorrect password")
     @Schema(description = "Password", example = "rebel")
+    @Pattern(regexp = PASSWORD_PATTERN, message = "Incorrect password")
     private String password;
 
     @NotBlank(message = "Enter verify password")
-    @Pattern(regexp = PASSWORD_PATTERN, message = "Incorrect  verify password")
     @Schema(description = "Password", example = "rebel")
+    @Pattern(regexp = PASSWORD_PATTERN, message = "Incorrect  verify password")
     private String verifyPassword;
 }

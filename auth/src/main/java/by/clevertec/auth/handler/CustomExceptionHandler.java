@@ -31,6 +31,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
+    /**
+     * Обрабатывает исключение {@link BadCredentialsException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link BadCredentialsException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP UNAUTHORIZED.
+     */
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<BaseResponse> handleException(BadCredentialsException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -41,6 +47,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * Обрабатывает исключение {@link MethodArgumentNotValidException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link MethodArgumentNotValidException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP BAD_REQUEST.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BaseResponse> handleException(MethodArgumentNotValidException exception) {
         ErrorValidationResponse response = new ErrorValidationResponse(
@@ -51,6 +63,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Обрабатывает исключение {@link DataSourceLookupFailureException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link DataSourceLookupFailureException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP INTERNAL_SERVER_ERROR.
+     */
     @ExceptionHandler(DataSourceLookupFailureException.class)
     public ResponseEntity<BaseResponse> handleException(DataSourceLookupFailureException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -61,6 +79,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Обрабатывает исключение {@link DataIntegrityViolationException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link DataIntegrityViolationException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP INTERNAL_SERVER_ERROR.
+     */
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<BaseResponse> handleException(DataIntegrityViolationException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -71,6 +95,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Обрабатывает исключение {@link HttpMessageNotReadableException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link HttpMessageNotReadableException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP INTERNAL_SERVER_ERROR.
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<BaseResponse> handleException(HttpMessageNotReadableException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -81,6 +111,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Обрабатывает исключение {@link EntityNotFoundException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link EntityNotFoundException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP NOT_FOUND.
+     */
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<BaseResponse> handleException(EntityNotFoundException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -91,6 +127,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Обрабатывает исключение {@link JpaObjectRetrievalFailureException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link JpaObjectRetrievalFailureException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP INTERNAL_SERVER_ERROR.
+     */
     @ExceptionHandler(JpaObjectRetrievalFailureException.class)
     public ResponseEntity<BaseResponse> handleException(JpaObjectRetrievalFailureException exception) {
         ExceptionResponse response = getExceptionResponse(
@@ -101,6 +143,12 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Обрабатывает исключение {@link AccessDeniedException} и возвращает соответствующий ResponseEntity с {@link BaseResponse}.
+     *
+     * @param exception Исключение {@link AccessDeniedException}, которое требуется обработать.
+     * @return ResponseEntity с {@link BaseResponse} и кодом состояния HTTP FORBIDDEN.
+     */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<BaseResponse> handleException(AccessDeniedException exception) {
         ExceptionResponse response = getExceptionResponse(

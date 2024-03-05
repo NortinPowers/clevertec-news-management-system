@@ -54,6 +54,28 @@ class AdminServiceImplTest {
     }
 
     @Nested
+    class TestSetJournalist {
+
+        @Test
+        void setJournalistShouldChangeRole() {
+            doNothing()
+                    .when(userService).setRoleJournalist(any());
+
+            adminService.setAdmin(any());
+        }
+
+        @Test
+        void setJournalistShouldThrowDataSourceLookupFailureException_whenDbException() {
+            DataSourceLookupFailureException exception = new DataSourceLookupFailureException("not matter");
+
+            doThrow(exception)
+                    .when(userService).setRoleJournalist(any());
+
+            assertThrows(DataSourceLookupFailureException.class, () -> userService.setRoleJournalist(any()));
+        }
+    }
+
+    @Nested
     class TestGetAllUsers {
 
         private final List<UserDto> users = new ArrayList<>();

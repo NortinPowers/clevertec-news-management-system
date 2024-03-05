@@ -22,8 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
@@ -45,7 +45,6 @@ public class SecurityConfig {
                         (request, response, exception) -> getEmptyTokenResponse(response)
                 ))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        //TODO + test
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)

@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    /**
+     * Ищет пользователя по его имени пользователя.
+     *
+     * @param username Имя пользователя для поиска.
+     * @return Объект {@link Optional<User>}, содержащий пользователя с указанным именем или пустой, если пользователь не найден.
+     */
     @RepositoryAspectLogger
     Optional<User> findByUsername(String username);
 }

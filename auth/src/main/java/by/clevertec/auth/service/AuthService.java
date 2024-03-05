@@ -18,6 +18,12 @@ public class AuthService {
     private final UserDetailsService userDetailsService;
     private final JwtTokenManager jwtTokenManager;
 
+    /**
+     * Получает JWT-токен на основе данных из запроса.
+     *
+     * @param request Запрос с данными о пользователе (имя пользователя и пароль).
+     * @return Сгенерированный JWT-токен.
+     */
     @ServiceAspectLogger
     public String getToken(JwtRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

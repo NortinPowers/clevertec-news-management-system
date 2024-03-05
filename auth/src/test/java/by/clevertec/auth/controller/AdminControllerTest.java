@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import by.clevertec.auth.UserDto;
-import by.clevertec.auth.config.TestContainerConfig;
 import by.clevertec.auth.service.AdminService;
 import by.clevertec.message.ExceptionResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,16 +33,11 @@ import org.springframework.jdbc.datasource.lookup.DataSourceLookupFailureExcepti
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@SpringBootTest(classes = TestContainerConfig.class)
-@Sql(value = "classpath:sql/user/user-repository-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = "classpath:sql/user/user-repository-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@SpringBootTest
 class AdminControllerTest {
 
     @Autowired
@@ -72,7 +66,7 @@ class AdminControllerTest {
         private final Long id;
 
         {
-            url = "/admin/set/{id}";
+            url = "/admin/set/admin/{id}";
             id = 1L;
         }
 
@@ -153,6 +147,104 @@ class AdminControllerTest {
 
             doThrow(exception)
                     .when(adminService).setAdmin(any());
+
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isNotFound())
+                    .andExpectAll(
+                            jsonPath("$.timestamp").isNotEmpty(),
+                            jsonPath("$.status").value(response.getStatus()),
+                            jsonPath("$.message").value(response.getMessage()),
+                            jsonPath("$.type").value(response.getType()));
+        }
+    }
+
+    @Nested
+    class TestSetJournalist {
+
+        private final Long id;
+
+        {
+            url = "/admin/set/journalist/{id}";
+            id = 1L;
+        }
+
+        @Test
+        @WithAnonymousUser
+        void setJournalistShouldReturnMessageAboutTokenNeeded_whenUserIsAnonymous() throws Exception {
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isUnauthorized())
+                    .andExpect(jsonPath("error").value("To get access you need token"));
+        }
+
+        @Test
+        @WithMockUser(username = "user", roles = "SUBSCRIBER")
+        void setJournalistShouldReturnAccessDeniedMessage_whenUserIsSubscriber() throws Exception {
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isForbidden())
+                    .andExpectAll(
+                            jsonPath("$.timestamp").isNotEmpty(),
+                            jsonPath("$.status").value(exceptionResponse.getStatus()),
+                            jsonPath("$.message").value(exceptionResponse.getMessage()),
+                            jsonPath("$.type").value(exceptionResponse.getType()));
+        }
+
+        @Test
+        @WithMockUser(username = "user", roles = "JOURNALIST")
+        void setJournalistShouldReturnAccessDeniedMessage_whenUserIsJournalist() throws Exception {
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isForbidden())
+                    .andExpectAll(
+                            jsonPath("$.timestamp").isNotEmpty(),
+                            jsonPath("$.status").value(exceptionResponse.getStatus()),
+                            jsonPath("$.message").value(exceptionResponse.getMessage()),
+                            jsonPath("$.type").value(exceptionResponse.getType()));
+        }
+
+        @Test
+        @WithMockUser(username = "admin", roles = "ADMIN")
+        void setJournalistShouldReturnSuccessResponse_whenUserIsAdmin() throws Exception {
+            doNothing()
+                    .when(adminService).setJournalist(id);
+
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("message").value(String.format(CHANGE_ROLE_MESSAGE, "user")));
+        }
+
+        @Test
+        @WithMockUser(username = "admin", roles = "ADMIN")
+        void setJournalistShouldReturnExceptionResponse_whenDbError() throws Exception {
+            DataSourceLookupFailureException exception = new DataSourceLookupFailureException("it does not matter");
+            ExceptionResponse response = getExceptionResponse(
+                    INTERNAL_SERVER_ERROR,
+                    DATA_SOURCE_LOOKUP_FAILURE_EXCEPTION_MESSAGE,
+                    exception
+            );
+
+            doThrow(exception)
+                    .when(adminService).setJournalist(any());
+
+            mockMvc.perform(post(url, id))
+                    .andExpect(status().isInternalServerError())
+                    .andExpectAll(
+                            jsonPath("$.timestamp").isNotEmpty(),
+                            jsonPath("$.status").value(response.getStatus()),
+                            jsonPath("$.message").value(response.getMessage()),
+                            jsonPath("$.type").value(response.getType()));
+        }
+
+        @Test
+        @WithMockUser(username = "admin", roles = "ADMIN")
+        void setJournalistShouldReturnExceptionResponse_whenUserNotFound() throws Exception {
+            EntityNotFoundException exception = new EntityNotFoundException(ENTITY_NOT_FOUND_EXCEPTION_MESSAGE);
+            ExceptionResponse response = getExceptionResponse(
+                    NOT_FOUND,
+                    ENTITY_NOT_FOUND_EXCEPTION_MESSAGE,
+                    exception
+            );
+
+            doThrow(exception)
+                    .when(adminService).setJournalist(any());
 
             mockMvc.perform(post(url, id))
                     .andExpect(status().isNotFound())
