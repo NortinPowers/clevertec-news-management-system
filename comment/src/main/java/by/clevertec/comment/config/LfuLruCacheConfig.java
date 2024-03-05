@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-//@Profile("lfu-lru")
 @Profile(value = {"lfu-lru", "test"})
 public class LfuLruCacheConfig {
 

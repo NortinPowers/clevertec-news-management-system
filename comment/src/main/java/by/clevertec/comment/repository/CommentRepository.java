@@ -2,7 +2,6 @@ package by.clevertec.comment.repository;
 
 import by.clevertec.aspect.RepositoryAspectLogger;
 import by.clevertec.comment.domain.Comment;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Comment> findAllByNewsId(Long newsId);
-
     /**
      * Получает список объектов {@link Comment} с учетом параметров страницы и размера страницы.
      *
@@ -26,7 +23,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @RepositoryAspectLogger
     @EntityGraph(attributePaths = {"news", "author"})
     Page<Comment> findAll(Pageable pageable);
-
 
     /**
      * Получает объект {@link Comment} по уникальному идентификатору (Long).
@@ -46,6 +42,13 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @RepositoryAspectLogger
     void deleteById(Long id);
 
+    /**
+     * Ищет комментарии, связанные с новостью по указанному идентификатору.
+     *
+     * @param newsId   Идентификатор новости.
+     * @param pageable Объект, представляющий параметры пагинации.
+     * @return Страница с комментариями, связанными с указанной новостью.
+     */
     @RepositoryAspectLogger
     Page<Comment> findByNewsId(Long newsId, Pageable pageable);
 

@@ -35,6 +35,12 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper mapper;
     private final AuthorService authorService;
 
+    /**
+     * Получает страницу объектов {@link CommentResponseDto} с помощью пагинации.
+     *
+     * @param pageable Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link CommentResponseDto}.
+     */
     @Override
     @ServiceAspectLogger
     public Page<CommentResponseDto> getAll(Pageable pageable) {
@@ -44,10 +50,16 @@ public class CommentServiceImpl implements CommentService {
         return commentsPage;
     }
 
+    /**
+     * Получает объект {@link CommentResponseDto} по уникальному идентификатору.
+     *
+     * @param id Идентификатор объекта {@link Comment}.
+     * @return Объект {@link CommentResponseDto} с указанным идентификатором.
+     * @throws CustomEntityNotFoundException Если объект с указанным идентификатором не найден.
+     */
     @Override
-//    @CustomCacheable
-    @ServiceAspectLogger
     @Transactional
+    @ServiceAspectLogger
     @Cacheable(value = "CommentService::getById", key = "#id")
     public CommentResponseDto getById(Long id) {
         return repository.findById(id)
@@ -55,27 +67,35 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() -> CustomEntityNotFoundException.of(Comment.class, id));
     }
 
+    /**
+     * Сохраняет объект {@link Comment} и возвращает его уникальный идентификатор.
+     *
+     * @param commentDtoWithName DTO с данными для создания объекта {@link Comment} и имени автора.
+     * @return Уникальный идентификатор сохраненного объекта {@link Comment}.
+     */
     @Override
+    @Transactional
     @CommentCacheable
     @ServiceAspectLogger
-    @Transactional
-//    @Cacheable(value = "CommentService::getById", key = "#result.id")
     public Long save(CommentAndNameRequestDto commentDtoWithName) {
-//    public void save(CommentAndNameRequestDto commentDtoWithName) {
-//    public Comment save(CommentAndNameRequestDto commentDtoWithName) {
         CommentRequestDto dto = commentDtoWithName.getRequestDto();
         Comment comment = mapper.toDomain(dto);
         Author author = authorService.getByName(commentDtoWithName.getName());
         comment.setAuthor(author);
         return repository.save(comment).getId();
-//       repository.save(comment);
-//        return repository.save(comment);
     }
 
+    /**
+     * Обновляет объект {@link Comment} по указанному идентификатору.
+     *
+     * @param id                 Идентификатор объекта {@link Comment}, который будет обновлен.
+     * @param commentDtoWithName DTO с обновленными данными для объекта {@link Comment} и именем автора.
+     * @throws CustomAccessException         Если доступ к обновлению запрещен.
+     * @throws CustomEntityNotFoundException Если объект с указанным идентификатором не найден.
+     */
     @Override
-//    @CustomCacheable
-    @ServiceAspectLogger
     @Transactional
+    @ServiceAspectLogger
     @CachePut(value = "CommentService::getById", key = "#id")
     public void update(Long id, CommentAndNameRequestDto commentDtoWithName) {
         Optional<Comment> commentOptional = repository.findById(id);
@@ -95,9 +115,15 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
-    //TODO
+    /**
+     * Обновляет объект {@link Comment} по указанному идентификатору.
+     *
+     * @param id                 Идентификатор объекта {@link Comment}, который будет обновлен.
+     * @param commentDtoWithName DTO с обновленными данными для объекта {@link Comment} и именем автора.
+     * @throws CustomAccessException         Если доступ к обновлению запрещен.
+     * @throws CustomEntityNotFoundException Если объект с указанным идентификатором не найден.
+     */
     @Override
-//    @CustomCacheable
     @ServiceAspectLogger
     @Transactional
     @CachePut(value = "CommentService::getById", key = "#id")
@@ -119,10 +145,17 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * Удаляет объект {@link Comment} по указанному идентификатору.
+     *
+     * @param id       Идентификатор объекта {@link Comment}, который будет удален.
+     * @param username Имя пользователя, выполняющего операцию удаления.
+     * @throws CustomAccessException         Если доступ к удалению запрещен.
+     * @throws CustomEntityNotFoundException Если объект с указанным идентификатором не найден.
+     */
     @Override
-//    @CustomCacheable
-    @ServiceAspectLogger
     @Transactional
+    @ServiceAspectLogger
     @CacheEvict(value = "CommentService::getById", key = "#id")
     public void delete(Long id, String username) {
         Optional<Comment> commentOptional = repository.findById(id);
@@ -138,14 +171,13 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
-//    @Override
-//    public List<CommentResponseDto> getAllByNewsId(Long newsId) {
-//        List<Comment> commentsByNewsId = repository.findAllByNewsId(newsId);
-//        return commentsByNewsId.stream()
-//                .map(mapper::toDto)
-//                .toList();
-//    }
-
+    /**
+     * Получает страницу объектов {@link CommentResponseDto}, связанных с новостью по указанному идентификатору.
+     *
+     * @param newsId   Идентификатор новости.
+     * @param pageable Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link CommentResponseDto}, связанными с указанной новостью.
+     */
     @Override
     @ServiceAspectLogger
     public Page<CommentResponseDto> getAllByNewsId(Long newsId, Pageable pageable) {
@@ -155,6 +187,13 @@ public class CommentServiceImpl implements CommentService {
         return commentsPage;
     }
 
+    /**
+     * Ищет объекты {@link CommentResponseDto} по заданному условию с использованием пагинации.
+     *
+     * @param condition Условие поиска (например, ключевое слово).
+     * @param pageable  Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link CommentResponseDto}, удовлетворяющими условию поиска.
+     */
     @Override
     @ServiceAspectLogger
     public Page<CommentResponseDto> findCommentsSearchResult(String condition, Pageable pageable) {
@@ -164,6 +203,14 @@ public class CommentServiceImpl implements CommentService {
         return commentsPage;
     }
 
+    /**
+     * Проверяет доступ к объекту {@link Comment} на основе имени пользователя и объекта новости.
+     *
+     * @param t       Объект, представляющий имя пользователя или DTO с именем.
+     * @param comment Объект {@link Comment}, к которому проверяется доступ.
+     * @param <T>     Тип объекта (String или DTO).
+     * @return true, если доступ разрешен, иначе false.
+     */
     private <T> boolean hasAccess(T t, Comment comment) {
         String name;
         if (t instanceof CommentAndNameRequestDto requestDto) {
@@ -173,6 +220,6 @@ public class CommentServiceImpl implements CommentService {
         } else {
             name = (String) t;
         }
-        return name.equals(comment.getAuthor().getName()) || ("!ADMIN").equals(name);
+        return name.equals(comment.getAuthor().getName()) || "!ADMIN".equals(name);
     }
 }

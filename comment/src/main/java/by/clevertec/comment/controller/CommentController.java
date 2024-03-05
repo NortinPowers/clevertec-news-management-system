@@ -49,6 +49,12 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    /**
+     * Получает определенную страницу со списком комментариев определенного размера из всех комментариев.
+     *
+     * @param pageable Объект определяющий номер страницы и размер списка комментариев.
+     * @return {@link ResponseEntity} с Page объектов {@link CommentResponseDto}.
+     */
     @GetMapping
     @ControllerAspectLogger
     @Operation(
@@ -146,13 +152,11 @@ public class CommentController {
      * @throws IllegalArgumentException Если переданный объект {@code null}.
      */
     @PostMapping("/{id}")
-//    @PatchMapping("/{id}")
     @ControllerAspectLogger
     @Operation(
             summary = "Update the comment by id",
             description = "Update the comment by specifying its id. The response is a message about the successful update a comment",
             tags = "post"
-//            tags = "patch"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = BaseResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
@@ -191,8 +195,25 @@ public class CommentController {
         return ResponseEntity.ok(getSuccessResponse(DELETION_MESSAGE, Comment.class));
     }
 
+    /**
+     * Получает определенную страницу со списком комментариев определенного размера к новости из всех комментариев к новости.
+     *
+     * @param pageable Объект определяющий номер страницы и размер списка комментариев.
+     * @param newsId   Объект определяющий идентификатор новости.
+     * @return {@link ResponseEntity} с Page объектов {@link CommentResponseDto}.
+     */
     @ControllerAspectLogger
     @GetMapping("/news/{newsId}")
+    @Operation(
+            summary = "Retrieves the comments page from the list of all comments for a specific news, depending on the page",
+            description = "Collect comments from the list of all comments for a specific news. The default page size is 15 elements. The answer is an array of comments with id, time, text, username, newsId and author for each of the array element",
+            tags = "get"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(array = @ArraySchema(schema = @Schema(implementation = CommentRequestDto.class)), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "410", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<Page<CommentResponseDto>> getAllByNewsId(@PathVariable Long newsId,
                                                                    @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
                                                                    @PageableDefault(size = 15)
@@ -200,6 +221,13 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getAllByNewsId(newsId, pageable));
     }
 
+    /**
+     * Получает определенную страницу со списком комментариев определенного размера из всех комментариев в зависимости от условия поиска.
+     *
+     * @param pageable  Объект определяющий номер страницы и размер списка комментариев.
+     * @param condition Объект определяющий условие поиска.
+     * @return {@link ResponseEntity} с Page объектов {@link CommentResponseDto}.
+     */
     @ControllerAspectLogger
     @GetMapping("/search/{condition}")
     @Operation(

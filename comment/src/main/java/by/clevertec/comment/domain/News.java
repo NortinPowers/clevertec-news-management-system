@@ -39,9 +39,6 @@ public class News {
     private String title;
     private String text;
 
-//    @ElementCollection
-//    private List<Long> commentIds;
-
     @OneToMany(
             mappedBy = "news",
             fetch = FetchType.LAZY)

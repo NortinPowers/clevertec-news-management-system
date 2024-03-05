@@ -5,6 +5,7 @@ import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
+import by.clevertec.response.NewsResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -32,8 +33,6 @@ public interface CommentService {
      * @param commentDtoWithName Объект {@link CommentAndNameRequestDto}, который требуется сохранить в виде нового пользователя.
      */
     Long save(CommentAndNameRequestDto commentDtoWithName);
-//    void save(CommentAndNameRequestDto commentDtoWithName);
-//    Comment save(CommentAndNameRequestDto commentDtoWithName);
 
     /**
      * Обновляет данные объекта {@link Comment} по уникальному идентификатору (UUID).
@@ -60,9 +59,21 @@ public interface CommentService {
      */
     void delete(Long id, String username);
 
-//    List<CommentResponseDto> getAllByNewsId(Long newsId);
-
+    /**
+     * Получает страницу объектов {@link CommentResponseDto}, связанных с новостью по указанному идентификатору.
+     *
+     * @param newsId   Идентификатор новости.
+     * @param pageable Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link CommentResponseDto}, связанными с указанной новостью.
+     */
     Page<CommentResponseDto> getAllByNewsId(Long newsId, Pageable pageable);
 
+    /**
+     * Ищет объекты {@link NewsResponseDto} по заданному условию с использованием пагинации.
+     *
+     * @param condition Условие поиска (например, ключевое слово).
+     * @param pageable  Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link NewsResponseDto}, удовлетворяющими условию поиска.
+     */
     Page<CommentResponseDto> findCommentsSearchResult(String condition, Pageable pageable);
 }

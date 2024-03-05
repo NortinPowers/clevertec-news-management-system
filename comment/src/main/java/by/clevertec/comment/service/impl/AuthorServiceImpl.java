@@ -17,6 +17,12 @@ public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
 
+    /**
+     * Получает объект {@link Author} по уникальному имени (String).
+     *
+     * @param name Уникальное имя (String) объекта {@link Author}.
+     * @return Объект {@link Author}, найденный по указанному имени, или создает нового автора с указанным именем, если не найден.
+     */
     @Override
     @ServiceAspectLogger
     @Cacheable(value = "AuthorService::getByName", key = "#name")
