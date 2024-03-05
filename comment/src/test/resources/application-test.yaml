@@ -1,4 +1,5 @@
 spring:
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -10,37 +11,16 @@ spring:
     change-log: classpath:db/changelog/master-changelog.yaml
     contexts: ddl
 
-#  liquibase:
-#    change-log: classpath:db/changelog/master-changelog.yaml
-#    contexts: ddl
-#    change-log: /news/src/main/resources/db/changelog/master-changelog.yaml
-    #    change-log: C:/Users/Нортин/Desktop/workProc/clevertec-news-management-system/news/src/main/resources/db/changelog/master-changelog.yam
-#    change-log: classpath:src/test/resources/db/changelog/master-changelog.yaml
-
   cache:
     type: none
-#  cache:
-#    type: redis
-#    cache-names: redis-cache
-#  data:
-#    redis:
-#      host: localhost
-#      port: 6379
-#      password: cGFzc3dvcnRvcmVkaXM=
-
 
   datasource:
     tomcat:
       driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/clevertec_news
-#    url: jdbc:postgresql://localhost:5434/clevertec_news
     username: postgres
     password: root
 
 cache:
   algorithm: lfu
   max-collection-size: 100
-
-
-#spring.datasource.url=url: jdbc:tc:postgresql:16://items
-
