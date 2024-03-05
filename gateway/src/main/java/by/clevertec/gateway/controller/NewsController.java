@@ -59,6 +59,12 @@ public class NewsController {
     private final NewsServiceClient newsServiceClient;
     private final CommentServiceClient commentServiceClient;
 
+    /**
+     * Получает список новостей с пагинацией.
+     *
+     * @param pageable Параметры пагинации.
+     * @return Ответ со страницей объектов {@link NewsResponseDto}, представляющих новости.
+     */
     @GetMapping
     @ControllerAspectLogger
     @Operation(
@@ -76,6 +82,12 @@ public class NewsController {
         return newsServiceClient.getAll(pageable);
     }
 
+    /**
+     * Получает данные о новости по её идентификатору.
+     *
+     * @param id Идентификатор новости.
+     * @return Ответ с данными о новости.
+     */
     @GetMapping("/{id}")
     @ControllerAspectLogger
     @Operation(
@@ -91,6 +103,12 @@ public class NewsController {
         return newsServiceClient.getById(id);
     }
 
+    /**
+     * Сохраняет новость.
+     *
+     * @param news Данные о новости.
+     * @return Ответ с сообщением об успешном сохранении новости.
+     */
     @PostMapping
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -111,6 +129,13 @@ public class NewsController {
 
     }
 
+    /**
+     * Обновляет новость по её идентификатору.
+     *
+     * @param id   Идентификатор новости.
+     * @param news Данные о новости.
+     * @return Ответ с сообщением об успешном обновлении новости.
+     */
     @PutMapping("/{id}")
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -133,6 +158,13 @@ public class NewsController {
 
     }
 
+    /**
+     * Обновляет новость по её идентификатору (path).
+     *
+     * @param id   Идентификатор новости.
+     * @param news Данные о новости.
+     * @return Ответ с сообщением об успешном обновлении новости.
+     */
     @PatchMapping("/{id}")
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -154,6 +186,12 @@ public class NewsController {
         return newsServiceClient.updatePath(id, requestDto);
     }
 
+    /**
+     * Удаляет новость по её идентификатору.
+     *
+     * @param id Идентификатор новости.
+     * @return Ответ с сообщением об успешном удалении новости.
+     */
     @DeleteMapping("/{id}")
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -173,6 +211,13 @@ public class NewsController {
         return newsServiceClient.delete(id, username);
     }
 
+    /**
+     * Получает комментарии к новости по её идентификатору.
+     *
+     * @param id       Идентификатор новости.
+     * @param pageable Параметры пагинации.
+     * @return Ответ с объектом {@link NewsWithCommentsProjection}, объединяющим новость и комментарии.
+     */
     @ControllerAspectLogger
     @GetMapping("/{id}/comments")
     @PreAuthorize("isAuthenticated()")
@@ -200,6 +245,13 @@ public class NewsController {
         return ResponseEntity.ok(newsWithCommentsProjection);
     }
 
+    /**
+     * Получает результаты поиска новостей по ключевому слову.
+     *
+     * @param condition Условие поиска.
+     * @param pageable  Параметры пагинации.
+     * @return Ответ со страницей объектов {@link NewsResponseDto}, представляющих новости.
+     */
     @ControllerAspectLogger
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/search/{condition}")

@@ -34,6 +34,12 @@ public class AuthController {
 
     private final AuthServiceClient authServiceClient;
 
+    /**
+     * Создает JWT-токен на основе данных из запроса аутентификации.
+     *
+     * @param request Запрос с данными о пользователе (имя пользователя и пароль).
+     * @return Ответ со сгенерированным JWT-токеном.
+     */
     @ControllerAspectLogger
     @PostMapping("/token")
     @Operation(
@@ -52,6 +58,12 @@ public class AuthController {
         return authServiceClient.createAuthToken(request);
     }
 
+    /**
+     * Создает нового пользователя на основе данных о регистрации.
+     *
+     * @param userRegistrationDto Данные о регистрации пользователя.
+     * @return Ответ с сообщением об успешном создании пользователя.
+     */
     @ControllerAspectLogger
     @PostMapping("/registration")
     @Operation(

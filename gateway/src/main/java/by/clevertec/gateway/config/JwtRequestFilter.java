@@ -62,7 +62,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private void createExceptionResponseAndLog(HttpServletRequest request,
                                                HttpServletResponse response,
                                                String message,
-                                               Exception exception) throws IOException, ServletException {
+                                               Exception exception) throws IOException {
         log.debug(exception.getMessage());
         customAccessDeniedHandler.handle(request, response, new AccessDeniedException(message));
     }

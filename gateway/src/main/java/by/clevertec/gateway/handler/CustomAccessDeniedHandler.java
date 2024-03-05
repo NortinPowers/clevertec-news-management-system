@@ -20,6 +20,14 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final CustomExceptionHandler customExceptionHandler;
 
+    /**
+     * Обрабатывает исключение доступа, вызванное отказом в доступе.
+     *
+     * @param request               HTTP-запрос.
+     * @param response              HTTP-ответ.
+     * @param accessDeniedException Исключение доступа.
+     * @throws IOException Если возникла ошибка ввода-вывода при записи в ответ.
+     */
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         ResponseEntity<BaseResponse> responseEntity = customExceptionHandler.handleException(accessDeniedException);

@@ -12,14 +12,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@Retry(name = "auth-service-retry")
 @FeignClient(name = "auth-service")
 @CircuitBreaker(name = "auth-service-breaker")
-@Retry(name = "auth-service-retry")
 public interface AuthServiceClient {
 
+    /**
+     * Создает JWT-токен на основе данных из запроса аутентификации.
+     *
+     * @param request Запрос с данными о пользователе (имя пользователя и пароль).
+     * @return Ответ со сгенерированным JWT-токеном.
+     */
     @PostMapping
     ResponseEntity<JwtResponse> createAuthToken(@RequestBody @Valid JwtRequest request);
 
+    /**
+     * Создает нового пользователя на основе данных о регистрации.
+     *
+     * @param userRegistrationDto Данные о регистрации пользователя.
+     * @return Ответ с сообщением об успешном создании пользователя.
+     */
     @PostMapping("/registration")
     ResponseEntity<BaseResponse> createNewUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto);
 }

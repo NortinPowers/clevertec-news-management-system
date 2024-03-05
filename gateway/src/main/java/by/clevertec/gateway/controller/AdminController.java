@@ -42,6 +42,12 @@ public class AdminController {
     private final AdminServiceClient adminServiceClient;
     private final JwtTokenManager jwtTokenManager;
 
+    /**
+     * Назначает роль администратора пользователю с указанным идентификатором.
+     *
+     * @param id Идентификатор пользователя, которому нужно назначить роль администратора.
+     * @return Ответ с сообщением об успешном изменении роли пользователя.
+     */
     @ControllerAspectLogger
     @PatchMapping("/set/admin/{id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -61,6 +67,12 @@ public class AdminController {
         return adminServiceClient.setAdmin(id, header);
     }
 
+    /**
+     * Назначает роль журналиста пользователю с указанным идентификатором.
+     *
+     * @param id Идентификатор пользователя, которому нужно назначить роль журналиста.
+     * @return Ответ с сообщением об успешном изменении роли пользователя.
+     */
     @ControllerAspectLogger
     @PatchMapping("/set/journalist/{id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -80,6 +92,11 @@ public class AdminController {
         return adminServiceClient.setJournalist(id, header);
     }
 
+    /**
+     * Возвращает список всех пользователей.
+     *
+     * @return Ответ со списком объектов {@link UserDto}, представляющих пользователей.
+     */
     @ControllerAspectLogger
     @GetMapping("/users")
     @PreAuthorize("hasRole('ADMIN')")
@@ -98,5 +115,4 @@ public class AdminController {
         String header = BEARER + jwtTokenManager.generateJwtToken(userDetails);
         return adminServiceClient.getAllUsers(header);
     }
-
 }

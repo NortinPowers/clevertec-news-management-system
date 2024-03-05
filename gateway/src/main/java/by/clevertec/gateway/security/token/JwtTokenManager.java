@@ -26,10 +26,21 @@ public class JwtTokenManager {
     @Value("${jwt.lifetime}")
     private Duration jwtLifetime;
 
+    /**
+     * Создает экземпляр менеджера JWT-токенов с указанным секретом.
+     *
+     * @param secret Секрет для создания ключа.
+     */
     public JwtTokenManager(@Value("${jwt.secret}") String secret) {
         this.key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), HS256.getJcaName());
     }
 
+    /**
+     * Генерирует JWT-токен на основе данных о пользователе.
+     *
+     * @param userDetails Данные о пользователе.
+     * @return Сгенерированный JWT-токен.
+     */
     public String generateJwtToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         List<String> roles = userDetails.getAuthorities().stream()
@@ -46,15 +57,33 @@ public class JwtTokenManager {
                 .compact();
     }
 
+    /**
+     * Получает имя пользователя из JWT-токена.
+     *
+     * @param token JWT-токен.
+     * @return Имя пользователя.
+     */
     public String getUsername(String token) {
         return getAllClaimsFromToken(token).getSubject();
     }
 
+    /**
+     * Получает роли пользователя из JWT-токена.
+     *
+     * @param token JWT-токен.
+     * @return Список ролей пользователя.
+     */
     @SuppressWarnings("unchecked")
     public List<String> getUserRoles(String token) {
         return getAllClaimsFromToken(token).get(ROLES, List.class);
     }
 
+    /**
+     * Получает все утверждения (claims) из JWT-токена.
+     *
+     * @param token JWT-токен.
+     * @return Объект Claims, содержащий информацию из токена.
+     */
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(key)

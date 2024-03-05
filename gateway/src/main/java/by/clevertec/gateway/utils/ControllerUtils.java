@@ -20,6 +20,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @UtilityClass
 public class ControllerUtils {
 
+    /**
+     * Создает объект {@link NewsAndNameRequestDto} для создания новости.
+     *
+     * @param news Данные о новости.
+     * @return Объект {@link NewsAndNameRequestDto} с именем пользователя и данными о новости.
+     */
     public static NewsAndNameRequestDto getNewsAndNameRequestDtoToCreate(NewsRequestDto news) {
         NewsAndNameRequestDto requestDto = new NewsAndNameRequestDto();
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -28,6 +34,12 @@ public class ControllerUtils {
         return requestDto;
     }
 
+    /**
+     * Создает объект {@link NewsAndNameRequestDto} для обновления новости.
+     *
+     * @param news Данные о новости.
+     * @return Объект {@link NewsAndNameRequestDto} с именем пользователя и данными о новости.
+     */
     public static NewsAndNameRequestDto getNewsAndNameRequestDtoToUpdate(NewsRequestDto news) {
         NewsAndNameRequestDto requestDto = new NewsAndNameRequestDto();
         String username = getUsername();
@@ -36,6 +48,12 @@ public class ControllerUtils {
         return requestDto;
     }
 
+    /**
+     * Создает объект {@link NewsAndNamePathRequestDto} для обновления новости (path).
+     *
+     * @param news Данные о новости.
+     * @return Объект {@link NewsAndNamePathRequestDto} с именем пользователя и данными о новости.
+     */
     public static NewsAndNamePathRequestDto getNewsAndNamePathRequestDtoToUpdate(NewsPathRequestDto news) {
         NewsAndNamePathRequestDto requestDto = new NewsAndNamePathRequestDto();
         String username = getUsername();
@@ -44,6 +62,12 @@ public class ControllerUtils {
         return requestDto;
     }
 
+    /**
+     * Получает имя пользователя из контекста безопасности.
+     * Если пользователь администратор, устанавливает имя суперпользователя.
+     *
+     * @return Имя пользователя.
+     */
     public static String getUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -54,6 +78,13 @@ public class ControllerUtils {
                 .orElseGet(authentication::getName);
     }
 
+    /**
+     * Создает объект {@link NewsWithCommentsProjectionImpl} на основе данных о новости и комментариях.
+     *
+     * @param newsResponseDto     Данные о новости.
+     * @param commentResponseDtos Страница комментариев.
+     * @return Объект {@link NewsWithCommentsProjectionImpl}, объединяющий новость и комментарии.
+     */
     public static NewsWithCommentsProjectionImpl getNewsWithCommentsProjection(NewsResponseDto newsResponseDto, Page<CommentResponseDto> commentResponseDtos) {
         return new NewsWithCommentsProjectionImpl(
                 LocalDateTime.parse(newsResponseDto.getTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME),
@@ -63,6 +94,11 @@ public class ControllerUtils {
                 commentResponseDtos);
     }
 
+    /**
+     * Получает детали пользователя из контекста безопасности.
+     *
+     * @return Объект {@link CustomUserDetails}, содержащий имя пользователя и его роли.
+     */
     public static CustomUserDetails getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();

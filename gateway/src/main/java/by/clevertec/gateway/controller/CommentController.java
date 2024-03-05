@@ -46,6 +46,12 @@ public class CommentController {
 
     private final CommentServiceClient commentServiceClient;
 
+    /**
+     * Получает список комментариев с пагинацией.
+     *
+     * @param pageable Параметры пагинации.
+     * @return Ответ со страницей объектов {@link CommentResponseDto}, представляющих комментарии.
+     */
     @GetMapping
     @ControllerAspectLogger
     @Operation(
@@ -63,6 +69,12 @@ public class CommentController {
         return commentServiceClient.getAll(pageable);
     }
 
+    /**
+     * Получает данные о комментарии по его идентификатору.
+     *
+     * @param id Идентификатор комментария.
+     * @return Ответ с данными о комментарии.
+     */
     @GetMapping("/{id}")
     @ControllerAspectLogger
     @Operation(
@@ -78,6 +90,12 @@ public class CommentController {
         return commentServiceClient.getById(id);
     }
 
+    /**
+     * Сохраняет комментарий.
+     *
+     * @param comment Данные о комментарии.
+     * @return Ответ с сообщением об успешном сохранении комментария.
+     */
     @PostMapping
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -97,6 +115,13 @@ public class CommentController {
 
     }
 
+    /**
+     * Обновляет комментарий по его идентификатору.
+     *
+     * @param id      Идентификатор комментария.
+     * @param comment Данные о комментарии.
+     * @return Ответ с сообщением об успешном обновлении комментария.
+     */
     @PutMapping("/{id}")
     @ControllerAspectLogger
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -118,6 +143,13 @@ public class CommentController {
 
     }
 
+    /**
+     * Обновляет комментарий по его идентификатору (path).
+     *
+     * @param id      Идентификатор комментария.
+     * @param comment Данные о комментарии.
+     * @return Ответ с сообщением об успешном обновлении комментария.
+     */
     @ControllerAspectLogger
     @PatchMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -138,6 +170,12 @@ public class CommentController {
         return commentServiceClient.updatePath(id, comment);
     }
 
+    /**
+     * Удаляет комментарий по его идентификатору.
+     *
+     * @param id Идентификатор комментария.
+     * @return Ответ с сообщением об успешном удалении комментария.
+     */
     @ControllerAspectLogger
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'JOURNALIST')")
@@ -156,6 +194,13 @@ public class CommentController {
         return commentServiceClient.delete(id);
     }
 
+    /**
+     * Получает результаты поиска комментариев по ключевому слову.
+     *
+     * @param condition Условие поиска.
+     * @param pageable  Параметры пагинации.
+     * @return Ответ со страницей объектов {@link CommentResponseDto}, представляющих комментарии.
+     */
     @ControllerAspectLogger
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/search/{condition}")
