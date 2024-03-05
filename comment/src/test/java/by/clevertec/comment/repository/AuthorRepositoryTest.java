@@ -1,6 +1,5 @@
 package by.clevertec.comment.repository;
 
-
 import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,8 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @Transactional
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

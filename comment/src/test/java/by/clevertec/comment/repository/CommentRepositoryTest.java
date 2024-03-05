@@ -27,16 +27,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @Transactional
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-
-//TODO @Transactional не работает?
-
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class CommentRepositoryTest {
 
@@ -79,8 +75,6 @@ class CommentRepositoryTest {
     }
 
     @Test
-        //TODO
-//    @Sql(value = {"classpath:sql/comment/create-comment-without-owner.sql", "classpath:sql/delete-owners.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void deleteByIdShouldDeleteComment_whenCommentExistInTable() {
         Optional<Comment> before = commentRepository.findById(COMMENT_ID);
         assertTrue(before.isPresent());

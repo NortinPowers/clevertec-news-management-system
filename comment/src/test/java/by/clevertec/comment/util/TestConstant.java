@@ -16,10 +16,8 @@ public class TestConstant {
     public static final String COMMENT_TEXT = "comment text";
     public static final Long AUTHOR_ID = 1L;
     public static final String AUTHOR_NAME = "Ben Brown";
-
     public static final Long CORRECT_ID = 1L;
     public static final Long INCORRECT_ID = 30L;
     public static final int PAGE_NUMBER = 0;
     public static final int PAGE_SIZE = 15;
-
 }

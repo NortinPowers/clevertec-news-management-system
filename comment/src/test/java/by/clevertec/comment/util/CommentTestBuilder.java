@@ -1,6 +1,5 @@
 package by.clevertec.comment.util;
 
-
 import static by.clevertec.comment.util.TestConstant.AUTHOR_ID;
 import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
 import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
@@ -38,10 +37,10 @@ public class CommentTestBuilder {
     private String username = COMMENT_USERNAME;
 
     @Builder.Default
-    private Long news_id = NEWS_ID;
+    private Long newsId = NEWS_ID;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     @Builder.Default
     private Author author = new Author(AUTHOR_NAME);
@@ -87,7 +86,6 @@ public class CommentTestBuilder {
         comment.setAuthor(author.getName());
         return comment;
     }
-
 
     public CommentAndNamePathRequestDto buildCommentAndNamePathRequestDto() {
         CommentAndNamePathRequestDto requestDto = new CommentAndNamePathRequestDto();

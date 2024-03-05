@@ -50,12 +50,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-@ActiveProfiles("test")
 @Transactional
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @SpringBootTest(classes = TestContainerConfig.class)
-//TODO
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class CommentControllerTest {
@@ -87,9 +86,6 @@ class CommentControllerTest {
         }
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void getAllShouldReturnExceptionResponse_whenCommentsListIsEmpty() throws Exception {
             CustomNoContentException exception = CustomNoContentException.of(Comment.class);
@@ -420,9 +416,6 @@ class CommentControllerTest {
         private final String url = "/comments/{id}";
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void deleteShouldReturnSuccessResponse_whenValidId() throws Exception {
             MessageResponse response = getSuccessResponse(DELETION_MESSAGE, Comment.class);
@@ -522,9 +515,6 @@ class CommentControllerTest {
         }
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void getAllByNewsIdShouldReturnExceptionResponse_whenCommentsListIsEmpty() throws Exception {
             CustomNoContentException exception = CustomNoContentException.of(Comment.class);

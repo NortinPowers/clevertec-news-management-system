@@ -304,7 +304,6 @@ class CommentServiceImplTest {
     @Nested
     class UpdatePathTest {
 
-
         @Test
         void updateShouldThrowCustomEntityNotFoundException_whenIncorrectId() {
             when(commentRepository.findById(INCORRECT_ID))
@@ -409,7 +408,6 @@ class CommentServiceImplTest {
             Comment comment = CommentTestBuilder.builder()
                     .build()
                     .buildComment();
-            ;
 
             when(commentRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(comment));
@@ -554,5 +552,4 @@ class CommentServiceImplTest {
             verify(commentMapper, never()).toDto(any(Comment.class));
         }
     }
-
 }

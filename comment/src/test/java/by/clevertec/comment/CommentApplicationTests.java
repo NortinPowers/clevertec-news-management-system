@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @RequiredArgsConstructor
 class CommentApplicationTests {
-//class CommentApplicationTests extends AbstractTest{
 
     private final CommentController commentController;
 

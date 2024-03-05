@@ -43,7 +43,6 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-//@Transactional
 class CommentServiceImplIntegrationTest {
 
     private final CommentService commentService;
@@ -305,7 +304,6 @@ class CommentServiceImplIntegrationTest {
     @Nested
     class UpdatePathTest {
 
-
         @Test
         void updateShouldThrowCustomEntityNotFoundException_whenIncorrectId() {
             when(commentRepository.findById(TestConstant.INCORRECT_ID))
@@ -410,7 +408,6 @@ class CommentServiceImplIntegrationTest {
             Comment comment = CommentTestBuilder.builder()
                     .build()
                     .buildComment();
-            ;
 
             when(commentRepository.findById(TestConstant.CORRECT_ID))
                     .thenReturn(Optional.of(comment));
@@ -555,5 +552,4 @@ class CommentServiceImplIntegrationTest {
             verify(commentMapper, never()).toDto(any(Comment.class));
         }
     }
-
 }
