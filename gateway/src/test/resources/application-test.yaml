@@ -1,22 +1,6 @@
 server:
   port: 8000
 
-gateway:
-  openapi:
-    dev-url: http://localhost:8000
-
-springdoc:
-  swagger-ui:
-    path: /documentation
-    try-it-out-enabled: true
-  api-docs:
-    path: /api-doc
-  packages-to-scan: by.clevertec.gateway.controller
-#
-#jwt:
-#  secret: qwerty232425ndjdysjrndhhsjjeesppsuurvxnhhfdkksdurnnsjj22234isknfnnfl8845jjdjdcscacassascbb353fdcd
-#  lifetime: 10m
-
 spring:
   cloud:
     openfeign:
@@ -28,71 +12,13 @@ spring:
             read-timeout: 50000
           comment-service:
             url: http://localhost:9002/comments
-          #            connect-timeout: 3000
-          #            read-timeout: 5000
+            connect-timeout: 30000
+            read-timeout: 50000
           auth-service:
             url: http://localhost:9003/auth
-          #            connect-timeout: 3000
-          #            read-timeout: 5000
+            connect-timeout: 30000
+            read-timeout: 50000
           admin-service:
             url: http://localhost:9003/admin
-#            connect-timeout: 3000
-#            read-timeout: 5000
-
-#resilience4j:
-#  retry:
-#    instances:
-#      news-service-retry:
-#        max-attempts: 3
-#        wait-duration: 3s
-#        retry-exceptions:
-#          - feign.FeignException.BadGateway
-#      comment-service-retry:
-#        max-attempts: 3
-#        wait-duration: 3s
-#        retry-exceptions:
-#          - feign.FeignException.BadGateway
-#      auth-service-retry:
-#        max-attempts: 3
-#        wait-duration: 3s
-#        retry-exceptions:
-#          - feign.FeignException.BadGateway
-#      admin-service-retry:
-#        max-attempts: 3
-#        wait-duration: 3s
-#        retry-exceptions:
-#          - feign.FeignException.BadGateway
-#  circuitbreaker:
-#    instances:
-#      news-service-breaker:
-#        sliding-window-type: count_based
-#        sliding-window-size: 5
-#        failure-rate-threshold: 75
-#        minimum-number-of-calls: 5
-#        wait-duration-in-open-state: 10s
-#        max-wait-duration-in-half-open-state: 5s
-#        automatic-transition-from-open-to-half-open-enabled: true
-#      comment-service-breaker:
-#        sliding-window-type: count_based
-#        sliding-window-size: 5
-#        failure-rate-threshold: 75
-#        minimum-number-of-calls: 5
-#        wait-duration-in-open-state: 10s
-#        max-wait-duration-in-half-open-state: 5s
-#        automatic-transition-from-open-to-half-open-enabled: true
-#      auth-service-breaker:
-#        sliding-window-type: count_based
-#        sliding-window-size: 5
-#        failure-rate-threshold: 75
-#        minimum-number-of-calls: 5
-#        wait-duration-in-open-state: 10s
-#        max-wait-duration-in-half-open-state: 5s
-#        automatic-transition-from-open-to-half-open-enabled: true
-#      admin-service-breaker:
-#        sliding-window-type: count_based
-#        sliding-window-size: 5
-#        failure-rate-threshold: 75
-#        minimum-number-of-calls: 5
-#        wait-duration-in-open-state: 10s
-#        max-wait-duration-in-half-open-state: 5s
-#        automatic-transition-from-open-to-half-open-enabled: true
+            connect-timeout: 30000
+            read-timeout: 50000

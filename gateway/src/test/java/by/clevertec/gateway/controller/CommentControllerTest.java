@@ -16,14 +16,14 @@ import static com.github.tomakehurst.wiremock.client.WireMock.put;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import by.clevertec.gateway.util.CustomPageImplSerializer;
 import by.clevertec.gateway.util.CommentTestBuilder;
+import by.clevertec.gateway.util.CustomPageImplSerializer;
 import by.clevertec.message.BaseResponse;
 import by.clevertec.message.MessageResponse;
 import by.clevertec.request.CommentPathRequestDto;
@@ -52,24 +52,21 @@ import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @WireMockTest
 @EnableFeignClients
 @ActiveProfiles("test")
 @RequiredArgsConstructor
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CommentControllerTest {
-
-    private final CommentController commentController;
-
-    private final ObjectMapper mapper = new ObjectMapper();
-
-    private final PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
-
 
     @RegisterExtension
     static WireMockExtension wireMockExtension = WireMockExtension.newInstance()
             .options(wireMockConfig().port(9002).bindAddress("127.0.0.1"))
             .build();
+
+    private final CommentController commentController;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
 
     @Test
     @SneakyThrows
@@ -130,7 +127,6 @@ class CommentControllerTest {
 
             assertThrows(FeignException.NotFound.class, executable);
         }
-
     }
 
     @Nested
@@ -229,8 +225,6 @@ class CommentControllerTest {
             assertThrows(AccessDeniedException.class, executable);
         }
 
-        //TODO
-
         @Test
         @WithMockUser(username = "user", roles = {"ADMIN", "JOURNALIST"})
         void updateShouldThrowNotFoundException_whenIncorrectId() {
@@ -242,9 +236,7 @@ class CommentControllerTest {
 
             assertThrows(FeignException.NotFound.class, executable);
         }
-
     }
-
 
     @Nested
     class TestUpdatePath {
@@ -354,6 +346,5 @@ class CommentControllerTest {
 
             assertThrows(FeignException.NotFound.class, executable);
         }
-
     }
 }

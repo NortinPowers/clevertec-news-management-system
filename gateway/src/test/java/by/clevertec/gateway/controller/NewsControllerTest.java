@@ -54,37 +54,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @WireMockTest
 @EnableFeignClients
 @ActiveProfiles("test")
 @RequiredArgsConstructor
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class NewsControllerTest {
-
-    private final NewsController newsController;
-
-    private final ObjectMapper mapper = new ObjectMapper();
-
-    private final PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
-
 
     @RegisterExtension
     static WireMockExtension wireMockExtension = WireMockExtension.newInstance()
             .options(wireMockConfig().port(9001).bindAddress("127.0.0.1"))
             .build();
 
-//    @DynamicPropertySource
-//    public static void setUpMockBaseUrl(DynamicPropertyRegistry registry) {
-//        registry.add("news-server", () -> "http://localhost:" + wireMockExtension.getPort());
-////        registry.add("http://127.0.0.1", wireMockExtension::baseUrl);
-//    }
-
-//    @Nested
-//    class TestGetAll {
+    private final NewsController newsController;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
 
     @Test
     @SneakyThrows
@@ -101,8 +87,6 @@ class NewsControllerTest {
 
         String pageConfig = "?size=15&page=0";
 
-
-//            String testUrl = "/news";
         wireMockExtension.stubFor(get(urlEqualTo("/news" + pageConfig))
                 .willReturn(aResponse()
                         .withStatus(OK.value())
@@ -114,10 +98,8 @@ class NewsControllerTest {
         assertThat(actualPage.getStatusCode()).isEqualTo(OK);
         assertThat(actualPage.getBody().getContent()).isEqualTo(expectedContent);
     }
-//    }
 
     @Nested
-//    @DirtiesContext
     class TestGetById {
 
         @Test
@@ -140,7 +122,6 @@ class NewsControllerTest {
         }
 
         @Test
-//        @SneakyThrows
         void getByIdShouldThrowNotFoundException_whenIncorrectId() {
             wireMockExtension.stubFor(get(urlEqualTo("/news/" + INCORRECT_ID))
                     .willReturn(aResponse()
@@ -154,28 +135,17 @@ class NewsControllerTest {
     }
 
     @Nested
-//    @DirtiesContext
     class TestSave {
 
         @Test
         @SneakyThrows
-//        @WithMockUser(username = "user", authorities  = {"ADMIN", "JOURNALIST"})
-//        @WithMockUser(username = "user", authorities  = "ADMIN")
         @WithMockUser(username = "user", roles = {"ADMIN", "JOURNALIST"})
         void saveShouldReturnSuccessResponse_whenCorrectBodyAndAccessAllowed() {
             NewsRequestDto requestDto = NewsTestBuilder.builder()
                     .build()
                     .buildNewsRequestDto();
-//            NewsRequestDto newsRequestDto = NewsTestBuilder.builder()
-//                    .build()
-//                    .buildNewsRequestDto();
-//            NewsAndNameRequestDto newsAndNameRequestDto = NewsTestBuilder.builder()
-//                    .build()
-//                    .buildNewsAndNameRequestDto();
             MessageResponse successResponse = getSuccessResponse(CREATION_MESSAGE, "news");
-//
-//            when(ControllerUtils.getNewsAndNameRequestDtoToCreate(newsRequestDto))
-//                    .thenReturn(newsAndNameRequestDto);
+
             wireMockExtension.stubFor(post(urlEqualTo("/news"))
                     .willReturn(aResponse()
                             .withStatus(OK.value())
@@ -190,16 +160,11 @@ class NewsControllerTest {
         }
 
         @Test
-//        @WithMockUser(username = "user", authorities = "SUBSCRIBER")
         @WithMockUser(username = "user", roles = "SUBSCRIBER")
         void saveShouldThrowAccessDeniedException_whenAccessDeniedRoleSubscriber() {
             NewsRequestDto requestDto = NewsTestBuilder.builder()
                     .build()
                     .buildNewsRequestDto();
-
-//            wireMockExtension.stubFor(post(urlEqualTo("/news"))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
 
             Executable executable = () -> newsController.save(requestDto);
 
@@ -213,10 +178,6 @@ class NewsControllerTest {
                     .build()
                     .buildNewsRequestDto();
 
-//            wireMockExtension.stubFor(post(urlEqualTo("/news"))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.save(requestDto);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -224,7 +185,6 @@ class NewsControllerTest {
     }
 
     @Nested
-//    @DirtiesContext
     class TestUpdate {
 
         private final NewsRequestDto requestDto;
@@ -257,10 +217,6 @@ class NewsControllerTest {
         @Test
         @WithMockUser(username = "user", roles = "SUBSCRIBER")
         void updateShouldThrowAccessDeniedException_whenAccessDeniedRoleSubscriber() {
-//            wireMockExtension.stubFor(put(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.update(CORRECT_ID, requestDto);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -269,35 +225,13 @@ class NewsControllerTest {
         @Test
         @WithAnonymousUser
         void updateShouldThrowAccessDeniedException_whenAccessDeniedAnonymousUser() {
-//            wireMockExtension.stubFor(put(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.update(CORRECT_ID, requestDto);
 
             assertThrows(AccessDeniedException.class, executable);
         }
-
-        //TODO
-
-//        @Test
-//        @WithMockUser(username = "user", roles = {"ADMIN", "JOURNALIST"})
-//        void updateShouldThrowNotFoundException_whenIncorrectId() {
-//
-//            wireMockExtension.stubFor(put(urlEqualTo("/news/" + INCORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(NOT_FOUND.value())));
-//
-//            Executable executable = () -> newsController.update(INCORRECT_ID, requestDto);
-//
-//            assertThrows(NotFound.class, executable);
-//        }
-
     }
 
-
     @Nested
-//    @DirtiesContext
     class TestUpdatePath {
 
         private final NewsPathRequestDto requestDto;
@@ -330,10 +264,6 @@ class NewsControllerTest {
         @Test
         @WithMockUser(username = "user", roles = "SUBSCRIBER")
         void updatePathShouldThrowAccessDeniedException_whenAccessDeniedRoleSubscriber() {
-//            wireMockExtension.stubFor(post(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.updatePath(CORRECT_ID, requestDto);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -342,10 +272,6 @@ class NewsControllerTest {
         @Test
         @WithAnonymousUser
         void updatePathShouldThrowAccessDeniedException_whenAccessDeniedAnonymousUser() {
-//            wireMockExtension.stubFor(post(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.updatePath(CORRECT_ID, requestDto);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -365,7 +291,6 @@ class NewsControllerTest {
     }
 
     @Nested
-//    @DirtiesContext
     class TestDelete {
 
         @Test
@@ -390,10 +315,6 @@ class NewsControllerTest {
         @Test
         @WithMockUser(username = "user", roles = "SUBSCRIBER")
         void deleteShouldThrowAccessDeniedException_whenAccessDeniedRoleSubscriber() {
-//            wireMockExtension.stubFor(delete(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.delete(CORRECT_ID);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -402,10 +323,6 @@ class NewsControllerTest {
         @Test
         @WithAnonymousUser
         void deleteShouldThrowAccessDeniedException_whenAccessDeniedAnonymousUser() {
-//            wireMockExtension.stubFor(delete(urlEqualTo("/news/" + CORRECT_ID))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.delete(CORRECT_ID);
 
             assertThrows(AccessDeniedException.class, executable);
@@ -422,19 +339,15 @@ class NewsControllerTest {
 
             assertThrows(NotFound.class, executable);
         }
-
     }
 
-
     @Nested
-//    @DirtiesContext
     class TestGetCommentsByNewsId {
 
         @RegisterExtension
         static WireMockExtension wireMockExtensionComments = WireMockExtension.newInstance()
                 .options(wireMockConfig().port(9002).bindAddress("127.0.0.1"))
                 .build();
-
 
         @Test
         @SneakyThrows
@@ -482,25 +395,15 @@ class NewsControllerTest {
         @Test
         @WithAnonymousUser
         void getCommentsByNewsIdShouldThrowAccessDeniedException_whenAccessDeniedAnonymousUser() {
-//            wireMockExtension.stubFor(get(urlEqualTo(testUrl + condition + pageConfig))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.getCommentsByNewsId(CORRECT_ID, pageRequest);
 
             assertThrows(AccessDeniedException.class, executable);
         }
-
-
     }
 
-
     @Nested
-//    @DirtiesContext
     class TestGetPersonSearchResult {
 
-        private final String testUrl = "/news/search/";
-        private final String pageConfig = "?size=15&page=0";
         private final String condition = "condition";
 
         @Test
@@ -512,6 +415,8 @@ class NewsControllerTest {
                     .buildNewsResponseDto();
             List<NewsResponseDto> expectedContent = List.of(news);
             Page<NewsResponseDto> dtoPage = new PageImpl<>(expectedContent);
+            String testUrl = "/news/search/";
+            String pageConfig = "?size=15&page=0";
 
             SimpleModule module = new SimpleModule();
             module.addSerializer(PageImpl.class, new CustomPageImplSerializer());
@@ -532,10 +437,6 @@ class NewsControllerTest {
         @Test
         @WithAnonymousUser
         void getPersonSearchResultShouldThrowAccessDeniedException_whenAccessDeniedAnonymousUser() {
-//            wireMockExtension.stubFor(get(urlEqualTo(testUrl + condition + pageConfig))
-//                    .willReturn(aResponse()
-//                            .withStatus(FORBIDDEN.value())));
-
             Executable executable = () -> newsController.getPersonSearchResult(condition, pageRequest);
 
             assertThrows(AccessDeniedException.class, executable);

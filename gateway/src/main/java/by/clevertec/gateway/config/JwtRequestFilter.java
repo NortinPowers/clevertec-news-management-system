@@ -1,6 +1,5 @@
 package by.clevertec.gateway.config;
 
-
 import static by.clevertec.utils.ResponseUtils.EXPIRED_JWT_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.MALFORMED_JWT_EXCEPTION_MESSAGE;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -36,9 +35,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader(AUTHORIZATION);
         if (authorization != null && authorization.startsWith("Bearer ")) {
-
-//            String jwt = getToken(authorization);
-
             String jwt = authorization.substring(7);
             try {
                 String username = jwtTokenManager.getUsername(jwt);
@@ -53,7 +49,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             } catch (MalformedJwtException exception) {
-                //TODO
                 createExceptionResponseAndLog(request, response, MALFORMED_JWT_EXCEPTION_MESSAGE, exception);
                 return;
             } catch (ExpiredJwtException exception) {
@@ -64,16 +59,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-//    private static String getToken(String authorization) {
-//        int startIndex = authorization.indexOf("\"token\": \"") + "\"token\": \"".length();
-//        int endIndex = authorization.indexOf("\"", startIndex);
-//        return authorization.substring(startIndex, endIndex);
-//    }
-
     private void createExceptionResponseAndLog(HttpServletRequest request,
                                                HttpServletResponse response,
                                                String message,
-                                               Exception exception) throws IOException, ServletException {
+                                               Exception exception) throws IOException {
         log.debug(exception.getMessage());
         customAccessDeniedHandler.handle(request, response, new AccessDeniedException(message));
     }
