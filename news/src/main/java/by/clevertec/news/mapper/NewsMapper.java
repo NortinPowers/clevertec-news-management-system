@@ -30,14 +30,7 @@ public interface NewsMapper extends DateConverter {
      * @param dto Объект типа {@link NewsRequestDto}, который требуется преобразовать в {@link News}.
      * @return Объект {@link News}, созданный на основе данных из объекта {@link NewsRequestDto}.
      */
-//    @Mapping(target = "author", source = "author", qualifiedByName = "map")
     News toDomain(NewsRequestDto dto);
-
-
-//    @Named("map")
-//    default Author map(String value) {
-//        return Mappers.map(value);
-//    }
 
     /**
      * Преобразует объект типа {@link NewsPathRequestDto} в объект {@link News}.

@@ -63,7 +63,3 @@ public class News {
         this.time = LocalDateTime.now();
     }
 }
-
-
-//    @ElementCollection
-//    private List<Long> commentIds;

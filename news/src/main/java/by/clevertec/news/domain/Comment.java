@@ -41,9 +41,6 @@ public class Comment {
     @Column(nullable = false)
     private String username;
 
-//    @Column(nullable = false)
-//    private Long newsId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "news_id", nullable = false)
     private News news;
