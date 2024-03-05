@@ -1,6 +1,5 @@
 package by.clevertec.auth.config;
 
-
 import static by.clevertec.auth.utils.ResponseUtils.EXPIRED_JWT_EXCEPTION_MESSAGE;
 import static by.clevertec.auth.utils.ResponseUtils.MALFORMED_JWT_EXCEPTION_MESSAGE;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;

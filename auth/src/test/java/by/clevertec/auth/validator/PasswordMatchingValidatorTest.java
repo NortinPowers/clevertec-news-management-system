@@ -26,12 +26,12 @@ class PasswordMatchingValidatorTest {
     }
 
     @Test
-    void test_isValid_confirmation() {
+    void isValidShouldReturnTrue_whenDtoValid() {
         assertTrue(passwordMatchingValidator.isValid(userRegistrationDto, constraintValidatorContext));
     }
 
     @Test
-    void test_isValid_refutation() {
+    void isValidShouldReturnFalse_whenDtoInvalid() {
         userRegistrationDto.setVerifyPassword("some");
 
         assertFalse(passwordMatchingValidator.isValid(userRegistrationDto, constraintValidatorContext));

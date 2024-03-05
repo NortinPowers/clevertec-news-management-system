@@ -1,6 +1,6 @@
 package by.clevertec.auth.controller;
 
-import static by.clevertec.utils.Constants.ENTITY_NOT_FOUND_EXCEPTION_MESSAGE;
+import static by.clevertec.auth.utils.Constants.ENTITY_NOT_FOUND_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.CHANGE_ROLE_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.DATA_SOURCE_LOOKUP_FAILURE_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.getExceptionResponse;
@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import by.clevertec.auth.UserDto;
+import by.clevertec.auth.config.TestContainerConfig;
 import by.clevertec.auth.service.AdminService;
 import by.clevertec.message.ExceptionResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,16 +33,21 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.datasource.lookup.DataSourceLookupFailureException;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @AutoConfigureMockMvc
-@SpringBootTest
-//@RequiredArgsConstructor
+@ActiveProfiles("test")
+@SpringBootTest(classes = TestContainerConfig.class)
+@Sql(value = "classpath:sql/user/user-repository-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "classpath:sql/user/user-repository-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class AdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-//    private final MockMvc mockMvc;
 
     @MockBean
     private AdminService adminService;
@@ -50,11 +56,9 @@ class AdminControllerTest {
 
     @Autowired
     private ObjectMapper mapper;
-    //    private final ObjectMapper mapper;
     private String url;
 
     {
-//        mapper = getMapperWithTimeModule();
         exceptionResponse = new ExceptionResponse(
                 FORBIDDEN,
                 "Access Denied",
@@ -75,7 +79,6 @@ class AdminControllerTest {
         @Test
         @WithAnonymousUser
         void setAdminShouldReturnMessageAboutTokenNeeded_whenUserIsAnonymous() throws Exception {
-//        void test_setAdmin_anonymous_denied() throws Exception {
             mockMvc.perform(post(url, id))
                     .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("error").value("To get access you need token"));
@@ -84,7 +87,6 @@ class AdminControllerTest {
         @Test
         @WithMockUser(username = "user", roles = "SUBSCRIBER")
         void setAdminShouldReturnAccessDeniedMessage_whenUserIsSubscriber() throws Exception {
-//        void test_setAdmin_roleUser_denied() throws Exception {
             mockMvc.perform(post(url, id))
                     .andExpect(status().isForbidden())
                     .andExpectAll(
@@ -92,14 +94,11 @@ class AdminControllerTest {
                             jsonPath("$.status").value(exceptionResponse.getStatus()),
                             jsonPath("$.message").value(exceptionResponse.getMessage()),
                             jsonPath("$.type").value(exceptionResponse.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(exceptionResponse)));
         }
-
 
         @Test
         @WithMockUser(username = "user", roles = "JOURNALIST")
         void setAdminShouldReturnAccessDeniedMessage_whenUserIsJournalist() throws Exception {
-//        void test_setAdmin_roleUser_denied() throws Exception {
             mockMvc.perform(post(url, id))
                     .andExpect(status().isForbidden())
                     .andExpectAll(
@@ -107,13 +106,11 @@ class AdminControllerTest {
                             jsonPath("$.status").value(exceptionResponse.getStatus()),
                             jsonPath("$.message").value(exceptionResponse.getMessage()),
                             jsonPath("$.type").value(exceptionResponse.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(exceptionResponse)));
         }
 
         @Test
         @WithMockUser(username = "admin", roles = "ADMIN")
         void setAdminShouldReturnSuccessResponse_whenUserIsAdmin() throws Exception {
-//        void test_setAdmin_roleAdmin_success() throws Exception {
             doNothing()
                     .when(adminService).setAdmin(id);
 
@@ -170,11 +167,8 @@ class AdminControllerTest {
     @Nested
     class TestGetAllUser {
 
-//        private final ObjectMapper mapper;
-
         {
             url = "/admin/users";
-//            mapper = getMapperWithTimeModule();
         }
 
         @Test
@@ -197,7 +191,6 @@ class AdminControllerTest {
                             jsonPath("$.status").value(exceptionResponse.getStatus()),
                             jsonPath("$.message").value(exceptionResponse.getMessage()),
                             jsonPath("$.type").value(exceptionResponse.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(exceptionResponse)));
         }
 
         @Test
@@ -211,7 +204,6 @@ class AdminControllerTest {
                             jsonPath("$.status").value(exceptionResponse.getStatus()),
                             jsonPath("$.message").value(exceptionResponse.getMessage()),
                             jsonPath("$.type").value(exceptionResponse.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(exceptionResponse)));
         }
 
         @Test
@@ -220,13 +212,11 @@ class AdminControllerTest {
             UserDto firstUser = new UserDto();
             firstUser.setId(1L);
             firstUser.setUsername("admin");
-//            firstUser.setRole("ROLE_ADMIN");
-            firstUser.setRole("ADMIN");
+            firstUser.setRole("ROLE_ADMIN");
             UserDto secondUser = new UserDto();
             secondUser.setId(2L);
             secondUser.setUsername("user");
-//            secondUser.setRole("ROLE_SUBSCRIBER");
-            secondUser.setRole("SUBSCRIBER");
+            secondUser.setRole("ROLE_SUBSCRIBER");
             List<UserDto> users = List.of(firstUser, secondUser);
 
             when(adminService.getAllUsers())

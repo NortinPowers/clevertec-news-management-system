@@ -26,7 +26,6 @@ import org.springframework.test.context.ActiveProfiles;
 @RequiredArgsConstructor
 class AdminServiceImplTest {
 
-    //    @Autowired
     private final AdminService adminService;
 
     @MockBean

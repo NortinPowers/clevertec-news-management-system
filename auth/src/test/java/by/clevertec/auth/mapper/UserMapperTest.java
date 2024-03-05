@@ -2,16 +2,19 @@ package by.clevertec.auth.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import by.clevertec.auth.AbstractTest;
 import by.clevertec.auth.UserDto;
 import by.clevertec.auth.domain.User;
 import by.clevertec.auth.dto.UserRegistrationDto;
 import by.clevertec.auth.util.UserTestBuilder;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
+@SpringBootTest
+@ActiveProfiles("test")
 @RequiredArgsConstructor
-class UserMapperTest extends AbstractTest {
+class UserMapperTest {
 
     private final UserMapper userMapper;
 

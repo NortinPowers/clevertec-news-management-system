@@ -26,25 +26,8 @@ class CustomUserDetailsServiceTest {
     @MockBean
     private UserService userService;
 
-//    private final User user;
-//
-//    {
-//        Long id = 1L;
-//        String username = "user";
-//        String password = "password";
-//        String roleName = "ROLE_USER";
-//        Role role = new Role();
-//        role.setId(id);
-//        role.setName(roleName);
-//        user = new User();
-//        user.setId(id);
-//        user.setUserName(username);
-//        user.setPassword(password);
-//        user.setRole(role);
-//    }
-
     @Test
-    void test_loadUserByUsername_isPresent() {
+    void loadUserByUsernameShouldReturnUser_whenUserIsPresent() {
         User user = UserTestBuilder.builder()
                 .build()
                 .buildUser();
@@ -59,7 +42,7 @@ class CustomUserDetailsServiceTest {
     }
 
     @Test
-    void test_loadUserByUsername_isNotPresent() {
+    void loadUserByUsernameShouldThrowUsernameNotFoundException_whenUserIsNotPresent() {
         User user = UserTestBuilder.builder()
                 .build()
                 .buildUser();

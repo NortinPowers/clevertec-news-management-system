@@ -1,6 +1,5 @@
 package by.clevertec.auth.controller;
 
-
 import static by.clevertec.auth.utils.ResponseUtils.HTTP_MESSAGE_NOT_READABLE_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.BAD_CREDENTIALS_EXCEPTION_MESSAGE;
 import static by.clevertec.utils.ResponseUtils.CREATION_MESSAGE;
@@ -46,7 +45,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @RequiredArgsConstructor
 class AuthControllerTest {
 
-    //    @Autowired
     private final MockMvc mockMvc;
 
     private final ObjectMapper mapper;
@@ -61,10 +59,6 @@ class AuthControllerTest {
     private ErrorValidationResponse errorValidationResponse;
     private List<String> errors;
     private ExceptionResponse response;
-//
-//    {
-//        mapper = getMapperWithTimeModule();
-//    }
 
     @Nested
     class TestCreateToken {
@@ -80,7 +74,6 @@ class AuthControllerTest {
 
         @Test
         void createAuthTokenShouldReturnJwtToken_whenCalled() throws Exception {
-//        void test_createAuthToken_success() throws Exception {
             String token = "header.payload.signature";
             JwtResponse jwtResponse = new JwtResponse(token);
 
@@ -96,7 +89,6 @@ class AuthControllerTest {
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_whenEmptyUserData() throws Exception {
-//        void test_createAuthToken_emptyBody() throws Exception {
             errors = List.of("Enter password", "Enter username");
             errorValidationResponse = new ErrorValidationResponse(
                     BAD_REQUEST,
@@ -119,7 +111,6 @@ class AuthControllerTest {
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_whenSemiEmptyBody() throws Exception {
-//        void test_createAuthToken_semiEmptyBody() throws Exception {
             errors = List.of("Enter password");
             jwtRequest.setPassword("");
             errorValidationResponse = new ErrorValidationResponse(
@@ -141,7 +132,6 @@ class AuthControllerTest {
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_whenIncorrectBody() throws Exception {
-//        void test_createAuthToken_incorrectBody() throws Exception {
             IncorrectJwtRequest incorrectJwtRequest = new IncorrectJwtRequest("user", "password");
             errors = List.of("Enter username");
             errorValidationResponse = new ErrorValidationResponse(
@@ -155,18 +145,15 @@ class AuthControllerTest {
                             .content(mapper.writeValueAsString(incorrectJwtRequest)))
                     .andExpect(status().isBadRequest())
 
-//                    .andExpect(jsonPath("$.errors[0].defaultMessage", is("Enter username")));
                     .andExpectAll(
                             jsonPath("$.timestamp").isNotEmpty(),
                             jsonPath("$.status").value(errorValidationResponse.getStatus()),
                             jsonPath("$.message").value(errorValidationResponse.getMessage()),
                             jsonPath("$.errors.[0]").value(errorValidationResponse.getErrors().get(0)));
-//                    .andExpect(content().json(mapper.writeValueAsString(errorValidationResponse)));
         }
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_whenBadCredentials() throws Exception {
-//        void test_createAuthToken_badCredentials() throws Exception {
             BadCredentialsException exception = new BadCredentialsException("it does not matter");
             response = getExceptionResponse(
                     UNAUTHORIZED,
@@ -186,12 +173,10 @@ class AuthControllerTest {
                             jsonPath("$.status").value(response.getStatus()),
                             jsonPath("$.message").value(response.getMessage()),
                             jsonPath("$.type").value(response.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(response)));
         }
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_whenDbError() throws Exception {
-//        void test_createAuthToken_dBError() throws Exception {
             DataSourceLookupFailureException exception = new DataSourceLookupFailureException("it does not matter");
             response = getExceptionResponse(
                     INTERNAL_SERVER_ERROR,
@@ -215,7 +200,6 @@ class AuthControllerTest {
 
         @Test
         void createAuthTokenShouldReturnExceptionResponse_incorrectBodyType() throws Exception {
-//        void test_createAuthToken_incorrectBodyType() throws Exception {
             String request = "user, password";
             HttpMessageNotReadableException exception = new HttpMessageNotReadableException("it does not matter", new MockHttpInputMessage("it does not matter".getBytes()));
             response = getExceptionResponse(
@@ -255,7 +239,6 @@ class AuthControllerTest {
 
         @Test
         void createNewUserShouldReturnSuccessResponse_whenCalled() throws Exception {
-//        void test_createNewUser_success() throws Exception {
             doNothing().when(userService)
                     .save(any());
 
@@ -268,7 +251,6 @@ class AuthControllerTest {
 
         @Test
         void createNewUserShouldReturnExceptionResponse_whenDbError() throws Exception {
-//        void test_createNewUser_dBError() throws Exception {
             DataSourceLookupFailureException exception = new DataSourceLookupFailureException("it does not matter");
             response = getExceptionResponse(
                     INTERNAL_SERVER_ERROR,
@@ -291,7 +273,6 @@ class AuthControllerTest {
 
         @Test
         void createNewUserShouldReturnExceptionResponse_whenIncorrectBody() throws Exception {
-//        void test_createNewUser_incorrectBody() throws Exception {
             IncorrectRegistrationBody incorrectRegistrationBody = new IncorrectRegistrationBody("test", "ester", "password");
             errors = List.of("Verify password", "The entered passwords do not match", "Enter username");
             errorValidationResponse = new ErrorValidationResponse(
@@ -309,12 +290,10 @@ class AuthControllerTest {
                             jsonPath("$.status").value(errorValidationResponse.getStatus()),
                             jsonPath("$.message").value(errorValidationResponse.getMessage()),
                             jsonPath("$.errors.size()").value(errorValidationResponse.getErrors().size()));
-//                    .andExpect(content().json(mapper.writeValueAsString(errorValidationResponse)));
         }
 
         @Test
         void createNewUserShouldReturnExceptionResponse_whenPasswordsNotMatching() throws Exception {
-//        void test_createNewUser_passwordsNotMatching() throws Exception {
             userRegistrationDto.setVerifyPassword("incorrect");
             errors = List.of("The entered passwords do not match");
             errorValidationResponse = new ErrorValidationResponse(
@@ -332,12 +311,10 @@ class AuthControllerTest {
                             jsonPath("$.status").value(errorValidationResponse.getStatus()),
                             jsonPath("$.message").value(errorValidationResponse.getMessage()),
                             jsonPath("$.errors.[0]").value(errorValidationResponse.getErrors().get(0)));
-//                    .andExpect(content().json(mapper.writeValueAsString(errorValidationResponse)));
         }
 
         @Test
         void createNewUserShouldReturnExceptionResponse_whenIncorrectBodyType() throws Exception {
-//        void test_createNewUser_incorrectBodyType() throws Exception {
             String request = "user, password, password";
             HttpMessageNotReadableException exception = new HttpMessageNotReadableException("it does not matter", new MockHttpInputMessage("it does not matter".getBytes()));
             response = getExceptionResponse(
@@ -355,7 +332,6 @@ class AuthControllerTest {
                             jsonPath("$.status").value(response.getStatus()),
                             jsonPath("$.message").value(response.getMessage()),
                             jsonPath("$.type").value(response.getType()));
-//                    .andExpect(content().json(mapper.writeValueAsString(response)));
         }
 
         record IncorrectRegistrationBody(String name, String surname, String password) {

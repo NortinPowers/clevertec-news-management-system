@@ -18,13 +18,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
+@Transactional
 @ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Transactional
 @Sql(value = "classpath:sql/role/role-repository-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-//@Sql(value = "classpath:sql/role/role-repository-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class RoleRepositoryTest {
 
     @Autowired
@@ -33,11 +32,11 @@ class RoleRepositoryTest {
     private String testRole;
 
     {
-        testRole = "SUBSCRIBER";
+        testRole = "ROLE_SUBSCRIBER";
     }
 
     @Test
-    void test_findByName_isPresent() {
+    void findByNameShouldReturnRole_whenRoleIsPresent() {
         Optional<Role> optionalRole = roleRepository.findByName(testRole);
 
         assertTrue(optionalRole.isPresent());
@@ -45,7 +44,7 @@ class RoleRepositoryTest {
     }
 
     @Test
-    void test_findByName_isNotPresent() {
+    void findByNameShouldReturnEmptyOptional_whenRoleIsNotPresent() {
         testRole = "NotExistRole";
 
         Optional<Role> optionalRole = roleRepository.findByName(testRole);

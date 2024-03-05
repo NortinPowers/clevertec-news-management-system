@@ -26,13 +26,9 @@ class UserExistValidatorTest {
 
     private final String name = "Test";
     private boolean flag;
-//
-//    {
-//        name = "Test";
-//    }
 
     @Test
-    void test_isValid_confirmation() {
+    void isValidShouldReturnTrue_whenNameValid() {
         when(userService.isUserExist(name))
                 .thenReturn(flag);
 
@@ -40,7 +36,7 @@ class UserExistValidatorTest {
     }
 
     @Test
-    void test_isValid_refutation() {
+    void isValidShouldReturnFalse_whenNameInvalid() {
         flag = true;
 
         when(userService.isUserExist(name))

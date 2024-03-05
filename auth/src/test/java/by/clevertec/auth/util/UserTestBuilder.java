@@ -1,6 +1,5 @@
 package by.clevertec.auth.util;
 
-
 import static by.clevertec.auth.util.TestConstant.USER_ID;
 import static by.clevertec.auth.util.TestConstant.USER_PASSWORD;
 import static by.clevertec.auth.util.TestConstant.USER_USERNAME;

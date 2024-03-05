@@ -57,14 +57,6 @@ class UserServiceImplTest {
     private final Role role;
 
     {
-//        user = new User();
-//        user.setId(1L);
-//        user.setUsername("User");
-//        user.setPassword("Password");
-//        role = new Role();
-//        role.setId(1L);
-//        role.setName("ROLE_USER");
-//        user.setRole(role);
         role = RoleTestBuilder.builder()
                 .build()
                 .buildRole();
@@ -76,10 +68,6 @@ class UserServiceImplTest {
     @Test
     void getAllUsersShouldReturnUserDtosList() {
         List<User> users = List.of(user);
-//        UserDto userDto = new UserDto();
-//        userDto.setId(user.getId());
-//        userDto.setUsername(user.getUsername());
-//        userDto.setRole(user.getRole().getName());
         UserDto userDto = UserTestBuilder.builder()
                 .build()
                 .buildUserDto();
@@ -123,13 +111,6 @@ class UserServiceImplTest {
         private final UserRegistrationDto userRegistrationDto = UserTestBuilder.builder()
                 .build()
                 .buildUserRegistrationDto();
-
-//        {
-//            userRegistrationDto = new UserRegistrationDto();
-//            userRegistrationDto.setUsername(user.getUsername());
-//            userRegistrationDto.setPassword(user.getPassword());
-//            userRegistrationDto.setVerifyPassword(user.getPassword());
-//        }
 
         @Test
         void saveShouldSaveUser() {
@@ -194,16 +175,6 @@ class UserServiceImplTest {
 
     @Nested
     class TestSetRoleAdmin {
-
-//        private final Role roleAdmin;
-//        private final String roleAdminName;
-//
-//        {
-//            roleAdminName = "ROLE_ADMIN";
-//            roleAdmin = new Role();
-//            roleAdmin.setId(2L);
-//            roleAdmin.setName(roleAdminName);
-//        }
 
         @Test
         void setRoleAdminShouldSetRoleAdmin() {

@@ -17,12 +17,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
+@Transactional
 @ActiveProfiles("test")
 @Import(TestContainerConfig.class)
-@Transactional
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(value = "classpath:sql/user/user-repository-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-//@Sql(value = "classpath:sql/user/user-repository-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class UserRepositoryTest {
 
     @Autowired
@@ -35,7 +34,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void test_findByUsername_isPresent() {
+    void findByUsernameShouldReturnUser_whenUserIsPresent() {
         Optional<User> optionalUser = userRepository.findByUsername(username);
 
         assertTrue(optionalUser.isPresent());
@@ -43,7 +42,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void test_findByUsername_isNotPresent() {
+    void findByUsernameShouldReturnEmptyOptional_whenUserIsNotPresent() {
         username = "nonExistUser";
         Optional<User> optionalUser = userRepository.findByUsername(username);
 
