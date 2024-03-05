@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/ddl/001_create-table-news.yaml
+  - include:
+      file: db/changelog/ddl/002_create-table-comments.yaml
+  - include:
+      file: db/changelog/ddl/003_create-table-authors.yaml
+  - include:
+      file: db/changelog/ddl/004_update-table-news.yaml
+  - include:
+      file: db/changelog/ddl/005_update-table-comments.yaml
+
+
+  - include:
+      file: db/changelog/dml/001_insert-data-authors.yaml
+  - include:
+      file: db/changelog/dml/002_insert-data-news.yaml
+  - include:
+      file: db/changelog/dml/003_insert-data-comments.yaml
+  - include:
+      file: db/changelog/dml/004_insert_all_lazy.xml
