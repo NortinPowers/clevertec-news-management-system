@@ -1,14 +1,18 @@
 package by.clevertec.news.service.impl;
 
+import static by.clevertec.news.util.TestConstant.NEWS_ID;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
 import by.clevertec.news.cache.Cache;
 import by.clevertec.news.domain.News;
 import by.clevertec.news.mapper.NewsMapper;
 import by.clevertec.news.proxy.NewsCacheableAspect;
 import by.clevertec.news.repository.NewsRepository;
 import by.clevertec.news.util.NewsTestBuilder;
-import by.clevertec.news.proxy.NewsCacheableAspect;
-import static org.assertj.core.api.Assertions.assertThat;
 import by.clevertec.response.NewsResponseDto;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.junit.jupiter.api.Test;
@@ -16,17 +20,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.Optional;
-
-import static by.clevertec.news.util.TestConstant.NEWS_ID;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
-
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-public class NewsServiceImplCacheIntegrationTest  {
+public class NewsServiceImplCacheIntegrationTest {
 
     private final NewsCacheableAspect cacheableAspect;
     private final NewsServiceImpl newsService;

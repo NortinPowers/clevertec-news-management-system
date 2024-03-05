@@ -1,5 +1,11 @@
 package by.clevertec.news.util;
 
+import static by.clevertec.news.util.TestConstant.AUTHOR_ID;
+import static by.clevertec.news.util.TestConstant.AUTHOR_NAME;
+import static by.clevertec.news.util.TestConstant.NEWS_ID;
+import static by.clevertec.news.util.TestConstant.NEWS_TEXT;
+import static by.clevertec.news.util.TestConstant.NEWS_TIME;
+import static by.clevertec.news.util.TestConstant.NEWS_TITLE;
 
 import by.clevertec.news.domain.Author;
 import by.clevertec.news.domain.Comment;
@@ -9,20 +15,11 @@ import by.clevertec.request.NewsAndNameRequestDto;
 import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
-import lombok.Builder;
-import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
-import static by.clevertec.news.util.TestConstant.AUTHOR_ID;
-import static by.clevertec.news.util.TestConstant.AUTHOR_NAME;
-import static by.clevertec.news.util.TestConstant.NEWS_ID;
-import static by.clevertec.news.util.TestConstant.NEWS_TEXT;
-import static by.clevertec.news.util.TestConstant.NEWS_TIME;
-import static by.clevertec.news.util.TestConstant.NEWS_TITLE;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder(setterPrefix = "with")
@@ -41,7 +38,7 @@ public class NewsTestBuilder {
     private String text = NEWS_TEXT;
 
     @Builder.Default
-    private Long author_id = AUTHOR_ID;
+    private Long authorId = AUTHOR_ID;
 
     @Builder.Default
     private Author author = new Author(AUTHOR_NAME);

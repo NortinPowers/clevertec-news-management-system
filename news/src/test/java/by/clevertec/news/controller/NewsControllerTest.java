@@ -14,7 +14,6 @@ import static by.clevertec.utils.ResponseUtils.getSuccessResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -50,15 +49,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-//@SpringBootTest
-@ActiveProfiles("test")
 @Transactional
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @RequiredArgsConstructor
 @SpringBootTest(classes = TestContainerConfig.class)
-//TODO @Transactional не работает!!
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class NewsControllerTest {
 
@@ -88,9 +84,6 @@ class NewsControllerTest {
         }
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void getAllShouldReturnExceptionResponse_whenNewsListIsEmpty() throws Exception {
             CustomNoContentException exception = CustomNoContentException.of(News.class);
@@ -152,7 +145,6 @@ class NewsControllerTest {
         private final String url = "/news";
 
         @Test
-
         void saveShouldReturnSuccessResponse_whenValidRequestSend() throws Exception {
             NewsAndNameRequestDto requestDto = NewsTestBuilder.builder()
                     .build()
@@ -420,9 +412,6 @@ class NewsControllerTest {
         private final String url = "/news/{id}";
 
         @Test
-
-        //TODO
-
         @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void deleteShouldReturnSuccessResponse_whenValidId() throws Exception {
             MessageResponse response = getSuccessResponse(DELETION_MESSAGE, News.class);
@@ -447,8 +436,8 @@ class NewsControllerTest {
             );
 
             mockMvc.perform(delete(url, INCORRECT_ID)
-                    .contentType(APPLICATION_JSON)
-                    .content(AUTHOR_NAME))
+                            .contentType(APPLICATION_JSON)
+                            .content(AUTHOR_NAME))
                     .andExpect(status().isNotFound())
                     .andExpectAll(
                             jsonPath("$.timestamp").isNotEmpty(),

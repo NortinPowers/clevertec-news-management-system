@@ -3,7 +3,6 @@ package by.clevertec.news.service;
 import by.clevertec.news.domain.News;
 import by.clevertec.request.NewsAndNamePathRequestDto;
 import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsPathRequestDto;
 import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.NewsResponseDto;
 import org.springframework.data.domain.Page;
@@ -33,23 +32,20 @@ public interface NewsService {
      * @param newsDtoWithName Объект {@link NewsAndNameRequestDto}, содержащий объект который требуется сохранить и имя пользователя.
      */
     Long save(NewsAndNameRequestDto newsDtoWithName);
-//    void save(NewsAndNameRequestDto newsDtoWithName);
-//    News save(NewsAndNameRequestDto newsDtoWithName);
 
     /**
      * Обновляет данные объекта {@link News} по уникальному идентификатору (UUID).
      *
-     * @param id   Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
+     * @param id              Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
      * @param newsDtoWithName Объект {@link NewsAndNameRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void update(Long id, NewsAndNameRequestDto newsDtoWithName);
-//    void update(Long id, NewsRequestDto newsDto);
 
     /**
      * Обновляет данные объекта {@link News} по уникальному идентификатору (UUID) с использованием
      * данных из объекта {@link NewsAndNamePathRequestDto}.
      *
-     * @param id      Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
+     * @param id              Уникальный идентификатор (Long) объекта {@link News}, который требуется обновить.
      * @param newsDtoWithName Объект {@link NewsAndNamePathRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void updatePath(Long id, NewsAndNamePathRequestDto newsDtoWithName);
@@ -57,11 +53,17 @@ public interface NewsService {
     /**
      * Удаляет объект {@link News} по уникальному идентификатору (UUID).
      *
-     * @param id Уникальный идентификатор (Long) объекта {@link News}, который требуется удалить.
+     * @param id       Уникальный идентификатор (Long) объекта {@link News}, который требуется удалить.
      * @param username Имя пользователя, который запрашивает метод.
      */
     void delete(Long id, String username);
-//    void delete(Long id);
 
+    /**
+     * Ищет объекты {@link NewsResponseDto} по заданному условию с использованием пагинации.
+     *
+     * @param condition Условие поиска (например, ключевое слово).
+     * @param pageable  Объект, представляющий параметры пагинации.
+     * @return Страница с объектами {@link NewsResponseDto}, удовлетворяющими условию поиска.
+     */
     Page<NewsResponseDto> findNewsSearchResult(String condition, Pageable pageable);
 }
