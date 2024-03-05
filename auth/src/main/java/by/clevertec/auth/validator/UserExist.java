@@ -11,9 +11,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = UserExistValidator.class)
 @Target(FIELD)
 @Retention(RUNTIME)
+@Constraint(validatedBy = UserExistValidator.class)
 public @interface UserExist {
 
     String message() default USER_EXIST;

@@ -1,15 +1,14 @@
 package by.clevertec.auth.util;
 
-import by.clevertec.auth.domain.Role;
-import by.clevertec.auth.domain.User;
-import lombok.Builder;
-import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static by.clevertec.auth.util.TestConstant.ROLE_ID;
 import static by.clevertec.auth.util.TestConstant.ROLE_NAME;
+
+import by.clevertec.auth.domain.Role;
+import by.clevertec.auth.domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder(setterPrefix = "with")

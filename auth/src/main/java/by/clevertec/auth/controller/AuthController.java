@@ -1,5 +1,10 @@
 package by.clevertec.auth.controller;
 
+import static by.clevertec.auth.utils.Constants.USER;
+import static by.clevertec.auth.utils.ResponseUtils.getSuccessResponse;
+import static by.clevertec.utils.ResponseUtils.CREATION_MESSAGE;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import by.clevertec.aspect.ControllerAspectLogger;
 import by.clevertec.auth.JwtRequest;
 import by.clevertec.auth.JwtResponse;
@@ -26,11 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static by.clevertec.auth.utils.Constants.USER;
-import static by.clevertec.auth.utils.ResponseUtils.CREATION_MESSAGE;
-import static by.clevertec.auth.utils.ResponseUtils.getSuccessResponse;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @Tag(name = "Auth", description = "User`s management API")
 @RestController
 @RequestMapping("auth")
@@ -41,6 +41,13 @@ public class AuthController {
 
     private final UserService userService;
 
+    /**
+     * Создает JWT-токен на основе данных из запроса аутентификации.
+     *
+     * @param request Запрос с данными о пользователе (имя пользователя и пароль).
+     * @return Ответ со сгенерированным JWT-токеном.
+     * @throws BadCredentialsException Если предоставленные учетные данные недействительны.
+     */
     @PostMapping
     @ControllerAspectLogger
     @Operation(
@@ -60,11 +67,12 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    //    @PostMapping
-//    public JwtResponse createAuthToken(@RequestBody @Valid JwtRequest request) throws BadCredentialsException {
-//        String token = authService.getToken(request);
-//        return new JwtResponse(token);
-//    }
+    /**
+     * Создает нового пользователя на основе данных о регистрации.
+     *
+     * @param userRegistrationDto Данные о регистрации пользователя.
+     * @return Ответ с сообщением об успешном создании пользователя.
+     */
     @ControllerAspectLogger
     @PostMapping("/registration")
     @Operation(
@@ -82,18 +90,4 @@ public class AuthController {
         userService.save(userRegistrationDto);
         return ResponseEntity.ok(getSuccessResponse(CREATION_MESSAGE, USER));
     }
-
-//    @GetMapping("/{name}/role")
-//    String getUserRoleByName(@PathVariable("name") String name){
-//        return userService.getUserByUsername(name).getRole().toString();
-//    }
-
-//    @SuppressWarnings("checkstyle:EmptyLineSeparator")
-//    @PostMapping("/auth/role")
-//    String getUserRoleByName(@RequestParam String name,
-//                             @RequestParam String password){
-//        JwtRequest jwtRequest = new JwtRequest();
-//
-//
-//    }
 }

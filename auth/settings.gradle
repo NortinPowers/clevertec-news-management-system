@@ -1,4 +1,1 @@
 rootProject.name = 'auth'
-//TODO
-//include 'spring-boot-jwt-news-starter'
-//include 'spring-boot-exception-handler-starter'

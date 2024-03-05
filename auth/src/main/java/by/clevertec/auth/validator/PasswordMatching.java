@@ -11,9 +11,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = PasswordMatchingValidator.class)
 @Target(TYPE)
 @Retention(RUNTIME)
+@Constraint(validatedBy = PasswordMatchingValidator.class)
 public @interface PasswordMatching {
 
     String message() default PASSWORD_NOT_MATCHING;

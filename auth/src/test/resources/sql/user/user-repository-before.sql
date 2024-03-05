@@ -3,11 +3,9 @@ select setval('roles_id_seq', 1, false);
 truncate table users cascade;
 select setval('users_id_seq', 1, false);
 insert into roles (name)
--- values ('ROLE_ADMIN'),
---        ('ROLE_USER');
-       values ('ADMIN'),
-              ('JOURNALIST'),
-              ('SUBSCRIBER');
+       values ('ROLE_ADMIN'),
+              ('ROLE_JOURNALIST'),
+              ('ROLE_SUBSCRIBER');
 insert into users (username, password, role_id)
 values ('user', 'password', 2),
        ('admin', 'password', 1);

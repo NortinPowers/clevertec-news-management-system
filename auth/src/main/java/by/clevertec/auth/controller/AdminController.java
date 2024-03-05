@@ -21,37 +21,38 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
-@Tag(name = "Admin", description = "Admin`s management API")
-@SecurityRequirement(name = SECURITY_SWAGGER)
 @RestController
 @RequestMapping("admin")
+@SecurityRequirement(name = SECURITY_SWAGGER)
+@Tag(name = "Admin", description = "Admin`s management API")
 @RequiredArgsConstructor
-//@SecurityRequirement(name = "bearerAuth")
 public class AdminController {
 
     private final AdminService adminService;
 
-    //TODO
+    /**
+     * Назначает роль администратора пользователю с указанным идентификатором.
+     *
+     * @param id Идентификатор пользователя, которому нужно назначить роль администратора.
+     * @return Ответ с сообщением об успешном изменении роли пользователя.
+     */
     @ControllerAspectLogger
-    @PostMapping("/set/{id}")
-//    @PatchMapping("/set/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/set/admin/{id}")
     @Operation(
             summary = "Set the administrator role for the user",
             description = "Update the user role by specifying its id. The response is a message about the successful changed a role",
-            //TODO
-            tags = "path"
+            tags = "post"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SuccessResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
@@ -63,6 +64,35 @@ public class AdminController {
         return ResponseEntity.ok(getSuccessResponse(CHANGE_ROLE_MESSAGE, USER));
     }
 
+    /**
+     * Назначает роль журналиста пользователю с указанным идентификатором.
+     *
+     * @param id Идентификатор пользователя, которому нужно назначить роль журналиста.
+     * @return Ответ с сообщением об успешном изменении роли пользователя.
+     */
+    @ControllerAspectLogger
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/set/journalist/{id}")
+    @Operation(
+            summary = "Set the journalist role for the user",
+            description = "Update the user role by specifying its id. The response is a message about the successful changed a role",
+            tags = "post"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SuccessResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "403", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
+    public ResponseEntity<BaseResponse> setJournalist(@PathVariable("id") @Min(1) Long id) {
+        adminService.setJournalist(id);
+        return ResponseEntity.ok(getSuccessResponse(CHANGE_ROLE_MESSAGE, USER));
+    }
+
+    /**
+     * Возвращает список всех пользователей.
+     *
+     * @return Ответ со списком объектов {@link UserDto}, представляющих пользователей.
+     */
     @ControllerAspectLogger
     @GetMapping("/users")
     @PreAuthorize("hasRole('ADMIN')")

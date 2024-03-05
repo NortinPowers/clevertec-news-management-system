@@ -1,5 +1,6 @@
 package by.clevertec.auth.service.impl;
 
+import static by.clevertec.auth.utils.Constants.ROLE_JOURNALIST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -57,14 +58,6 @@ class UserServiceImplTest {
     private final Role role;
 
     {
-//        user = new User();
-//        user.setId(1L);
-//        user.setUsername("User");
-//        user.setPassword("Password");
-//        role = new Role();
-//        role.setId(1L);
-//        role.setName("ROLE_USER");
-//        user.setRole(role);
         role = RoleTestBuilder.builder()
                 .build()
                 .buildRole();
@@ -76,10 +69,6 @@ class UserServiceImplTest {
     @Test
     void getAllUsersShouldReturnUserDtosList() {
         List<User> users = List.of(user);
-//        UserDto userDto = new UserDto();
-//        userDto.setId(user.getId());
-//        userDto.setUsername(user.getUsername());
-//        userDto.setRole(user.getRole().getName());
         UserDto userDto = UserTestBuilder.builder()
                 .build()
                 .buildUserDto();
@@ -123,13 +112,6 @@ class UserServiceImplTest {
         private final UserRegistrationDto userRegistrationDto = UserTestBuilder.builder()
                 .build()
                 .buildUserRegistrationDto();
-
-//        {
-//            userRegistrationDto = new UserRegistrationDto();
-//            userRegistrationDto.setUsername(user.getUsername());
-//            userRegistrationDto.setPassword(user.getPassword());
-//            userRegistrationDto.setVerifyPassword(user.getPassword());
-//        }
 
         @Test
         void saveShouldSaveUser() {
@@ -195,16 +177,6 @@ class UserServiceImplTest {
     @Nested
     class TestSetRoleAdmin {
 
-//        private final Role roleAdmin;
-//        private final String roleAdminName;
-//
-//        {
-//            roleAdminName = "ROLE_ADMIN";
-//            roleAdmin = new Role();
-//            roleAdmin.setId(2L);
-//            roleAdmin.setName(roleAdminName);
-//        }
-
         @Test
         void setRoleAdminShouldSetRoleAdmin() {
             Role role = RoleTestBuilder.builder()
@@ -243,6 +215,52 @@ class UserServiceImplTest {
                     .thenReturn(Optional.empty());
 
             assertThrows(DataSourceLookupFailureException.class, () -> userService.setRoleAdmin(user.getId()));
+
+            verify(userRepository, never()).save(user);
+        }
+    }
+
+    @Nested
+    class TestSetRoleJournalist {
+
+        @Test
+        void setRoleJournalistShouldSetRoleAdmin() {
+            Role role = RoleTestBuilder.builder()
+                    .withName(ROLE_JOURNALIST)
+                    .build()
+                    .buildRole();
+
+            when(userRepository.findById(user.getId()))
+                    .thenReturn(Optional.of(user));
+            when(roleRepository.findByName(ROLE_JOURNALIST))
+                    .thenReturn(Optional.of(role));
+            when(userRepository.save(user))
+                    .thenReturn(user);
+
+            userService.setRoleJournalist(user.getId());
+
+            assertEquals(user.getRole().getName(), role.getName());
+        }
+
+        @Test
+        void setRoleJournalistShouldThrowUsernameNotFoundException_whenUserNotFound() {
+            when(userRepository.findById(user.getId()))
+                    .thenReturn(Optional.empty());
+
+            assertThrows(EntityNotFoundException.class, () -> userService.setRoleJournalist(user.getId()));
+
+            verifyNoInteractions(roleRepository);
+            verify(userRepository, never()).save(user);
+        }
+
+        @Test
+        void setRoleJournalistShouldThrowDataSourceLookupFailureException_whenRoleNotFound() {
+            when(userRepository.findById(user.getId()))
+                    .thenReturn(Optional.of(user));
+            when(roleRepository.findByName(any(String.class)))
+                    .thenReturn(Optional.empty());
+
+            assertThrows(DataSourceLookupFailureException.class, () -> userService.setRoleJournalist(user.getId()));
 
             verify(userRepository, never()).save(user);
         }

@@ -1,6 +1,5 @@
 package by.clevertec.auth.config;
 
-
 import static by.clevertec.auth.utils.ResponseUtils.EXPIRED_JWT_EXCEPTION_MESSAGE;
 import static by.clevertec.auth.utils.ResponseUtils.MALFORMED_JWT_EXCEPTION_MESSAGE;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -13,6 +12,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
@@ -22,11 +22,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtTokenManager jwtTokenManager;

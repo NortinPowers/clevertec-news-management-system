@@ -1,7 +1,12 @@
 package by.clevertec.auth.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import by.clevertec.auth.config.TestContainerConfig;
 import by.clevertec.auth.domain.Role;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,24 +14,16 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @DataJpaTest
+@Transactional
 @ActiveProfiles("test")
 @RequiredArgsConstructor
 @Import(TestContainerConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Transactional
 @Sql(value = "classpath:sql/role/role-repository-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-//@Sql(value = "classpath:sql/role/role-repository-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class RoleRepositoryTest {
 
     @Autowired
@@ -35,11 +32,11 @@ class RoleRepositoryTest {
     private String testRole;
 
     {
-        testRole = "SUBSCRIBER";
+        testRole = "ROLE_SUBSCRIBER";
     }
 
     @Test
-    void test_findByName_isPresent() {
+    void findByNameShouldReturnRole_whenRoleIsPresent() {
         Optional<Role> optionalRole = roleRepository.findByName(testRole);
 
         assertTrue(optionalRole.isPresent());
@@ -47,7 +44,7 @@ class RoleRepositoryTest {
     }
 
     @Test
-    void test_findByName_isNotPresent() {
+    void findByNameShouldReturnEmptyOptional_whenRoleIsNotPresent() {
         testRole = "NotExistRole";
 
         Optional<Role> optionalRole = roleRepository.findByName(testRole);

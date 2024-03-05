@@ -15,7 +15,7 @@ class BaseMapperTest {
     private BaseMapper baseMapper;
 
     @Test
-    void test_convertToDto() {
+    void convertToDtoShouldReturnBaseDomain() {
         Long id = 1L;
         BaseDto baseDto = new BaseDto();
         baseDto.setId(id);
