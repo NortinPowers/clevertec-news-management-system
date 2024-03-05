@@ -1,25 +1,24 @@
 package by.clevertec.comment.util;
 
 
-import by.clevertec.comment.domain.Author;
-import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.domain.News;
-import by.clevertec.request.NewsPathRequestDto;
-import by.clevertec.request.NewsRequestDto;
-import by.clevertec.response.NewsResponseDto;
-import lombok.Builder;
-import lombok.Data;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import static by.clevertec.comment.util.TestConstant.AUTHOR_ID;
 import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
 import static by.clevertec.comment.util.TestConstant.NEWS_ID;
 import static by.clevertec.comment.util.TestConstant.NEWS_TEXT;
 import static by.clevertec.comment.util.TestConstant.NEWS_TIME;
 import static by.clevertec.comment.util.TestConstant.NEWS_TITLE;
+
+import by.clevertec.comment.domain.Author;
+import by.clevertec.comment.domain.Comment;
+import by.clevertec.comment.domain.News;
+import by.clevertec.request.NewsPathRequestDto;
+import by.clevertec.request.NewsRequestDto;
+import by.clevertec.response.NewsResponseDto;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder(setterPrefix = "with")

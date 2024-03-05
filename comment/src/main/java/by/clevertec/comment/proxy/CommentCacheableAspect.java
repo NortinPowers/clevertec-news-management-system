@@ -1,22 +1,19 @@
 package by.clevertec.comment.proxy;
 
 import by.clevertec.comment.cache.Cache;
-import by.clevertec.comment.cache.impl.LfuCache;
-import by.clevertec.comment.cache.impl.LruCache;
 import by.clevertec.comment.domain.Comment;
 import by.clevertec.comment.mapper.CommentMapper;
 import by.clevertec.comment.repository.CommentRepository;
 import by.clevertec.exception.CustomEntityNotFoundException;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import java.util.Optional;
 
 @Aspect
 @Component

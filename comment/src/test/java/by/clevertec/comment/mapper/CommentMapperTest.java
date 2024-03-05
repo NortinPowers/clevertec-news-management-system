@@ -1,24 +1,22 @@
 package by.clevertec.comment.mapper;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.mapper.CommentMapper;
 import by.clevertec.comment.util.CommentTestBuilder;
 import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
-class CommentMapperTest{
+class CommentMapperTest {
 
     private final CommentMapper commentMapper;
 

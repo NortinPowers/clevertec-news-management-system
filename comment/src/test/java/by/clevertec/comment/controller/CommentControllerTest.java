@@ -1,45 +1,9 @@
 package by.clevertec.comment.controller;
 
-import by.clevertec.comment.domain.News;
-import by.clevertec.comment.util.NewsTestBuilder;
-import by.clevertec.exception.CustomAccessException;
-import by.clevertec.exception.CustomEntityNotFoundException;
-import by.clevertec.exception.CustomNoContentException;
-import by.clevertec.message.MessageResponse;
-import by.clevertec.model.ErrorValidationResponse;
-import by.clevertec.model.ExceptionResponse;
-import by.clevertec.comment.config.TestContainerConfig;
-import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.proxy.CommentCacheableAspect;
-import by.clevertec.comment.util.CommentTestBuilder;
-import by.clevertec.request.CommentAndNamePathRequestDto;
-import by.clevertec.request.CommentAndNameRequestDto;
-import by.clevertec.request.CommentRequestDto;
-import by.clevertec.request.NewsAndNamePathRequestDto;
-import by.clevertec.request.NewsAndNameRequestDto;
-import by.clevertec.request.NewsRequestDto;
-import by.clevertec.response.CommentResponseDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.mock.http.MockHttpInputMessage;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
 import static by.clevertec.comment.util.TestConstant.AUTHOR_NAME;
+import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
 import static by.clevertec.comment.util.TestConstant.CORRECT_ID;
 import static by.clevertec.comment.util.TestConstant.INCORRECT_ID;
-import static by.clevertec.comment.util.TestConstant.COMMENT_ID;
 import static by.clevertec.comment.util.TestConstant.NEWS_ID;
 import static by.clevertec.util.ResponseUtils.HTTP_NOT_READABLE_EXCEPTION_MESSAGE;
 import static by.clevertec.util.ResponseUtils.METHOD_ARGUMENT_NOT_VALID_EXCEPTION_MESSAGE;
@@ -51,12 +15,40 @@ import static by.clevertec.utils.ResponseUtils.getSuccessResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import by.clevertec.comment.config.TestContainerConfig;
+import by.clevertec.comment.domain.Comment;
+import by.clevertec.comment.proxy.CommentCacheableAspect;
+import by.clevertec.comment.util.CommentTestBuilder;
+import by.clevertec.exception.CustomAccessException;
+import by.clevertec.exception.CustomEntityNotFoundException;
+import by.clevertec.exception.CustomNoContentException;
+import by.clevertec.message.MessageResponse;
+import by.clevertec.model.ErrorValidationResponse;
+import by.clevertec.model.ExceptionResponse;
+import by.clevertec.request.CommentAndNamePathRequestDto;
+import by.clevertec.request.CommentAndNameRequestDto;
+import by.clevertec.request.CommentRequestDto;
+import by.clevertec.response.CommentResponseDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.mock.http.MockHttpInputMessage;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 @ActiveProfiles("test")
 @Transactional
@@ -66,7 +58,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //TODO
 @Sql(value = "classpath:sql/insert-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "classpath:sql/reset-data.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class CommentControllerTest{
+class CommentControllerTest {
 
     private final ObjectMapper mapper;
     private final MockMvc mockMvc;

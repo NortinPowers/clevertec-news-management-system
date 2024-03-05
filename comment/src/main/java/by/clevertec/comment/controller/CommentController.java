@@ -9,18 +9,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import by.clevertec.aspect.ControllerAspectLogger;
 import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.domain.News;
 import by.clevertec.comment.service.CommentService;
 import by.clevertec.message.BaseResponse;
 import by.clevertec.model.ErrorValidationResponse;
 import by.clevertec.model.ExceptionResponse;
 import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
-import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
-import by.clevertec.request.NewsRequestDto;
 import by.clevertec.response.CommentResponseDto;
-import by.clevertec.response.NewsResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -38,7 +34,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -119,7 +114,7 @@ public class CommentController {
     /**
      * Обновляет данные комментарии по её уникальному идентификатору.
      *
-     * @param id      Уникальный идентификатор комментария, которую требуется обновить.
+     * @param id         Уникальный идентификатор комментария, которую требуется обновить.
      * @param requestDto Объект {@link CommentAndNameRequestDto}, содержащий обновленные данные новости.
      * @return {@link ResponseEntity} с объектом {@link BaseResponse} для успешного ответа.
      */
@@ -145,7 +140,7 @@ public class CommentController {
     /**
      * Частично обновляет некоторые данные комментария по её уникальному идентификатору.
      *
-     * @param id      Уникальный идентификатор комментария, которую требуется частично обновить.
+     * @param id         Уникальный идентификатор комментария, которую требуется частично обновить.
      * @param requestDto Объект {@link CommentAndNamePathRequestDto}, содержащий частично обновленные данные комментария.
      * @return {@link ResponseEntity} с объектом {@link BaseResponse} для успешного ответа.
      * @throws IllegalArgumentException Если переданный объект {@code null}.
@@ -217,9 +212,9 @@ public class CommentController {
             @ApiResponse(responseCode = "410", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<Page<CommentResponseDto>> getPersonSearchResult(@PathVariable String condition,
-                                                                       @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
-                                                                       @PageableDefault(size = 15)
-                                                                       @ParameterObject Pageable pageable) {
+                                                                          @Parameter(name = "Pageable parameters", example = "page=0&size=15&sort=created,asc")
+                                                                          @PageableDefault(size = 15)
+                                                                          @ParameterObject Pageable pageable) {
         return ResponseEntity.ok(commentService.findCommentsSearchResult(condition, pageable));
     }
 }

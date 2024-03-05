@@ -1,13 +1,12 @@
 package by.clevertec.comment.service;
 
+import by.clevertec.comment.domain.Comment;
 import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
-import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
 import by.clevertec.response.CommentResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import by.clevertec.comment.domain.Comment;
 
 public interface CommentService {
 
@@ -39,7 +38,7 @@ public interface CommentService {
     /**
      * Обновляет данные объекта {@link Comment} по уникальному идентификатору (UUID).
      *
-     * @param id   Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
+     * @param id                 Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
      * @param commentDtoWithName Объект {@link CommentAndNameRequestDto}, одержащий обновленные данные и имя пользователя.
      */
     void update(Long id, CommentAndNameRequestDto commentDtoWithName);
@@ -48,7 +47,7 @@ public interface CommentService {
      * Обновляет данные объекта {@link Comment} по уникальному идентификатору (UUID) с использованием
      * данных из объекта {@link CommentAndNamePathRequestDto}.
      *
-     * @param id      Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
+     * @param id                 Уникальный идентификатор (Long) объекта {@link Comment}, который требуется обновить.
      * @param commentDtoWithName Объект {@link CommentAndNamePathRequestDto}, содержащий обновленные данные и имя пользователя.
      */
     void updatePath(Long id, CommentAndNamePathRequestDto commentDtoWithName);
@@ -56,7 +55,7 @@ public interface CommentService {
     /**
      * Удаляет объект {@link Comment} по уникальному идентификатору (UUID).
      *
-     * @param id Уникальный идентификатор (Long) объекта {@link Comment}, который требуется удалить.
+     * @param id       Уникальный идентификатор (Long) объекта {@link Comment}, который требуется удалить.
      * @param username Имя пользователя, который запрашивает метод.
      */
     void delete(Long id, String username);

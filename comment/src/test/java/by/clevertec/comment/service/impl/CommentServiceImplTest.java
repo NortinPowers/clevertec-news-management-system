@@ -15,15 +15,15 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import by.clevertec.exception.CustomAccessException;
-import by.clevertec.exception.CustomEntityNotFoundException;
-import by.clevertec.exception.CustomNoContentException;
 import by.clevertec.comment.domain.Author;
 import by.clevertec.comment.domain.Comment;
 import by.clevertec.comment.mapper.CommentMapper;
 import by.clevertec.comment.repository.CommentRepository;
 import by.clevertec.comment.service.AuthorService;
 import by.clevertec.comment.util.CommentTestBuilder;
+import by.clevertec.exception.CustomAccessException;
+import by.clevertec.exception.CustomEntityNotFoundException;
+import by.clevertec.exception.CustomNoContentException;
 import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
 import by.clevertec.request.CommentPathRequestDto;
@@ -408,7 +408,8 @@ class CommentServiceImplTest {
         void deleteShouldDeleteComment_whenCorrectIdAndUsername() {
             Comment comment = CommentTestBuilder.builder()
                     .build()
-                    .buildComment();;
+                    .buildComment();
+            ;
 
             when(commentRepository.findById(CORRECT_ID))
                     .thenReturn(Optional.of(comment));
@@ -509,7 +510,7 @@ class CommentServiceImplTest {
 
     @Nested
     class TestGetAllByNewsId {
-        
+
         private final PageRequest pageRequest = PageRequest.of(PAGE_NUMBER, PAGE_SIZE);
 
         @Test
@@ -529,7 +530,7 @@ class CommentServiceImplTest {
                     .thenReturn(expected);
 
             Page<CommentResponseDto> actual = commentService.getAllByNewsId(NEWS_ID, pageRequest);
-            
+
             assertThat(actual.getContent().get(0))
                     .hasFieldOrPropertyWithValue(Comment.Fields.time, expected.getTime())
                     .hasFieldOrPropertyWithValue(Comment.Fields.text, expected.getText())
@@ -537,7 +538,7 @@ class CommentServiceImplTest {
                     .hasFieldOrPropertyWithValue("newsId", expected.getNewsId())
                     .hasFieldOrPropertyWithValue("author", expected.getAuthor());
         }
-        
+
         @Test
         void getAllByNewsIdShouldThrowCustomNoContentException_whenFoundedCommentsListEmpty() {
             CustomNoContentException expectedException = CustomNoContentException.of(Comment.class);

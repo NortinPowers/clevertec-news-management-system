@@ -1,8 +1,7 @@
 package by.clevertec.comment.util;
 
-import lombok.experimental.UtilityClass;
-
 import java.time.LocalDateTime;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TestConstant {

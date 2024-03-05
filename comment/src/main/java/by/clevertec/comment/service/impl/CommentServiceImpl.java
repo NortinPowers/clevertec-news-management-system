@@ -5,7 +5,6 @@ import static by.clevertec.util.CheckerUtil.checkList;
 import by.clevertec.aspect.ServiceAspectLogger;
 import by.clevertec.comment.domain.Author;
 import by.clevertec.comment.domain.Comment;
-import by.clevertec.comment.domain.News;
 import by.clevertec.comment.mapper.CommentMapper;
 import by.clevertec.comment.proxy.CommentCacheable;
 import by.clevertec.comment.repository.CommentRepository;
@@ -13,16 +12,11 @@ import by.clevertec.comment.service.AuthorService;
 import by.clevertec.comment.service.CommentService;
 import by.clevertec.exception.CustomAccessException;
 import by.clevertec.exception.CustomEntityNotFoundException;
-import by.clevertec.request.NewsAndNamePathRequestDto;
-import java.util.List;
-import java.util.Optional;
-
 import by.clevertec.request.CommentAndNamePathRequestDto;
 import by.clevertec.request.CommentAndNameRequestDto;
-import by.clevertec.request.CommentPathRequestDto;
 import by.clevertec.request.CommentRequestDto;
-import by.clevertec.request.NewsAndNameRequestDto;
 import by.clevertec.response.CommentResponseDto;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -73,7 +67,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = mapper.toDomain(dto);
         Author author = authorService.getByName(commentDtoWithName.getName());
         comment.setAuthor(author);
-       return repository.save(comment).getId();
+        return repository.save(comment).getId();
 //       repository.save(comment);
 //        return repository.save(comment);
     }
@@ -88,12 +82,12 @@ public class CommentServiceImpl implements CommentService {
         if (commentOptional.isPresent()) {
             Comment comment = commentOptional.get();
             if (hasAccess(commentDtoWithName, comment)) {
-            Comment updated = mapper.toDomain(commentDtoWithName.getRequestDto());
+                Comment updated = mapper.toDomain(commentDtoWithName.getRequestDto());
                 if (!comment.equals(updated)) {
                     Comment merged = mapper.merge(comment, updated);
                     merged.setTime(comment.getTime());
                 }
-            }  else {
+            } else {
                 throw CustomAccessException.of(Comment.class);
             }
         } else {
@@ -117,7 +111,7 @@ public class CommentServiceImpl implements CommentService {
                     Comment merged = mapper.merge(comment, updated);
                     merged.setTime(comment.getTime());
                 }
-            }  else {
+            } else {
                 throw CustomAccessException.of(Comment.class);
             }
         } else {
@@ -155,7 +149,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @ServiceAspectLogger
     public Page<CommentResponseDto> getAllByNewsId(Long newsId, Pageable pageable) {
-        Page<CommentResponseDto> commentsPage  = repository.findByNewsId(newsId, pageable)
+        Page<CommentResponseDto> commentsPage = repository.findByNewsId(newsId, pageable)
                 .map(mapper::toDto);
         checkList(commentsPage.getContent(), Comment.class);
         return commentsPage;
@@ -176,7 +170,7 @@ public class CommentServiceImpl implements CommentService {
             name = requestDto.getName();
         } else if (t instanceof CommentAndNamePathRequestDto requestDto) {
             name = requestDto.getName();
-        }else {
+        } else {
             name = (String) t;
         }
         return name.equals(comment.getAuthor().getName()) || ("!ADMIN").equals(name);
