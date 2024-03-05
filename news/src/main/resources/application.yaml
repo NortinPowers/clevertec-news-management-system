@@ -1,18 +1,9 @@
 spring:
+
   profiles:
-    active: dev, lfu-lru
-#    active: test, lfu-lru
+    active: prod, lfu-lru
     default: dev
-  config:
-    import: optional:file:.env[.properties]
-#    import: optional:file:.env
-  #  datasource:
-#    tomcat:
-#      driver-class-name: org.postgresql.Driver
-##    url: jdbc:postgresql://localhost:5432/clevertec_news
-#    url: jdbc:postgresql://localhost:5434/clevertec_news
-#    username: postgres
-#    password: root
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -20,23 +11,9 @@ spring:
       hibernate:
         show_sql: true
 
-#  liquibase:
-#    change-log: classpath:db/changelog/master-changelog.yaml
-##    TODO
-#    contexts: ddl
-
-#  cache:
-#    type: redis
-#    cache-names: redis-cache
-#  data:
-#    redis:
-#      host: localhost
-#      port: 6379
-#      password: cGFzc3dvcnRvcmVkaXM=
 news:
   openapi:
     dev-url: http://localhost:8001
-#    dev-url: http://${HOST}:8001
 springdoc:
   swagger-ui:
     path: /documentation
@@ -44,18 +21,6 @@ springdoc:
   api-docs:
     path: /api-doc
   packages-to-scan: by.clevertec.news.controller
-#cache:
-#  algorithm: lfu
-#  max-collection-size: 100
+
 server:
   port: 8001
-
-#jwt:
-#  secret: qwerty232425ndjdysjrndhhsjjeesppsuurvxnhhfdkksdurnnsjj22234isknfnnfl8845jjdjdcscacassascbb353fdcd
-#  lifetime: 10m
-#logger:
-#  package:
-#    controller: by.clevertec.news.controller
-#    service: by.clevertec.news.service
-#    repository: by.clevertec.news.repository
-
