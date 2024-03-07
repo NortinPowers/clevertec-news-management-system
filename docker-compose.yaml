@@ -53,8 +53,6 @@ services:
     depends_on:
       - db_auth
       - comment
-    env_file:
-      - .env.properties
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_auth:5432/clevertec_auth
       - SPRING_DATASOURCE_USERNAME=postgres
