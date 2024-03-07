@@ -4,11 +4,17 @@
 
 Разработать RESTful web-service, реализующей функционал для работы с системой управления новостями.
 
+<details>
+ <summary><strong>
+ Требования и ограничения
+</strong></summary>
+
 ## Основные сущности
 - news (новость) содержит поля: id, time, title, text и comments (list).
 - comment содержит поля: id, time, text, username и news_id.
 
 ## Требования
+
 1. Использовать Spring Boot 3.x, Java 17, Gradle и PostgreSQL.
 2. Разработать API согласно подходам REST (UI не надо):
     - CRUD для работы с новостью
@@ -59,7 +65,7 @@ feign-client.
 22.	**Сущности веб интерфейса (DTO) должны генерироваться при сборке проекта из .proto файлов (см. https://github.com/google/protobuf-gradle-plugin)
 
 “*” – необходимо минимум выполнить два задания со звёздочкой, больше заданий будет существенным плюсом. К этим пунктам лучше приступать после качественного решения базовых задач с применением принципов SOLID, декларативных подходов, оптимальных алгоритмов.
-
+</details>
 
 ## Детали реализации и комментарии
 
@@ -85,7 +91,13 @@ feign-client.
   * https://github.com/NortinPowers/clevertec-news-management-system.git
 * для запуска запустите скрипт в терминале:
   * ```./init.sh```
-* или последовательно выполните следующие команды запуска элементов проекта в терминале:
+
+<details>
+ <summary><strong>
+ Или вручную
+</strong></summary>
+
+* последовательно выполните в терминале следующие команды запуска элементов проекта:
   * _by.clevertec:dto-box_
     * ```cd dto-box```
     * ```./gradlew build -x test```
@@ -110,4 +122,11 @@ feign-client.
 * осуществите развертывание проекта выполнив команду в терминале:
   * ```cd ..```
   * ```docker-compose up```
+
+</details>
+
 * для входа используйте точку входа в api проекта - http://localhost:8000/documentation
+* уже созданы следующие пользователи (name / password):
+  * администратор admin / rebel
+  * журналист journalist / rebel
+  * подписчик subscriber / rebel
