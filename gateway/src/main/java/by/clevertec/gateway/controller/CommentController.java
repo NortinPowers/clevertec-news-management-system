@@ -1,6 +1,7 @@
 package by.clevertec.gateway.controller;
 
 import static by.clevertec.gateway.utils.Constants.SECURITY_SWAGGER;
+import static by.clevertec.gateway.utils.ControllerUtils.getUsername;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import by.clevertec.aspect.ControllerAspectLogger;
@@ -191,7 +192,8 @@ public class CommentController {
             @ApiResponse(responseCode = "406", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<BaseResponse> delete(@PathVariable Long id) {
-        return commentServiceClient.delete(id);
+        String username = getUsername();
+        return commentServiceClient.delete(id, username);
     }
 
     /**

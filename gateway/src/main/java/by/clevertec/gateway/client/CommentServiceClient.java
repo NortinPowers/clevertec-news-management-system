@@ -78,7 +78,8 @@ public interface CommentServiceClient {
      * @return Ответ с сообщением об успешном удалении комментария.
      */
     @DeleteMapping("/{id}")
-    ResponseEntity<BaseResponse> delete(@PathVariable Long id);
+    ResponseEntity<BaseResponse> delete(@PathVariable Long id,
+                                        @RequestBody String username);
 
     /**
      * Получает комментарии к новости по её идентификатору.
