@@ -1,7 +1,7 @@
 spring:
 
   profiles:
-    active: prod, lfu-lru
+    active: dev, lfu-lru
     default: dev
 
   jpa:
