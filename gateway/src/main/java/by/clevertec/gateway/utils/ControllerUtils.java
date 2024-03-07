@@ -72,7 +72,7 @@ public class ControllerUtils {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         return authorities.stream()
-                .filter(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"))
+                .filter(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))
                 .findAny()
                 .map(grantedAuthority -> "!ADMIN")
                 .orElseGet(authentication::getName);

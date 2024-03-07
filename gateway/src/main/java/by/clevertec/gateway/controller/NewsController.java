@@ -5,6 +5,7 @@ import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNamePathReque
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNameRequestDtoToCreate;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsAndNameRequestDtoToUpdate;
 import static by.clevertec.gateway.utils.ControllerUtils.getNewsWithCommentsProjection;
+import static by.clevertec.gateway.utils.ControllerUtils.getUsername;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import by.clevertec.aspect.ControllerAspectLogger;
@@ -38,7 +39,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -207,8 +207,7 @@ public class NewsController {
             @ApiResponse(responseCode = "406", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema(implementation = ExceptionResponse.class), mediaType = APPLICATION_JSON_VALUE)})})
     public ResponseEntity<BaseResponse> delete(@PathVariable Long id) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return newsServiceClient.delete(id, username);
+        return newsServiceClient.delete(id, getUsername());
     }
 
     /**
