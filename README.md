@@ -83,29 +83,31 @@ feign-client.
 
 * скачайте проект с gitHub:
   * https://github.com/NortinPowers/clevertec-news-management-system.git
-* последовательно выполните следующие команды запуска элементов проекта в терминале:
+* для запуска запустите скрипт в терминале:
+  * ```./init.sh```
+* или последовательно выполните следующие команды запуска элементов проекта в терминале:
   * _by.clevertec:dto-box_
     * ```cd dto-box```
-    * ```./gradlew build```
+    * ```./gradlew build -x test```
   * _by.clevertec:spring-boot-exception-handler-starter_
     * ```cd ../spring-boot-exception-handler-starter```
-    * ```./gradlew build```
+    * ```./gradlew build -x test```
   * _by.clevertec:spring-boot-logger-aspect-starter_
     * ```cd ../spring-boot-logger-aspect-starter```
-    * ```./gradlew build```
+    * ```./gradlew build -x test```
   * _news_
     * ```cd ../news```
-    * ```./gradlew build``` 
+    * ```./gradlew build -x test``` 
   * _comment_
     * ```cd ../comment```
-    * ```./gradlew build``` 
+    * ```./gradlew build -x test``` 
   * _auth_
     * ```cd ../auth```
-    * ```./gradlew build```  
+    * ```./gradlew build -x test```  
   * _gateway_
     * ```cd ../gateway```
-    * ```./gradlew build``` 
+    * ```./gradlew build -x test``` 
 * осуществите развертывание проекта выполнив команду в терминале:
   * ```cd ..```
-  * ```docker-compose up``` 
+  * ```docker-compose up```
 * для входа используйте точку входа в api проекта - http://localhost:8000/documentation
