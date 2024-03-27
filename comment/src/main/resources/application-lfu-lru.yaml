@@ -1,0 +1,8 @@
+spring:
+
+  cache:
+    type: none
+
+cache:
+  algorithm: lfu
+  max-collection-size: 100

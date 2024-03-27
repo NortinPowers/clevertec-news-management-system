@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-news-data
+      author: nortin
+      context: dml
+      changes:
+        - insert:
+            tableName: comments
+            columns:
+              - column:
+                  name: time
+                  value: '2024-01-01 13:00:00'
+              - column:
+                  name: text
+                  value: 'This is the text of sample comment 1'
+              - column:
+                  name: username
+                  value: 'user 1'
+              - column:
+                  name: news_id
+                  value: '1'
+              - column:
+                  name: author_id
+                  value: '1'
+        - insert:
+            tableName: comments
+            columns:
+              - column:
+                  name: time
+                  value: '2024-02-02 14:00:00'
+              - column:
+                  name: text
+                  value: 'This is the text of sample comment 2'
+              - column:
+                  name: username
+                  value: 'user 2'
+              - column:
+                  name: news_id
+                  value: '2'
+              - column:
+                  name: author_id
+                  value: '1'
+        - insert:
+            tableName: comments
+            columns:
+              - column:
+                  name: time
+                  value: '2024-03-03 15:00:00'
+              - column:
+                  name: text
+                  value: 'This is the text of sample comment 3'
+              - column:
+                  name: username
+                  value: 'user 2'
+              - column:
+                  name: news_id
+                  value: '1'
+              - column:
+                  name: author_id
+                  value: '1'
